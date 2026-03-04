@@ -193,7 +193,7 @@ export default function Contact() {
               initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }} viewport={{ once: true }}>
               <iframe
-                src="https://maps.google.com/maps?q=Purani+Bazar,+Tulsipur,+Uttar+Pradesh&output=embed"
+                src="https://maps.google.com/maps?q=GCM8%2BGJW+Tulsipur+Uttar+Pradesh&output=embed"
                 width="100%" height="100%"
                 style={{ border: 0, display: "block" }}
                 allowFullScreen loading="lazy"
