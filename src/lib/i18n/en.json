@@ -10,7 +10,13 @@
     "contact": "Contact",
     "features": "Why Us",
     "callNow": "Call Now",
-    "freeDemo": "Free Demo"
+    "freeDemo": "Free Demo",
+    "ticker": [
+      "🎉 Admissions Open for 2026–27 Batch",
+      "📝 Free Demo Classes Every Saturday",
+      "📞 Call Now: +91 72104 33685",
+      "⭐ 95% Pass Rate — Join the Best in Tulsipur"
+    ]
   },
   "hero": {
     "tagline": "Expert Coaching for",
@@ -60,6 +66,7 @@
     "subtitle": "Comprehensive coaching for all major boards",
     "highlightsLabel": "Highlights",
     "highlights": ["Small batch size", "Daily doubt sessions", "Weekly tests", "Free demo available"],
+    "timingsTitle": "Batch Timings",
     "enquireCta": "Enquire Now",
     "hint": "Click any board card to see details",
     "enrollLink": "Contact us to enroll",
@@ -121,6 +128,67 @@
     "hoursLabel": "Timings",
     "hours": "Mon – Sat: 7:00 AM – 8:00 PM",
     "whatsappBtn": "WhatsApp Us"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything parents & students ask before enrolling",
+    "items": [
+      { "q": "Which boards do you cover?", "a": "We provide expert coaching for CBSE, ICSE, ISC, and UP Board students from Classes 6 to 12 — all under one roof." },
+      { "q": "What is the batch size?", "a": "We strictly maintain small batches of 15–20 students so every child receives personal attention from our faculty." },
+      { "q": "Do you offer free demo classes?", "a": "Yes! Free demo classes are available every Saturday. Call or WhatsApp us to book your slot — no commitment required." },
+      { "q": "What subjects do you teach?", "a": "We specialise in Mathematics, Physics, Chemistry, and Biology for all four boards from Class 6 to 12." },
+      { "q": "What are the timings?", "a": "Morning: 7–9 AM (6th–8th), 9:30–11:30 AM (9th–10th). Evening: 5–7 PM (11th–12th). Monday to Saturday." },
+      { "q": "How are doubts handled?", "a": "Dedicated daily doubt-solving sessions are held after every lecture. Faculty is also reachable on WhatsApp for quick queries." },
+      { "q": "How do I enrol my child?", "a": "Simply call us or send a WhatsApp message. We will schedule a free demo class and walk you through the admission process." }
+    ]
+  },
+  "feeCard": {
+    "title": "Simple, Transparent Fees",
+    "subtitle": "No hidden charges. Pay monthly. Cancel anytime.",
+    "seatsLeft": "Only 8 seats left",
+    "perMonth": "/ month",
+    "popular": "Most Popular",
+    "includes": "What's included",
+    "ctaBtn": "Claim This Seat on WhatsApp",
+    "privacyNote": "No spam. We'll only call to confirm your seat.",
+    "namePlaceholder": "Student's full name",
+    "phonePlaceholder": "Parent / guardian mobile",
+    "tiers": [
+      {
+        "label": "Foundation",
+        "classes": "Class 6 – 8",
+        "price": "₹1,200",
+        "color": "blue",
+        "features": ["All 4 subjects", "Small batch (max 20)", "Daily doubt sessions", "Weekly tests", "Free demo class"]
+      },
+      {
+        "label": "Pre-Board",
+        "classes": "Class 9 – 10",
+        "price": "₹1,500",
+        "color": "gold",
+        "popular": true,
+        "features": ["All 4 subjects", "Small batch (max 15)", "Daily doubt sessions", "Weekly tests + analysis", "Board exam mock tests", "Free demo class"]
+      },
+      {
+        "label": "Senior",
+        "classes": "Class 11 – 12",
+        "price": "₹1,800",
+        "color": "teal",
+        "features": ["All 4 subjects", "Small batch (max 12)", "Daily doubt sessions", "Weekly tests + analysis", "Board exam mock tests", "Individual performance report", "Free demo class"]
+      }
+    ]
+  },
+  "enquiryForm": {
+    "title": "Quick Enquiry",
+    "subtitle": "Fill this in — we\u2019ll call you back within 2 hours",
+    "namePlaceholder": "Student\u2019s full name",
+    "phonePlaceholder": "Parent / guardian mobile",
+    "classLabel": "Class",
+    "classOptions": ["6th", "7th", "8th", "9th", "10th", "11th", "12th"],
+    "boardLabel": "Board",
+    "boardOptions": ["CBSE", "ICSE", "ISC", "UP Board"],
+    "submitBtn": "Book Free Demo on WhatsApp",
+    "privacyNote": "We only use your number to call back. No spam, ever."
   },
   "footer": {
     "tagline": "Expert Coaching for CBSE | ICSE | ISC | UP Board",

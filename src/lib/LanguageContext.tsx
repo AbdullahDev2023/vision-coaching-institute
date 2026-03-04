@@ -32,7 +32,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("vci-lang", next);
   };
 
-  const t = lang === "hi" ? (hi as Translations) : en;
+  const t: Translations = lang === "hi" ? (hi as unknown as Translations) : en;
 
   return (
     <LanguageContext.Provider value={{ lang, t, toggleLang }}>

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 
 export default function LoadingScreen() {
@@ -50,9 +51,10 @@ export default function LoadingScreen() {
         <div ref={logoRingRef}
           className="relative w-24 h-24 rounded-full border-2 border-gold flex items-center justify-center"
           style={{ boxShadow: "0 0 30px rgba(212,160,23,0.4)" }}>
-          {/* Inner spinning arc */}
-          <div className="absolute inset-1 rounded-full border-t-2 border-gold/60 border-r-transparent border-b-transparent border-l-transparent animate-spin" />
-          <span className="text-gold font-heading font-bold text-4xl relative z-10">V</span>
+          {/* Logo image */}
+          <div className="relative w-14 h-14 rounded-full overflow-hidden z-10 border border-gold/30">
+            <Image src="/logo.png" alt="Vision Coaching Institute" fill className="object-cover" priority />
+          </div>
         </div>
       </div>
 

@@ -10,7 +10,7 @@ export default function WhatsAppFloat() {
 
   return (
     <motion.div
-      className="fixed bottom-5 right-5 z-50 flex items-center gap-3"
+      className="float-right fixed bottom-5 z-50 flex items-center gap-3"
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 2.5, type: "spring", stiffness: 260, damping: 20 }}>
@@ -22,7 +22,7 @@ export default function WhatsAppFloat() {
             initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 10 }}
-            className="bg-white text-primary text-xs font-semibold px-3 py-2 rounded-xl shadow-xl whitespace-nowrap"
+            className="bg-white text-primary text-xs font-semibold px-3 py-2 rounded-xl shadow-xl max-w-[160px] break-words"
             style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.15)" }}>
             💬 Chat on WhatsApp
             <div className="absolute right-[-6px] top-1/2 -translate-y-1/2 w-0 h-0 border-l-[6px] border-l-white border-y-[5px] border-y-transparent" />

@@ -6,10 +6,15 @@ import Features from "@/components/sections/Features";
 import Courses from "@/components/sections/Courses";
 import Faculty from "@/components/sections/Faculty";
 import Results from "@/components/sections/Results";
+import CtaBanner from "@/components/sections/CtaBanner";
+import FeeCard from "@/components/sections/FeeCard";
+import FaqSection from "@/components/sections/FaqSection";
 import Gallery from "@/components/sections/Gallery";
 import Testimonials from "@/components/sections/Testimonials";
 import Contact from "@/components/sections/Contact";
 import WhatsAppFloat from "@/components/ui/WhatsAppFloat";
+import CallFloat from "@/components/ui/CallFloat";
+import BackToTop from "@/components/ui/BackToTop";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 
 export default function Home() {
@@ -29,8 +34,11 @@ export default function Home() {
         <section id="about"         aria-label="About Vision Coaching"><About /></section>
         <section id="features"      aria-label="Why Choose Vision"><Features /></section>
         <section id="courses"       aria-label="Our Courses"><Courses /></section>
+        <section id="fees"          aria-label="Fee Structure"><FeeCard /></section>
         <section id="faculty"       aria-label="Our Faculty"><Faculty /></section>
         <section id="results"       aria-label="Results &amp; Toppers"><Results /></section>
+        <CtaBanner />
+        <FaqSection />
         <section id="gallery"       aria-label="Gallery"><Gallery /></section>
         <section id="testimonials"  aria-label="Student Testimonials"><Testimonials /></section>
         <section id="contact"       aria-label="Contact Us"><Contact /></section>
@@ -38,6 +46,8 @@ export default function Home() {
 
       <Footer />
       <WhatsAppFloat />
+      <CallFloat />
+      <BackToTop />
     </>
   );
 }

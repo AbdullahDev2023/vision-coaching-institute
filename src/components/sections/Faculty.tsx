@@ -50,8 +50,9 @@ function TiltCard({ m, photoSoon }: { m: Member; photoSoon: string }) {
       onMouseMove={onMove} onMouseLeave={onReset}>
       <motion.div
         style={{ rotateX, rotateY, transformStyle: "preserve-3d", background: "#ffffff" }}
-        className="relative bg-white border border-primary/8 rounded-2xl p-6 sm:p-7 lg:p-8 text-center overflow-hidden cursor-default group h-full"
+        className="relative bg-white border border-primary/8 rounded-2xl p-6 sm:p-7 text-center overflow-hidden cursor-pointer group h-full"
         whileHover={{ borderColor: `${c.ring}55`, boxShadow: `0 16px 50px ${c.glow}` }}
+        onClick={() => { window.location.href = "#contact"; }}
         transition={{ duration: 0.2 }}>
 
         {/* Subject-coloured top strip */}
@@ -63,7 +64,7 @@ function TiltCard({ m, photoSoon }: { m: Member; photoSoon: string }) {
           style={{ background: `radial-gradient(circle at ${glowX} ${glowY}, ${c.glow} 0%, transparent 65%)` }} />
 
         {/* Avatar — real photo or initials fallback */}
-        <div className="flex flex-col items-center mb-9">
+        <div className="flex flex-col items-center" style={{ marginBottom: "var(--igap-sm)" }}>
           <div className="relative">
             {m.photo ? (
               <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0"
@@ -93,18 +94,31 @@ function TiltCard({ m, photoSoon }: { m: Member; photoSoon: string }) {
           </div>
         </div>
 
-        <h3 className="font-semibold text-primary text-base leading-snug mt-3">{m.name}</h3>
-        <p className="font-semibold text-sm mt-2 leading-snug" style={{ color: c.ring }}>{m.subject}</p>
-        <p className="text-primary/50 text-xs mt-2 leading-snug font-normal">{m.qualification}</p>
-        <span className="badge mt-5"
-          style={{ background: c.accent, color: c.ring, borderColor: `${c.ring}55` }}>
+        <h3 className="font-semibold text-primary text-sm sm:text-base leading-snug" style={{ marginTop: "var(--igap-sm)" }}>{m.name}</h3>
+        <p className="font-semibold text-xs sm:text-sm leading-snug" style={{ color: c.ring, marginTop: "calc(var(--igap-sm) / 2)" }}>{m.subject}</p>
+        <p className="text-primary/50 text-[10px] sm:text-xs leading-snug font-normal" style={{ marginTop: "calc(var(--igap-sm) / 2)" }}>{m.qualification}</p>
+        <span className="badge text-[10px] sm:text-xs" style={{ marginTop: "var(--igap-sm)", background: c.accent, color: c.ring, borderColor: `${c.ring}55` }}>
           {m.exp}
         </span>
+
+        {/* Vertical spacing */}
+        <div style={{ height: "var(--igap-sm)" }} />
 
         {/* Animated bottom bar */}
         <motion.div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] rounded-full"
           style={{ background: `linear-gradient(90deg, transparent, ${c.ring}, transparent)` }}
           initial={{ width: 0 }} whileHover={{ width: "80%" }} transition={{ duration: 0.3 }} />
+
+        {/* Hover CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 6 }} whileHover={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
+          className="absolute bottom-5 left-0 right-0 flex justify-center pointer-events-none group-hover:pointer-events-auto">
+          <span className="text-[11px] font-bold px-3 py-1 rounded-full"
+            style={{ background: c.accent, color: c.ring, border: `1px solid ${c.ring}55` }}>
+            Book Trial Class →
+          </span>
+        </motion.div>
       </motion.div>
     </motion.div>
   );
@@ -117,9 +131,9 @@ export default function Faculty() {
 
   return (
     <div className="section-pad bg-bg-light" style={{ background: "#F8F9FF" }} ref={sectionRef}>
-      <div className="layout-container">
+      <div className="layout-container section-inner">
         <SectionHeading title={t.faculty.title} subtitle={t.faculty.subtitle} light={false} />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4" style={{ gap: "var(--igap-sm)" }}>
           {t.faculty.members.map((m) => (
             <TiltCard key={m.name} m={m} photoSoon={t.faculty.photoSoon} />
           ))}

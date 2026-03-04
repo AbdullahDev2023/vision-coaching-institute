@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,7 +9,9 @@ import LanguageToggle from "@/components/ui/LanguageToggle";
 const NAV_LINKS = ["about", "features", "courses", "faculty", "results", "gallery", "testimonials", "contact"] as const;
 
 export default function Navbar() {
-  const { t } = useLanguage();
+  const { t: _t } = useLanguage();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const t = _t as any;
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -53,11 +56,39 @@ export default function Navbar() {
       ref={navRef as React.RefObject<HTMLElement> & React.RefObject<HTMLDivElement>}
       aria-label="Main navigation"
       style={{ opacity: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`navbar-fixed fixed top-0 z-50 transition-all duration-500 ${
         scrolled
           ? "bg-[#050D1F]/95 backdrop-blur-xl shadow-2xl shadow-black/40 border-b border-white/5"
           : "bg-transparent"
       }`}>
+
+      {/* ── Announcement ticker ── */}
+      <div className="overflow-hidden"
+        style={{
+          background: "rgba(212,160,23,0.07)",
+          borderBottom: "1px solid rgba(212,160,23,0.12)",
+          height: "40px",
+        }}>
+        <style>{`
+          @keyframes ticker-scroll {
+            0%   { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+          }
+          .ticker-track { animation: ticker-scroll 22s linear infinite; white-space: nowrap; display: inline-block; }
+          .ticker-track:hover { animation-play-state: paused; }
+        `}</style>
+        <div className="ticker-track flex items-center gap-12 h-10 px-4">
+          {[...t.nav.ticker, ...t.nav.ticker].map((msg, i) => (
+            <span key={i} className="inline-flex items-center gap-2 text-xs font-semibold"
+              style={{ color: "rgba(212,160,23,0.90)", letterSpacing: "0.06em" }}>
+              {msg}
+              {i < [...t.nav.ticker, ...t.nav.ticker].length - 1 && (
+                <span style={{ color: "rgba(212,160,23,0.30)", marginLeft: "1rem" }}>◆</span>
+              )}
+            </span>
+          ))}
+        </div>
+      </div>
 
       <div className="layout-container">
         {/*
@@ -66,19 +97,19 @@ export default function Navbar() {
           the nav links inside it are centred — completely independent
           of how wide the logo or buttons are.
         */}
-        <div className="grid grid-cols-[auto_1fr_auto] items-center h-20 gap-4">
+        <div className="grid grid-cols-[auto_1fr_auto] items-center h-14 sm:h-16 lg:h-20 gap-3 lg:gap-4">
 
           {/* ── Col 1: Logo ── */}
           <a ref={logoRef} href="#home" onClick={(e) => handleNavClick(e, "home")}
-            className="flex items-center gap-3 group flex-shrink-0 whitespace-nowrap">
-            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-gold to-gold-light flex items-center justify-center text-primary font-bold text-xl shadow-lg shadow-gold/30 group-hover:scale-105 transition-transform flex-shrink-0">
-              V
+            className="flex items-center gap-2 sm:gap-3 group flex-shrink-0 whitespace-nowrap">
+            <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full overflow-hidden flex-shrink-0 shadow-lg shadow-gold/20 group-hover:scale-105 transition-transform border border-gold/20">
+              <Image src="/logo.png" alt="Vision Coaching Institute" width={48} height={48} className="w-full h-full object-cover" priority />
             </div>
             <div className="leading-tight">
-              <div className="text-white font-heading font-bold text-lg tracking-wide group-hover:text-gold transition-colors duration-200">
+              <div className="text-white font-heading font-bold text-sm sm:text-lg tracking-wide group-hover:text-gold transition-colors duration-200">
                 Vision Coaching
               </div>
-              <div className="text-gold text-[10px] font-semibold tracking-widest uppercase hidden sm:block">
+              <div className="text-gold text-[9px] sm:text-[10px] font-semibold tracking-widest uppercase hidden sm:block">
                 Tulsipur
               </div>
             </div>

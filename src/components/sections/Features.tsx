@@ -39,7 +39,7 @@ function TiltCard({ icon, title, desc, index }: {
       onMouseMove={onMove}
       onMouseLeave={reset}>
       <motion.div
-        className="relative rounded-2xl p-7 sm:p-8 lg:p-10 text-center h-full cursor-default overflow-hidden group"
+        className="relative rounded-2xl p-5 sm:p-6 text-center h-full cursor-default overflow-hidden group"
         whileHover={{
           y: -6,
           borderColor: "rgba(212,160,23,0.50)",
@@ -58,7 +58,7 @@ function TiltCard({ icon, title, desc, index }: {
           style={{ background: `radial-gradient(circle at ${glowX} ${glowY}, rgba(212,160,23,0.12) 0%, transparent 65%)` }} />
 
         {/* Icon ring — consistent gold style */}
-        <div className="relative w-[76px] h-[76px] mx-auto mb-7">
+        <div className="relative w-[76px] h-[76px] mx-auto" style={{ marginBottom: "var(--igap-sm)" }}>
           <div className="absolute inset-0 rounded-full blur-xl opacity-30"
             style={{ background: color }} />
           <div className="relative w-full h-full rounded-full flex items-center justify-center"
@@ -72,12 +72,12 @@ function TiltCard({ icon, title, desc, index }: {
         </div>
 
         {/* Title */}
-        <h3 className="font-heading font-bold text-white text-lg mb-4 leading-snug">
+        <h3 className="font-heading font-bold text-white text-lg leading-snug" style={{ marginBottom: "var(--igap-sm)" }}>
           {title}
         </h3>
 
         {/* Description */}
-        <p className="text-white/70 text-sm leading-relaxed pb-2">
+        <p className="text-white/70 text-sm leading-relaxed pb-3">
           {desc}
         </p>
 
@@ -107,7 +107,7 @@ export default function Features() {
   ];
 
   return (
-    <div className="relative section-pad bg-bg-dark overflow-hidden" ref={sectionRef}>
+    <div className="relative section-pad bg-bg-dark overflow-clip" ref={sectionRef}>
 
       {/* Subtle dot grid — kept very faint so it never bleeds through card text */}
       <div className="absolute inset-0 opacity-[0.014]"
@@ -117,15 +117,13 @@ export default function Features() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[250px] pointer-events-none"
         style={{ background: "radial-gradient(ellipse at center, rgba(212,160,23,0.07) 0%, transparent 70%)" }} />
 
-      <div className="relative z-10 layout-container">
+      <div className="relative z-10 layout-container section-inner">
 
         {/* Heading with stronger subtitle */}
-        <div className="mb-12">
-          <SectionHeading title={t.features.title} subtitle={t.features.subtitle} />
-        </div>
+        <SectionHeading title={t.features.title} subtitle={t.features.subtitle} />
 
-        {/* Cards — 1 col mobile, 2 tablet, 4 desktop */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Cards — 1 col mobile, 2 col tablet, 4 col desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" style={{ gap: "var(--igap-sm)" }}>
           {t.features.items.map((item, i) => (
             <TiltCard key={item.title} icon={item.icon} title={item.title} desc={DESCS[i]} index={i} />
           ))}
@@ -133,7 +131,7 @@ export default function Features() {
 
         {/* CTA strip — clear vertical separation from cards */}
         <motion.div
-          className="mt-12 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 p-6 sm:p-8 lg:p-10 gsap-reveal"
+          className="rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 p-10 sm:p-12 gsap-reveal"
           style={{
             background: "linear-gradient(135deg, #0A1F5C 0%, #1A3A8F 100%)",
             border: "1px solid rgba(212,160,23,0.25)",

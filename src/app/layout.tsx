@@ -4,19 +4,25 @@ import { LanguageProvider } from "@/lib/LanguageContext";
 import CustomCursor from "@/components/ui/CustomCursor";
 import HtmlLangSync from "@/components/ui/HtmlLangSync";
 
-const SITE_URL = "https://visioncoaching.in";
+const SITE_URL = "https://vision-coaching-institute.vercel.app";
+const OG_IMAGE = `${SITE_URL}/opengraph-image`;
+const OG_TITLE = "Vision Coaching Institute Tulsipur | CBSE · ICSE · ISC · UP Board";
+const OG_DESC  =
+  "Expert coaching for Classes 6–12 in Maths, Physics, Chemistry & Biology. " +
+  "Small batches · Daily doubt solving · Weekly tests · Free demo classes. " +
+  "Purani Bazar, Tulsipur, Uttar Pradesh. Call: +91 72104 33685";
 
 export const metadata: Metadata = {
   title: {
-    default: "Vision Coaching Institute Tulsipur | CBSE ICSE ISC UP Board",
+    default: OG_TITLE,
     template: "%s | Vision Coaching Institute Tulsipur",
   },
-  description:
-    "Expert coaching for Classes 6–12 in CBSE, ICSE, ISC & UP Board. Maths, Physics, Chemistry, Biology. Small batches, daily doubt-clearing sessions. Purani Bazar, Tulsipur, Uttar Pradesh.",
+  description: OG_DESC,
   keywords: [
     "coaching tulsipur", "CBSE coaching tulsipur", "ICSE coaching tulsipur",
     "UP Board coaching", "maths physics coaching", "vision coaching institute",
     "class 6 to 12 coaching tulsipur", "best coaching tulsipur",
+    "physics chemistry biology coaching", "board exam coaching uttar pradesh",
   ],
   authors: [{ name: "Vision Coaching Institute" }],
   creator: "Vision Coaching Institute",
@@ -28,16 +34,31 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE_URL,
     siteName: "Vision Coaching Institute",
-    title: "Vision Coaching Institute Tulsipur | CBSE ICSE ISC UP Board",
-    description:
-      "Expert coaching for Classes 6–12 in Maths, Physics, Chemistry & Biology. Small batches, daily doubt sessions. Tulsipur, UP.",
+    title: OG_TITLE,
+    description: OG_DESC,
     locale: "en_IN",
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Vision Coaching Institute Tulsipur — Expert Coaching for CBSE, ICSE, ISC & UP Board",
+        type: "image/png",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vision Coaching Institute Tulsipur",
-    description:
-      "Expert coaching for Classes 6–12. CBSE · ICSE · ISC · UP Board. Purani Bazar, Tulsipur, UP.",
+    title: OG_TITLE,
+    description: OG_DESC,
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Vision Coaching Institute Tulsipur",
+      },
+    ],
   },
   icons: {
     icon: "/favicon.ico",
@@ -46,12 +67,53 @@ export const metadata: Metadata = {
   other: {
     "theme-color": "#0A1F5C",
     "google-site-verification": "VT__ykYSkc_c9HPva45gsnFfsfkBJlhSzUgNNXM-os8",
+    // WhatsApp reads og: tags — no extra tags needed, but these reinforce it
+    "og:phone_number": "+917210433685",
+    "og:locality": "Tulsipur",
+    "og:region": "Uttar Pradesh",
+    "og:country-name": "India",
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Vision Coaching Institute",
+    "url": SITE_URL,
+    "telephone": "+917210433685",
+    "image": OG_IMAGE,
+    "description": "Expert coaching for Classes 6\u201312 in CBSE, ICSE, ISC & UP Board. Maths, Physics, Chemistry, Biology. Purani Bazar, Tulsipur, Uttar Pradesh.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Purani Bazar",
+      "addressLocality": "Tulsipur",
+      "addressRegion": "Uttar Pradesh",
+      "postalCode": "271602",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "27.5500",
+      "longitude": "82.4167"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens": "07:00",
+      "closes": "20:00"
+    },
+    "sameAs": []
+  };
+
   return (
     <html lang="en" className="scroll-smooth">
+      <head suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>
         <LanguageProvider>
           <HtmlLangSync />
