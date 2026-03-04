@@ -119,7 +119,7 @@ export default function Faculty() {
     <div className="section-pad bg-bg-light" style={{ background: "#F8F9FF" }} ref={sectionRef}>
       <div className="layout-container">
         <SectionHeading title={t.faculty.title} subtitle={t.faculty.subtitle} light={false} />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {t.faculty.members.map((m) => (
             <TiltCard key={m.name} m={m} photoSoon={t.faculty.photoSoon} />
           ))}

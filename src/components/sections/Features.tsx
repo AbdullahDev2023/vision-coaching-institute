@@ -117,15 +117,15 @@ export default function Features() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[250px] pointer-events-none"
         style={{ background: "radial-gradient(ellipse at center, rgba(212,160,23,0.07) 0%, transparent 70%)" }} />
 
-      <div className="relative z-10 layout-container" style={{ maxWidth: "64rem" }}>
+      <div className="relative z-10 layout-container">
 
         {/* Heading with stronger subtitle */}
-        <div className="mb-14">
+        <div className="mb-12">
           <SectionHeading title={t.features.title} subtitle={t.features.subtitle} />
         </div>
 
-        {/* Cards — reduced container width for premium feel, more gap */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+        {/* Cards — 1 col mobile, 2 tablet, 4 desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {t.features.items.map((item, i) => (
             <TiltCard key={item.title} icon={item.icon} title={item.title} desc={DESCS[i]} index={i} />
           ))}
@@ -133,7 +133,7 @@ export default function Features() {
 
         {/* CTA strip — clear vertical separation from cards */}
         <motion.div
-          className="mt-12 sm:mt-16 lg:mt-20 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8 lg:gap-10 p-6 sm:p-8 lg:p-10 gsap-reveal"
+          className="mt-12 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 p-6 sm:p-8 lg:p-10 gsap-reveal"
           style={{
             background: "linear-gradient(135deg, #0A1F5C 0%, #1A3A8F 100%)",
             border: "1px solid rgba(212,160,23,0.25)",

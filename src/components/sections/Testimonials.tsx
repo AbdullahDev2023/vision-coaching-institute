@@ -83,10 +83,10 @@ export default function Testimonials() {
       <div className="layout-container">
         <SectionHeading title={t.testimonials.title} subtitle={t.testimonials.subtitle} />
 
-        <div className="relative gsap-reveal">
+        <div className="relative gsap-reveal mx-5 sm:mx-8 lg:mx-12">
           {/* Prev arrow */}
           <button onClick={prev} aria-label="Previous"
-            className="absolute -left-4 sm:-left-5 lg:-left-10 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-gold/25 bg-bg-card text-gold text-xl flex items-center justify-center hover:border-gold/60 hover:bg-bg-card/80 transition-all duration-200">
+            className="absolute -left-5 sm:-left-8 lg:-left-12 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-gold/25 bg-bg-card text-gold text-xl flex items-center justify-center hover:border-gold/60 hover:bg-bg-card/80 transition-all duration-200">
             ‹
           </button>
 
@@ -111,7 +111,7 @@ export default function Testimonials() {
 
           {/* Next arrow */}
           <button onClick={next} aria-label="Next"
-            className="absolute -right-4 sm:-right-5 lg:-right-10 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-gold/25 bg-bg-card text-gold text-xl flex items-center justify-center hover:border-gold/60 hover:bg-bg-card/80 transition-all duration-200">
+            className="absolute -right-5 sm:-right-8 lg:-right-12 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-gold/25 bg-bg-card text-gold text-xl flex items-center justify-center hover:border-gold/60 hover:bg-bg-card/80 transition-all duration-200">
             ›
           </button>
         </div>

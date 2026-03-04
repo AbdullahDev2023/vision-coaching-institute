@@ -103,13 +103,13 @@ export default function Contact() {
 
           {/* ── Right panel: Map ── */}
           <motion.div
-            className="rounded-2xl overflow-hidden border border-white/8 min-h-[260px] sm:min-h-[360px]"
+            className="rounded-2xl overflow-hidden border border-white/8 h-[280px] sm:h-[380px] lg:h-auto lg:min-h-[420px]"
             initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }} viewport={{ once: true, amount: 0.2 }}>
             <iframe
               src="https://maps.google.com/maps?q=Purani+Bazar,+Tulsipur,+Uttar+Pradesh&output=embed"
               width="100%" height="100%"
-              style={{ border: 0, minHeight: "260px", display: "block" }}
+              style={{ border: 0, display: "block", minHeight: "280px" }}
               allowFullScreen loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Vision Coaching Institute Location"

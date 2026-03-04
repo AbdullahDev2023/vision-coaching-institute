@@ -13,6 +13,8 @@
   --gold-light:   #F0C842;
   --bg-dark:      #050D1F;
   --bg-card:      #0D1B4B;
+  /* Navbar height — single source of truth */
+  --navbar-h: 5rem; /* 80px */
 
   /* ─── Spacing scale ─── */
   --pad-xs:   0.75rem;   /* 12px */
@@ -70,10 +72,12 @@ body {
   background: var(--bg-dark);
   color: #ffffff;
   font-family: var(--font-inter);
-  line-height: 1.7;
+  line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* ══════════════════════════════════════════════
@@ -86,29 +90,30 @@ body {
  */
 .layout-container {
   width: 100%;
-  max-width: 80rem;          /* 1280px — same as Tailwind max-w-7xl */
+  max-width: 75rem;          /* 1200px */
   margin-left:  auto;
   margin-right: auto;
-  padding-left:  1.25rem;   /* 20px  — mobile */
-  padding-right: 1.25rem;
+  padding-left:  1rem;       /* 16px — mobile */
+  padding-right: 1rem;
 }
 @media (min-width: 640px) {
-  .layout-container { padding-left: 2rem; padding-right: 2rem; }     /* 32px */
+  .layout-container { padding-left: 1.5rem; padding-right: 1.5rem; } /* 24px — tablet */
 }
 @media (min-width: 1024px) {
-  .layout-container { padding-left: 3rem; padding-right: 3rem; }     /* 48px */
+  .layout-container { padding-left: 2rem; padding-right: 2rem; }     /* 32px — desktop */
 }
-@media (min-width: 1280px) {
-  .layout-container { padding-left: 2.5rem; padding-right: 2.5rem; } /* tighten at xl */
-}
+
+/* Narrow variant — content-heavy sections */
+.layout-container--narrow { max-width: 64rem; }
 
 /*
  * .section-pad — vertical breathing room between sections.
  * Used on the outermost section wrapper, *not* on the inner container.
  */
-.section-pad { padding-top: 4.5rem; padding-bottom: 4.5rem; }
-@media (min-width: 640px)  { .section-pad { padding-top: 6rem;   padding-bottom: 6rem;   } }
-@media (min-width: 1024px) { .section-pad { padding-top: 7.5rem; padding-bottom: 7.5rem; } }
+/* Section vertical rhythm — 48px mobile, 64px desktop */
+.section-pad { padding-top: 3rem; padding-bottom: 3rem; }
+@media (min-width: 640px)  { .section-pad { padding-top: 4rem;  padding-bottom: 4rem;  } }
+@media (min-width: 1024px) { .section-pad { padding-top: 4rem;  padding-bottom: 4rem;  } }
 
 /* ══════════════════════════════════════════════
    TYPOGRAPHY UTILITIES

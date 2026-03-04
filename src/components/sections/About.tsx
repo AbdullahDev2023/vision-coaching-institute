@@ -20,7 +20,7 @@ function StatCard({
 }) {
   const numRef = useCountUp(target, suffix, triggerRef as React.RefObject<HTMLElement | null>, duration);
   return (
-    <div className="relative group text-center p-4 sm:p-6 lg:p-8 rounded-2xl overflow-hidden cursor-default"
+    <div className="relative group text-center p-3 sm:p-5 lg:p-7 rounded-2xl overflow-hidden cursor-default"
       style={{ background: "linear-gradient(135deg, #0A1F5C 0%, #1A3A8F 100%)" }}>
       {/* Hover gold radial glow */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
@@ -29,10 +29,10 @@ function StatCard({
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-[2px] bg-gold rounded-full" />
       <div className="relative z-10 pt-1">
         <span ref={numRef}
-          className="block text-2xl sm:text-4xl lg:text-5xl font-heading font-bold text-gold-shimmer mb-2 sm:mb-3">
+          className="block text-xl sm:text-3xl lg:text-5xl font-heading font-bold text-gold-shimmer mb-1 sm:mb-2">
           {target}{suffix}
         </span>
-        <span className="text-white/60 text-[11px] uppercase tracking-widest leading-snug">{label}</span>
+        <span className="text-white/60 text-[9px] sm:text-[11px] uppercase tracking-wider leading-snug block">{label}</span>
       </div>
     </div>
   );
@@ -90,7 +90,7 @@ export default function About() {
 
           {/* RIGHT — animated stat counters */}
           <div ref={rightRef} style={{ opacity: 0 }} className="flex flex-col gap-8">
-            <div className="grid grid-cols-3 gap-3 sm:gap-5">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 lg:gap-5">
               {t.about.stats.map((s, i) => (
                 <StatCard
                   key={s.label}

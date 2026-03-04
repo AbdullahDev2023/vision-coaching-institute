@@ -54,8 +54,14 @@ export default function Hero() {
 
   return (
     <div
-      className="relative min-h-[600px] md:min-h-screen flex items-center pt-20 overflow-hidden"
-      style={{ background: "radial-gradient(ellipse at 30% 50%, #1A3A8F 0%, #0A1F5C 40%, #050D1F 80%)" }}>
+      className="relative flex items-center overflow-hidden"
+      style={{
+        background: "radial-gradient(ellipse at 30% 50%, #1A3A8F 0%, #0A1F5C 40%, #050D1F 80%)",
+        /* pt = navbar (80px) + breathing (40px) = 120px; pb = 64px desktop */
+        paddingTop: "clamp(7.5rem, 12vw, 8.5rem)",
+        paddingBottom: "clamp(3rem, 6vw, 5rem)",
+        minHeight: "100dvh",
+      }}>
 
       {/* Grid — very subtle, reduced opacity so content leads */}
       <div className="absolute inset-0 opacity-[0.012]"
@@ -74,11 +80,10 @@ export default function Hero() {
 
       {/* ── Main grid ── */}
       <div className="relative z-10 layout-container
-                      grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-8 sm:gap-10 lg:gap-16 items-center
-                      py-12 sm:py-16 lg:py-28">
+                      grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-8 sm:gap-10 lg:gap-16 items-center">
 
         {/* ── LEFT column ── */}
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 w-full max-w-[600px]">
 
           {/* Tagline */}
           <p ref={taglineRef} style={{ opacity: 0 }}
@@ -129,14 +134,14 @@ export default function Hero() {
             })}
           </div>
 
-          {/* ── CTAs — extra top margin to visually anchor the action block ── */}
-          <div ref={ctasRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-3">
+          {/* ── CTAs ── */}
+          <div ref={ctasRef} className="flex flex-wrap gap-3 sm:gap-4 mt-6">
             <a href={`https://wa.me/${t.contact.whatsapp}`}
               target="_blank" rel="noopener noreferrer"
-              className="btn-primary">
+              className="btn-primary flex-shrink-0">
               🎓 {t.hero.demoBtn}
             </a>
-            <a href="#contact" className="btn-secondary">
+            <a href="#contact" className="btn-secondary flex-shrink-0">
               {t.hero.cta} →
             </a>
           </div>
@@ -156,7 +161,7 @@ export default function Hero() {
 
         {/* ── RIGHT column: Three.js canvas ── */}
         <div ref={canvasRef}
-          className="hidden lg:flex items-center justify-center relative w-full h-[540px] rounded-3xl overflow-hidden"
+          className="hidden lg:flex items-center justify-center relative w-full aspect-[4/3] rounded-3xl overflow-hidden"
           style={{
             opacity: 0,
             background: "radial-gradient(ellipse at center, rgba(26,58,143,0.20) 0%, transparent 70%)",
@@ -172,7 +177,7 @@ export default function Hero() {
         </div>
 
         {/* Mobile canvas — shown below text on small screens */}
-        <div className="lg:hidden relative w-full h-[260px] sm:h-[340px] rounded-2xl overflow-hidden mt-2"
+        <div className="lg:hidden relative w-full aspect-video rounded-2xl overflow-hidden"
           style={{ background: "radial-gradient(ellipse at center, rgba(26,58,143,0.25) 0%, transparent 70%)" }}>
           <div className="absolute inset-0 rounded-2xl border border-gold/10 pointer-events-none z-10" />
           <div className="absolute inset-0">

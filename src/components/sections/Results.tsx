@@ -43,8 +43,8 @@ export default function Results() {
           </div>
         </div>
 
-        {/* Year filter tabs — own row with clear spacing */}
-        <div className="flex justify-center gap-4 mb-12 gsap-reveal">
+        {/* Year filter tabs */}
+        <div className="flex flex-wrap justify-center gap-3 mb-10 gsap-reveal">
           {years.map(yr => (
             <button key={yr} onClick={() => setActiveYear(yr)}
               className={`min-w-[80px] px-7 py-3 rounded-full text-sm font-semibold leading-none border transition-all duration-200 ${
@@ -62,7 +62,7 @@ export default function Results() {
           <motion.div key={activeYear}
             initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((tp) => (
               <motion.div key={tp.name + tp.year}
                 whileHover={{ scale: 1.03, boxShadow: "0 12px 40px rgba(212,160,23,0.18)" }}
