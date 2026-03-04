@@ -1,0 +1,133 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "courses": "Courses",
+    "faculty": "Faculty",
+    "results": "Results",
+    "gallery": "Gallery",
+    "testimonials": "Reviews",
+    "contact": "Contact",
+    "features": "Why Us",
+    "callNow": "Call Now",
+    "freeDemo": "Free Demo"
+  },
+  "hero": {
+    "tagline": "Expert Coaching for",
+    "boards": ["CBSE", "ICSE", "ISC", "UP Board"],
+    "institute": "Vision Coaching Institute",
+    "location": "Tulsipur",
+    "classes": "Coaching for Classes 6th to 12th",
+    "subjects": ["Maths", "Physics", "Chemistry", "Biology"],
+    "cta": "Register Now",
+    "demoBtn": "Free Demo Class",
+    "callUs": "Call Us"
+  },
+  "features": {
+    "title": "Why Choose Vision?",
+    "subtitle": "Everything your child needs to excel",
+    "items": [
+      { "icon": "👥", "title": "Small Batches", "desc": "Personal attention in small, focused batches for every student" },
+      { "icon": "🙋", "title": "Daily Doubt Solving", "desc": "Dedicated sessions every day to clear doubts and revise concepts" },
+      { "icon": "📝", "title": "Weekly Tests", "desc": "Regular tests with performance tracking to monitor progress" },
+      { "icon": "🎓", "title": "Free Demo Class", "desc": "Try before you enroll — free demo classes available" }
+    ],
+    "ctaTitle": "Ready to start your journey?",
+    "ctaBody": "Join hundreds of students who've achieved top results with Vision Coaching.",
+    "ctaBtn": "Book Free Demo"
+  },
+  "about": {
+    "title": "About Vision Coaching",
+    "subtitle": "Building Bright Futures Since Day One",
+    "body": "Vision Coaching Institute in Tulsipur has been shaping the academic futures of students from Classes 6 to 12. Our expert faculty, personalized approach, and proven methodology have helped hundreds of students achieve top results in CBSE, ICSE, ISC, and UP Board examinations.",
+    "features": [
+      "Personal Attention in Small Batches",
+      "Daily Doubt Solving & Revision Sessions",
+      "Weekly Tests & Performance Tracking",
+      "Free Demo Classes Available"
+    ],
+    "enrollCta": "Enroll Now",
+    "visionTitle": "Our Vision",
+    "visionBody": "To be the most trusted coaching institute in Tulsipur — empowering every student with knowledge, confidence, and the skills to excel in board exams and beyond.",
+    "stats": [
+      { "value": "500+", "label": "Students Taught" },
+      { "value": "95%", "label": "Pass Rate" },
+      { "value": "10+", "label": "Years of Excellence" }
+    ]
+  },
+  "courses": {
+    "title": "Our Courses",
+    "subtitle": "Comprehensive coaching for all major boards",
+    "highlightsLabel": "Highlights",
+    "highlights": ["Small batch size", "Daily doubt sessions", "Weekly tests", "Free demo available"],
+    "enquireCta": "Enquire Now",
+    "hint": "Click any board card to see details",
+    "enrollLink": "Contact us to enroll",
+    "boards": [
+      { "name": "CBSE", "classes": "6th – 12th", "subjects": ["Mathematics", "Physics", "Chemistry", "Biology"] },
+      { "name": "ICSE", "classes": "6th – 10th", "subjects": ["Mathematics", "Physics", "Chemistry", "Biology"] },
+      { "name": "ISC", "classes": "11th – 12th", "subjects": ["Mathematics", "Physics", "Chemistry", "Biology"] },
+      { "name": "UP Board", "classes": "6th – 12th", "subjects": ["Ganit", "Bhautiki", "Rasayan Vigyan", "Jeev Vigyan"] }
+    ]
+  },
+  "faculty": {
+    "title": "Our Faculty",
+    "subtitle": "Experienced educators dedicated to your success",
+    "photoSoon": "Photo soon",
+    "members": [
+      { "name": "Shivam Sir", "subject": "Physics", "qualification": "M.Sc. Physics, B.Ed", "exp": "8+ Years", "photo": "/images/faculty/shivam-sir-physics.jpeg" },
+      { "name": "Yusuf Sir", "subject": "Physics", "qualification": "M.Sc. Physics, B.Ed", "exp": "7+ Years", "photo": "/images/faculty/yusuf-sir-physics.jpeg" },
+      { "name": "Satish Sir", "subject": "Chemistry", "qualification": "M.Sc. Chemistry, B.Ed", "exp": "10+ Years", "photo": "/images/faculty/satish-sir-chemistry.jpeg" },
+      { "name": "Farhan Sir", "subject": "Biology", "qualification": "M.Sc. Biology, B.Ed", "exp": "9+ Years", "photo": "/images/faculty/farhan-sir-biology.jpeg" }
+    ]
+  },
+  "results": {
+    "title": "Our Results",
+    "subtitle": "Toppers & achievers from Vision Coaching",
+    "passRateLabel": "Overall Pass Rate",
+    "toppers": [
+      { "name": "Aarav Gupta", "board": "CBSE", "percentage": "98.6%", "year": "2024", "class": "12th" },
+      { "name": "Priya Tiwari", "board": "ISC", "percentage": "97.2%", "year": "2024", "class": "12th" },
+      { "name": "Rahul Mishra", "board": "UP Board", "percentage": "95.8%", "year": "2024", "class": "12th" },
+      { "name": "Ananya Singh", "board": "ICSE", "percentage": "96.4%", "year": "2023", "class": "10th" },
+      { "name": "Vikash Yadav", "board": "CBSE", "percentage": "94.2%", "year": "2023", "class": "10th" },
+      { "name": "Nisha Pandey", "board": "ISC", "percentage": "93.8%", "year": "2022", "class": "12th" }
+    ]
+  },
+  "gallery": {
+    "title": "Gallery",
+    "subtitle": "Moments from our classrooms & events",
+    "filters": ["All", "Photos", "Videos"]
+  },
+  "testimonials": {
+    "title": "What Students Say",
+    "subtitle": "Hear from our students and parents",
+    "reviews": [
+      { "name": "Ramesh Kumar (Parent)", "text": "My son's marks improved drastically after joining Vision Coaching. The teachers are very dedicated.", "rating": 5, "class": "Class 10" },
+      { "name": "Sneha Pandey", "text": "The doubt solving sessions are amazing. I cleared all my concepts before the board exams.", "rating": 5, "class": "Class 12 CBSE" },
+      { "name": "Mohit Srivastava", "text": "Best coaching in Tulsipur! Weekly tests helped me track my progress throughout the year.", "rating": 5, "class": "Class 11 UP Board" },
+      { "name": "Pooja Sharma (Parent)", "text": "Small batch size means my daughter gets personal attention. Highly recommended!", "rating": 5, "class": "Class 9" },
+      { "name": "Ankit Dubey", "text": "The faculty is very experienced and always available for doubt clearing. Got 94% in boards!", "rating": 5, "class": "Class 12 UP Board" }
+    ]
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We're here to help your child succeed",
+    "phones": ["+91 72104 33685", "+91 7235937827", "+91 99568 41282"],
+    "address": "Purani Bazar, Tulsipur, Uttar Pradesh",
+    "whatsapp": "+917210433685",
+    "callLabel": "Call Us",
+    "locationLabel": "Our Location",
+    "hoursLabel": "Timings",
+    "hours": "Mon – Sat: 7:00 AM – 8:00 PM",
+    "whatsappBtn": "WhatsApp Us"
+  },
+  "footer": {
+    "tagline": "Expert Coaching for CBSE | ICSE | ISC | UP Board",
+    "quickLinks": "Quick Links",
+    "contactUs": "Contact Us",
+    "followUs": "Follow Us",
+    "copyright": "© 2025 Vision Coaching Institute, Tulsipur. All rights reserved.",
+    "status": "All systems operational"
+  }
+}

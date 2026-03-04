@@ -1,0 +1,17 @@
+// ─── Orbit Rings (decorative) ────────────────────────────────────────────────
+function OrbitRing({ r, tilt }: { r: number; tilt: number }) {
+  const lineObj = useMemo(() => {
+    const pts: THREE.Vector3[] = [];
+    for (let i = 0; i <= 128; i++) {
+      const a = (i / 128) * Math.PI * 2;
+      pts.push(new THREE.Vector3(Math.cos(a) * r, 0, Math.sin(a) * r * 0.5));
+    }
+    const geo = new THREE.BufferGeometry().setFromPoints(pts);
+    const mat = new THREE.LineBasicMaterial({ color: 0xD4A017, transparent: true, opacity: 0.12 });
+    const obj = new THREE.Line(geo, mat);
+    obj.rotation.x = tilt;
+    return obj;
+  }, [r, tilt]);
+
+  return <primitive object={lineObj} />;
+}
