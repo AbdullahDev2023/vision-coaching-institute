@@ -145,6 +145,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/favicon_48.png" type="image/png" sizes="48x48" />
         <link rel="apple-touch-icon" href="/favicon_180.png" sizes="180x180" />
         <script
+          suppressHydrationWarning
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
