@@ -1,8 +1,7 @@
 "use client";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import { useLanguage } from "@/lib/LanguageContext";
-import { gsap } from "gsap";
 import HeroSceneLoader from "@/components/ui/HeroSceneLoader";
 import ShareButton from "@/components/ui/ShareButton";
 
@@ -20,15 +19,6 @@ const SUBJECT_COLORS: Record<string, { bg: string; border: string; text: string 
 export default function Hero() {
   const { t } = useLanguage();
   const colRef = useRef<HTMLDivElement>(null);
-
-  /* Single fast fade-in — no delay, no stagger cascade */
-  useEffect(() => {
-    gsap.fromTo(
-      colRef.current,
-      { opacity: 0, y: 18 },
-      { opacity: 1, y: 0, duration: 0.55, ease: "power2.out", delay: 0.1 }
-    );
-  }, []);
 
   const primaryPhone = t.contact.phones[0];
 
@@ -59,14 +49,14 @@ export default function Hero() {
       <div className="relative z-10 layout-container grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-8 sm:gap-10 lg:gap-16 items-center">
 
         {/* ── LEFT column — all content fades in together ── */}
-        <div ref={colRef} className="flex flex-col w-full max-w-[600px]" style={{ opacity: 0, gap: "var(--igap-sm)" }}>
+        <div ref={colRef} className="hero-col-animate flex flex-col w-full max-w-[600px]" style={{ gap: "var(--igap-sm)" }}>
 
           {/* ── Logo + name ── */}
           <div className="flex items-center gap-3">
             <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-gold/40 shadow-lg shadow-gold/20 flex-shrink-0"
               style={{ background: "rgba(10,31,92,0.6)" }}>
-              <Image src="/logo.png" alt="Vision Coaching Institute Tulsipur" width={128} height={128}
-                className="w-full h-full object-cover scale-[1.15]" priority sizes="128px" />
+              <Image src="/logo.png" alt="Vision Coaching Institute Tulsipur" width={64} height={64}
+                className="w-full h-full object-cover scale-[1.15]" priority sizes="64px" />
             </div>
             <div className="leading-tight">
               <div className="text-white font-heading font-bold text-base sm:text-lg tracking-wide">Vision Coaching</div>

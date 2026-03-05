@@ -323,6 +323,15 @@ body {
    VISUAL HELPERS
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
+/* Hero column entrance — CSS animation so LCP text is never hidden in HTML */
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-col-animate {
+  animation: heroFadeIn 0.55s ease-out 0.05s both;
+}
+
 .text-gold-shimmer {
   background: linear-gradient(90deg, #D4A017 0%, #F0C842 40%, #FFE066 60%, #D4A017 100%);
   background-size: 200% auto;

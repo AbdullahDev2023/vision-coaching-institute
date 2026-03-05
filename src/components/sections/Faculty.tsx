@@ -151,7 +151,11 @@ export default function Faculty() {
     setFsLoaded(true);
   }, []);
 
-  useEffect(() => { loadFirebase(); }, [loadFirebase]);
+  useEffect(() => {
+    // Defer Supabase fetch until after page is interactive — don't block LCP
+    const id = setTimeout(() => { loadFirebase(); }, 2000);
+    return () => clearTimeout(id);
+  }, [loadFirebase]);
 
   return (
     <div className="section-pad bg-bg-light" style={{ background: "#F8F9FF" }} ref={sectionRef}>
