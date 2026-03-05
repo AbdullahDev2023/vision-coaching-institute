@@ -104,14 +104,16 @@ export default function Courses() {
                       transition={{ duration: 0.3 }}
                       className="relative z-10 mt-4 pt-4 border-t overflow-hidden"
                       style={{ borderColor: `${meta.color}30` }}>
-                      <div className="text-xs text-white/40 uppercase tracking-widest mb-4 font-bold">{t.courses.highlightsLabel}</div>
-                      {t.courses.highlights.map((h) => (
-                        <div key={h} className="flex items-center gap-2.5 text-white/65 text-sm mb-3 leading-relaxed">
-                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: meta.color }} />
-                          {h}
-                        </div>
-                      ))}
-                      <div className="flex items-center gap-3 mt-4">
+                      <div className="px-4 py-3 rounded-xl mb-3" style={{ background: `${meta.color}0d` }}>
+                        <div className="text-xs text-white/40 uppercase tracking-widest mb-3 font-bold">{t.courses.highlightsLabel}</div>
+                        {t.courses.highlights.map((h) => (
+                          <div key={h} className="flex items-center gap-2.5 text-white/65 text-sm mb-2.5 leading-relaxed">
+                            <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: meta.color }} />
+                            {h}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="flex items-center gap-3 mt-3 px-1">
                         <a href="#contact"
                           className="btn-sm"
                           style={{ background: `linear-gradient(135deg, ${meta.color}, ${meta.color}cc)`, color: "#050D1F" }}>

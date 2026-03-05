@@ -51,7 +51,7 @@ export default function Footer() {
           <motion.div variants={fadeUp} className="md:col-span-4">
             <div className="flex items-center gap-3" style={{ marginBottom: "var(--igap-sm)" }}>
               <div className="w-13 h-13 rounded-full overflow-hidden flex-shrink-0 border border-gold/25 shadow-lg shadow-gold/15">
-                <Image src="/logo.png" alt="Vision Coaching Institute" width={104} height={104} className="w-full h-full object-contain p-0.5" sizes="104px" />
+                <Image src="/logo.png" alt="Vision Coaching Institute" width={104} height={104} className="w-full h-full object-cover scale-[1.15]" sizes="104px" />
               </div>
               <div>
                 <div className="text-white font-heading font-bold text-lg leading-tight">Vision Coaching</div>

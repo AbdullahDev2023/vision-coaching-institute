@@ -25,7 +25,7 @@ const notoDevanagari = Noto_Sans_Devanagari({
   display: "swap",
 });
 
-const SITE_URL = "https://vision-coaching-institute.vercel.app";
+const SITE_URL = "https://www.visioncoachinginstitute.online";
 const OG_IMAGE = `${SITE_URL}/opengraph-image`;
 const OG_TITLE = "Vision Coaching Institute Tulsipur | CBSE · ICSE · ISC · UP Board";
 const OG_DESC  =

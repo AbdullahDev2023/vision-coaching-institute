@@ -1,37 +1,75 @@
 import { MetadataRoute } from "next";
 
-const SITE_URL = "https://vision-coaching-institute.vercel.app";
+const SITE_URL = "https://www.visioncoachinginstitute.online";
 
 /**
  * Next.js App Router sitemap — auto-served at /sitemap.xml
- * Mirrors public/sitemap.xml but generated programmatically at build time.
+ * Do NOT add a public/sitemap.xml — that will conflict with this file.
+ *
+ * This is a single-page app; sections are hash anchors on the root page.
+ * Google treats /#section URLs as variants of / but we include them for
+ * completeness and to signal content structure.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date("2025-01-01");
-
-  const sections = [
-    { id: "about",        priority: 0.8, changeFrequency: "monthly" as const },
-    { id: "features",     priority: 0.7, changeFrequency: "monthly" as const },
-    { id: "courses",      priority: 0.9, changeFrequency: "monthly" as const },
-    { id: "faculty",      priority: 0.7, changeFrequency: "monthly" as const },
-    { id: "results",      priority: 0.8, changeFrequency: "yearly"  as const },
-    { id: "gallery",      priority: 0.6, changeFrequency: "monthly" as const },
-    { id: "testimonials", priority: 0.7, changeFrequency: "monthly" as const },
-    { id: "contact",      priority: 0.8, changeFrequency: "yearly"  as const },
-  ];
+  const now = new Date();
 
   return [
+    // ── Root page — highest priority ──────────────────────────────
     {
       url: SITE_URL,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 1.0,
     },
-    ...sections.map(({ id, priority, changeFrequency }) => ({
-      url: `${SITE_URL}/#${id}`,
+    // ── Named section anchors (required by the brief) ─────────────
+    {
+      url: `${SITE_URL}/#about`,
       lastModified: now,
-      changeFrequency,
-      priority,
-    })),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/#courses`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/#contact`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.8,
+    },
+    // ── Additional section anchors ────────────────────────────────
+    {
+      url: `${SITE_URL}/#features`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/#faculty`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/#results`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/#gallery`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${SITE_URL}/#testimonials`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
   ];
 }

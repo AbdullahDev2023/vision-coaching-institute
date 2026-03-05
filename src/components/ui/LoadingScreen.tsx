@@ -51,9 +51,9 @@ export default function LoadingScreen() {
         <div ref={logoRingRef}
           className="relative w-24 h-24 rounded-full border-2 border-gold flex items-center justify-center"
           style={{ boxShadow: "0 0 30px rgba(212,160,23,0.4)" }}>
-          {/* Logo image */}
-          <div className="relative w-14 h-14 rounded-full overflow-hidden z-10 border border-gold/30">
-            <Image src="/logo.png" alt="Vision Coaching Institute" width={112} height={112} className="w-full h-full object-contain p-1" priority sizes="112px" />
+          {/* Logo image — fills the full ring */}
+          <div className="absolute inset-0 rounded-full overflow-hidden z-10">
+            <Image src="/logo.png" alt="Vision Coaching Institute" width={96} height={96} className="w-full h-full object-cover scale-[1.15]" priority sizes="96px" />
           </div>
         </div>
       </div>
