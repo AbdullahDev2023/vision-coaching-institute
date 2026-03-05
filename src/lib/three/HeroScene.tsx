@@ -38,7 +38,7 @@ function MicroscopeModel() {
         const box = new THREE.Box3().setFromObject(scene);
         const size = new THREE.Vector3();
         box.getSize(size);
-        const s = 2.6 / Math.max(size.x, size.y, size.z, 0.001);
+        const s = 4.5 / Math.max(size.x, size.y, size.z, 0.001);
         scene.scale.setScalar(s);
         const center = new THREE.Vector3();
         box.getCenter(center);
@@ -150,7 +150,7 @@ function OrbitRing({ r, tilt }: { r: number; tilt: number }) {
 export default function HeroScene() {
   return (
     <Canvas
-      camera={{ position: [0, 0, 5.5], fov: 55 }}
+      camera={{ position: [0, 0, 2.75], fov: 55 }}
       style={{ width: "100%", height: "100%", display: "block", background: "transparent" }}
       dpr={[1, 2]}
       gl={{ antialias: true, alpha: true }}
@@ -162,17 +162,17 @@ export default function HeroScene() {
       <pointLight position={[ 0,  4,  0]} intensity={1.2} color={0xffeebb} />
       <pointLight position={[ 2, -3,  2]} intensity={0.9} color={0x44aaff} />
 
-      {/* OrbitControls — handles both mouse drag AND touch drag/pinch natively */}
       <OrbitControls
         enableZoom={true}
         enablePan={false}
         enableDamping={true}
         dampingFactor={0.08}
-        rotateSpeed={0.6}
-        minDistance={3}
-        maxDistance={9}
-        minPolarAngle={Math.PI * 0.2}
-        maxPolarAngle={Math.PI * 0.8}
+        rotateSpeed={0.7}
+        zoomSpeed={1.2}
+        minDistance={1.5}
+        maxDistance={12}
+        minPolarAngle={Math.PI * 0.1}
+        maxPolarAngle={Math.PI * 0.9}
         makeDefault
       />
 
