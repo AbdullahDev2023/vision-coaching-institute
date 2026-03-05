@@ -70,6 +70,46 @@ export function shareContact(): string {
   return wa(msg);
 }
 
+/**
+ * Data for WhatsApp Status share via Web Share API.
+ * Hinglish hook — short, emotional, curiosity-first.
+ * The URL at the end triggers WhatsApp's link-preview card (OG image).
+ */
+export function getStatusShareData(): { title: string; text: string; url: string } {
+  return {
+    title: "Vision Coaching Institute – Tulsipur",
+    text: [
+      `Kya aapke bache ke marks improve nahi ho rahe? 📉`,
+      ``,
+      `Tulsipur mein 500+ students ke results badal gaye — sirf sahi coaching se. 🎯`,
+      ``,
+      `FREE Demo Class available hai. Seats limited hain.`,
+    ].join("\n"),
+    url: SITE_URL,
+  };
+}
+
+/**
+ * WhatsApp deep-link fallback for browsers without Web Share API.
+ */
+export function shareStatusFallback(): string {
+  const msg = [
+    `Kya aapke bache ke marks improve nahi ho rahe? 📉`,
+    ``,
+    `Tulsipur mein 500+ students ke results badal gaye — sirf sahi coaching se. 🎯`,
+    ``,
+    `*Vision Coaching Institute* — Classes 6th–12th`,
+    `📘 CBSE · 📗 ICSE · 📙 ISC · 📕 UP Board`,
+    ``,
+    `🆓 FREE Demo Class available hai`,
+    `📍 Purani Bazar, Tulsipur, UP`,
+    `📞 ${PHONE}`,
+    ``,
+    `👉 ${SITE_URL}`,
+  ].join("\n");
+  return wa(msg);
+}
+
 /** Share the institute generally (about) */
 export function shareAbout(): string {
   const msg = [

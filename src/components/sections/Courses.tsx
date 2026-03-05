@@ -123,10 +123,7 @@ export default function Courses() {
                           style={{ background: `linear-gradient(135deg, ${meta.color}, ${meta.color}cc)`, color: "#050D1F" }}>
                           {t.courses.enquireCta} →
                         </a>
-                        <ShareButton
-                          href={shareCourse(board.name, board.classes, board.subjects)}
-                          label="Share"
-                        />
+                        <ShareButton variant="hero" />
                       </div>
                     </motion.div>
                   )}

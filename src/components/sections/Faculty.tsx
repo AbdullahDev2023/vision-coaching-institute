@@ -1,10 +1,12 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { fetchFaculty } from "@/lib/firestoreDb";
+import type { FacultyMember as FSMember } from "@/lib/firestoreDb";
 
 type Member = { name: string; subject: string; qualification: string; exp: string; photo?: string };
 
@@ -129,15 +131,49 @@ export default function Faculty() {
   const sectionRef = useRef<HTMLDivElement>(null);
   useScrollReveal(sectionRef as React.RefObject<HTMLElement>, { stagger: 0.13 });
 
+  // Merge: Firestore members take priority; fall back to i18n static data
+  const [members,  setMembers]  = useState<Member[]>(t.faculty.members);
+  const [fsLoaded, setFsLoaded] = useState(false);
+
+  const loadFirebase = useCallback(async () => {
+    try {
+      const fsMembers: FSMember[] = await fetchFaculty();
+      if (fsMembers.length > 0) {
+        setMembers(fsMembers.map(m => ({
+          name:          m.name,
+          subject:       m.subject,
+          qualification: m.qualification,
+          exp:           m.exp,
+          photo:         m.photoUrl || undefined,
+        })));
+      }
+    } catch { /* keep static */ }
+    setFsLoaded(true);
+  }, []);
+
+  useEffect(() => { loadFirebase(); }, [loadFirebase]);
+
   return (
     <div className="section-pad bg-bg-light" style={{ background: "#F8F9FF" }} ref={sectionRef}>
       <div className="layout-container section-inner">
         <SectionHeading title={t.faculty.title} subtitle={t.faculty.subtitle} light={false} />
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4" style={{ gap: "var(--igap-sm)" }}>
-          {t.faculty.members.map((m) => (
-            <TiltCard key={m.name} m={m} photoSoon={t.faculty.photoSoon} />
-          ))}
-        </div>
+
+        {/* Skeleton while Firebase loads */}
+        {!fsLoaded && (
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4" style={{ gap: "var(--igap-sm)" }}>
+            {[0,1,2,3].map(i => (
+              <div key={i} className="rounded-2xl animate-pulse" style={{ height: 280, background: "rgba(10,31,92,0.08)" }} />
+            ))}
+          </div>
+        )}
+
+        {fsLoaded && (
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4" style={{ gap: "var(--igap-sm)" }}>
+            {members.map((m) => (
+              <TiltCard key={m.name} m={m} photoSoon={t.faculty.photoSoon} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

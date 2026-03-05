@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
+import ShareButton from "@/components/ui/ShareButton";
 
 export default function CtaBanner() {
   const { t } = useLanguage();
@@ -38,13 +39,21 @@ export default function CtaBanner() {
           Small batches fill fast. Secure your child&apos;s seat with a free demo class.
         </p>
 
-        {/* Single primary CTA */}
-        <a
-          href={`https://wa.me/${t.contact.whatsapp}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20demo%20class`}
-          target="_blank" rel="noopener noreferrer"
-          className="btn-primary mt-2">
-          🎓 Book Free Demo Class
-        </a>
+        {/* CTAs row */}
+        <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
+          <a
+            href={`https://wa.me/${t.contact.whatsapp}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20demo%20class`}
+            target="_blank" rel="noopener noreferrer"
+            className="btn-primary">
+            🎓 Book Free Demo Class
+          </a>
+          <ShareButton variant="banner" />
+        </div>
+
+        {/* Share nudge */}
+        <p className="text-white/30 text-[11px] mt-1">
+          Apne dost / neighbour ko bhi batao — unke bache bhi benefit kar sakte hain 🙌
+        </p>
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-[2px]"

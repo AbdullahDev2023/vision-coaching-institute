@@ -174,7 +174,7 @@ export default function Contact() {
             <div>
               <div className="flex items-center justify-between" style={{ marginBottom: "var(--igap-sm)" }}>
                 <h3 className="text-gold font-bold uppercase text-[11px] tracking-widest">{t.contact.callLabel}</h3>
-                <ShareButton href={shareContact()} label="Share Contact" />
+                <ShareButton variant="hero" />
               </div>
               <div className="item-gap">
                 {t.contact.phones.map((p) => <CopyPhone key={p} phone={p} />)}
@@ -187,7 +187,7 @@ export default function Contact() {
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-2">
                   <div className="text-gold font-bold uppercase text-[11px] tracking-widest">{t.contact.locationLabel}</div>
-                  <ShareButton href={shareLocation()} label="Share Location" />
+                  <ShareButton variant="hero" />
                 </div>
                 <p className="text-white/60 text-sm leading-relaxed font-normal">{t.contact.address}</p>
               </div>

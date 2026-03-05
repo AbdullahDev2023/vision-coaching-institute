@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useLanguage } from "@/lib/LanguageContext";
 import { gsap } from "gsap";
 import HeroSceneLoader from "@/components/ui/HeroSceneLoader";
+import ShareButton from "@/components/ui/ShareButton";
 
 const SUBJECT_COLORS: Record<string, { bg: string; border: string; text: string }> = {
   Maths:         { bg: "rgba(212,160,23,0.15)",  border: "rgba(212,160,23,0.45)", text: "#F0C842" },
@@ -147,6 +148,7 @@ export default function Hero() {
               {t.hero.cta}
             </a>
             <p className="text-white/40 text-xs pl-1">{t.hero.ctaSub}</p>
+            <ShareButton variant="hero" className="sm:self-start" />
           </div>
 
           {/* ── Secondary: phone link ── */}
