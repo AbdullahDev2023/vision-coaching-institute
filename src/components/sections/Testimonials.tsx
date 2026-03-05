@@ -88,20 +88,20 @@ export default function Testimonials() {
       <div className="layout-container section-inner" ref={revealRef}>
         <SectionHeading title={t.testimonials.title} subtitle={t.testimonials.subtitle} />
 
-        {/* Desktop: 3-card */}
-        <div className="hidden lg:block gsap-reveal">
+        {/* Tablet+: 2 or 3-card */}
+        <div className="hidden md:block gsap-reveal">
           <AnimatePresence mode="wait" custom={dir}>
             <motion.div key={index} custom={dir}
               initial={{ opacity: 0, x: dir * 40 }} animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: dir * -40 }} transition={{ duration: 0.4, ease: "easeOut" }}
-              className="grid grid-cols-3 gap-5 items-start">
+              className="grid grid-cols-2 lg:grid-cols-3 gap-5 items-start">
               {desktopCards.map((r, o) => <ReviewCard key={o} r={r} featured={o === 1} />)}
             </motion.div>
           </AnimatePresence>
         </div>
 
         {/* Mobile: single swipeable card */}
-        <div className="lg:hidden gsap-reveal">
+        <div className="md:hidden gsap-reveal">
           <motion.div drag="x" dragConstraints={{ left: 0, right: 0 }} dragElastic={0.1}
             onDragEnd={onDragEnd} className="cursor-grab active:cursor-grabbing select-none overflow-hidden">
             <AnimatePresence mode="wait" custom={dir}>

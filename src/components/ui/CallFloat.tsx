@@ -27,7 +27,8 @@ export default function CallFloat() {
      * • md:w-14 md:h-14 (56px)   — matches WhatsApp button on larger screens
      */
     <motion.div
-      className="float-right fixed bottom-24 z-[55] flex items-center justify-end gap-3"
+      className="float-right fixed z-[55] flex items-center justify-end gap-3"
+      style={{ bottom: "calc(8rem + env(safe-area-inset-bottom, 0px))" }}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 3.0, type: "spring", stiffness: 260, damping: 20 }}

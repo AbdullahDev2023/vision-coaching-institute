@@ -53,7 +53,7 @@ export default function LoadingScreen() {
           style={{ boxShadow: "0 0 30px rgba(212,160,23,0.4)" }}>
           {/* Logo image */}
           <div className="relative w-14 h-14 rounded-full overflow-hidden z-10 border border-gold/30">
-            <Image src="/logo.png" alt="Vision Coaching Institute" fill className="object-cover" priority />
+            <Image src="/logo.png" alt="Vision Coaching Institute" width={112} height={112} className="w-full h-full object-contain p-1" priority sizes="112px" />
           </div>
         </div>
       </div>

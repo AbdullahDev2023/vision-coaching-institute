@@ -16,6 +16,7 @@ import WhatsAppFloat from "@/components/ui/WhatsAppFloat";
 import CallFloat from "@/components/ui/CallFloat";
 import BackToTop from "@/components/ui/BackToTop";
 import LoadingScreen from "@/components/ui/LoadingScreen";
+import MobileBookingBar from "@/components/ui/MobileBookingBar";
 
 export default function Home() {
   return (
@@ -48,6 +49,7 @@ export default function Home() {
       <WhatsAppFloat />
       <CallFloat />
       <BackToTop />
+      <MobileBookingBar />
     </>
   );
 }

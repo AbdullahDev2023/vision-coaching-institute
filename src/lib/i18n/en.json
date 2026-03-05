@@ -74,7 +74,7 @@
       { "name": "CBSE", "classes": "6th – 12th", "subjects": ["Mathematics", "Physics", "Chemistry", "Biology"] },
       { "name": "ICSE", "classes": "6th – 10th", "subjects": ["Mathematics", "Physics", "Chemistry", "Biology"] },
       { "name": "ISC", "classes": "11th – 12th", "subjects": ["Mathematics", "Physics", "Chemistry", "Biology"] },
-      { "name": "UP Board", "classes": "6th – 12th", "subjects": ["Ganit", "Bhautiki", "Rasayan Vigyan", "Jeev Vigyan"] }
+      { "name": "UP Board", "classes": "6th – 12th", "subjects": ["Mathematics", "Physics", "Chemistry", "Biology"] }
     ]
   },
   "faculty": {
@@ -82,10 +82,10 @@
     "subtitle": "Experienced educators dedicated to your success",
     "photoSoon": "Photo soon",
     "members": [
-      { "name": "Shivam Sir", "subject": "Physics", "qualification": "M.Sc. Physics, B.Ed", "exp": "8+ Years", "photo": "/images/faculty/shivam-sir-physics.jpeg" },
-      { "name": "Yusuf Sir", "subject": "Physics", "qualification": "M.Sc. Physics, B.Ed", "exp": "7+ Years", "photo": "/images/faculty/yusuf-sir-physics.jpeg" },
       { "name": "Satish Sir", "subject": "Chemistry", "qualification": "M.Sc. Chemistry, B.Ed", "exp": "10+ Years", "photo": "/images/faculty/satish-sir-chemistry.jpeg" },
-      { "name": "Farhan Sir", "subject": "Biology", "qualification": "M.Sc. Biology, B.Ed", "exp": "9+ Years", "photo": "/images/faculty/farhan-sir-biology.jpeg" }
+      { "name": "Farhan Sir", "subject": "Biology", "qualification": "M.Sc. Biology, B.Ed", "exp": "9+ Years", "photo": "/images/faculty/farhan-sir-biology.jpeg" },
+      { "name": "Yusuf Sir", "subject": "Physics", "qualification": "M.Sc. Physics, B.Ed", "exp": "7+ Years", "photo": "/images/faculty/yusuf-sir-physics.jpeg" },
+      { "name": "Shivam Sir", "subject": "Physics", "qualification": "M.Sc. Physics, B.Ed", "exp": "8+ Years", "photo": "/images/faculty/shivam-sir-physics.jpeg" }
     ]
   },
   "results": {

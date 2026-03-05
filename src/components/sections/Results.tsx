@@ -114,13 +114,13 @@ export default function Results() {
             </button>
           ))}
         </div>
-        {/* Desktop: 3-card carousel */}
-        <div className="hidden lg:block gsap-reveal">
+        {/* Tablet+: 2 or 3-card carousel */}
+        <div className="hidden md:block gsap-reveal">
           <AnimatePresence mode="wait" custom={dir}>
             <motion.div key={`${activeYear}-${index}`} custom={dir}
               initial={{ opacity: 0, x: dir * 50 }} animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: dir * -50 }} transition={{ duration: 0.38, ease: "easeOut" }}
-              className="grid grid-cols-3 gap-5 items-center">
+              className="grid grid-cols-2 lg:grid-cols-3 gap-5 items-center">
               <TopperCard tp={prevCard} />
               <TopperCard tp={currCard} featured />
               <TopperCard tp={nextCard} />
@@ -129,7 +129,7 @@ export default function Results() {
         </div>
 
         {/* Mobile: single swipeable card */}
-        <div className="lg:hidden gsap-reveal">
+        <div className="md:hidden gsap-reveal">
           <motion.div drag="x" dragConstraints={{ left: 0, right: 0 }} dragElastic={0.12}
             onDragEnd={onDragEnd} className="cursor-grab active:cursor-grabbing overflow-hidden">
             <AnimatePresence mode="wait" custom={dir}>

@@ -10,7 +10,8 @@ export default function WhatsAppFloat() {
 
   return (
     <motion.div
-      className="float-right fixed bottom-5 z-50 flex items-center gap-3"
+      className="float-right fixed z-50 flex items-center gap-3"
+      style={{ bottom: "calc(4.5rem + env(safe-area-inset-bottom, 0px))" }}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 2.5, type: "spring", stiffness: 260, damping: 20 }}>

@@ -14,8 +14,8 @@
   --bg-dark:      #050D1F;
   --bg-card:      #0D1B4B;
 
-  /* Navbar: 28px ticker + 56px bar = 84px mobile, 112px desktop */
-  --navbar-h: 5.25rem; /* 84px default (mobile-first) */
+  /* Navbar: 40px ticker + 56px bar = 96px mobile */
+  --navbar-h: 6rem; /* 96px mobile-first */
 
   /* Content max-width — layout-container uses this */
   --site-width: 1280px;
@@ -68,14 +68,17 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 84px; /* matches --navbar-h on mobile */
+  scroll-padding-top: 96px; /* matches --navbar-h mobile: ticker 40 + bar 56 */
   overflow-x: hidden;
   background: #000000;
 }
-@media (min-width: 640px)  { :root { --vgap: 3.5rem; --igap: 2.5rem; --igap-sm: 1.25rem; } }
-@media (min-width: 1024px) { :root { --vgap: 5rem;   --igap: 3.5rem; --igap-sm: 1.5rem;  } }
+@media (min-width: 640px)  {
+  :root { --vgap: 3.5rem; --igap: 2.5rem; --igap-sm: 1.25rem; --navbar-h: 6.5rem; /* 104px */ }
+}
+@media (min-width: 640px) { html { scroll-padding-top: 104px; } }
 @media (min-width: 1024px) {
-  html { scroll-padding-top: 112px; }
+  :root { --vgap: 5rem; --igap: 3.5rem; --igap-sm: 1.5rem; --navbar-h: 7.5rem; /* 120px */ }
+  html { scroll-padding-top: 120px; }
 }
 
 body {
@@ -142,11 +145,12 @@ body {
  */
 .item-gap > * + * { margin-top: var(--igap-sm); }
 
-/* Section vertical rhythm — generous breathing room */
-.section-pad { padding-top: 6rem; padding-bottom: 6rem; }
-@media (min-width: 640px)  { .section-pad { padding-top: 8rem;  padding-bottom: 8rem;  } }
-@media (min-width: 768px)  { .section-pad { padding-top: 11rem; padding-bottom: 11rem; } }
-@media (min-width: 1024px) { .section-pad { padding-top: 13rem; padding-bottom: 13rem; } }
+/* Section vertical rhythm — generous breathing room, mobile-first sensible */
+.section-pad { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+@media (min-width: 480px)  { .section-pad { padding-top: 5rem;   padding-bottom: 5rem;   } }
+@media (min-width: 640px)  { .section-pad { padding-top: 6rem;   padding-bottom: 6rem;   } }
+@media (min-width: 768px)  { .section-pad { padding-top: 8rem;   padding-bottom: 8rem;   } }
+@media (min-width: 1024px) { .section-pad { padding-top: 10rem;  padding-bottom: 10rem;  } }
 
 /* ══════════════════════════════════════════════
    TYPOGRAPHY UTILITIES
@@ -406,4 +410,33 @@ button, a[role="button"] { min-height: 44px; }
 }
 @media (min-width: 640px) {
   .float-right { right: 1.5rem; }
+}
+
+/* ══════════════════════════════════════════════
+   iOS / MOBILE CRITICAL FIXES
+══════════════════════════════════════════════ */
+
+/* Prevent iOS Safari auto-zoom on input focus (font-size < 16px triggers zoom) */
+input, select, textarea {
+  font-size: max(16px, 1rem) !important;
+}
+
+/* Safe area insets — iPhone home bar / notch clearance */
+.pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+.mb-safe  { margin-bottom:  env(safe-area-inset-bottom, 0px); }
+
+/* Horizontal carousels — allow vertical page scroll while dragging */
+.carousel-track { touch-action: pan-y; }
+
+/* Maps / iframes — prevent swipe hijack */
+.map-wrap { touch-action: pan-y; -webkit-overflow-scrolling: touch; }
+
+/* Fluid heading scale — use these classes on h1/h2 for smooth viewport scaling */
+.text-fluid-xl  { font-size: clamp(1.75rem,  5vw + 0.5rem, 4rem);   }
+.text-fluid-2xl { font-size: clamp(2rem,     6vw + 0.5rem, 5rem);   }
+.text-fluid-sm  { font-size: clamp(1.125rem, 2vw + 0.5rem, 1.5rem); }
+
+/* Mobile sticky booking bar clearance — prevents content hiding behind it */
+@media (max-width: 1023px) {
+  body { padding-bottom: 4.5rem; /* height of MobileBookingBar */ }
 }

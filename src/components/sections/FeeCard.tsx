@@ -311,15 +311,28 @@ export default function FeeCard() {
         {/* Main layout: tiers left + form right */}
         <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] items-start gsap-reveal" style={{ gap: "var(--igap)" }}>
 
-          {/* Pricing cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            {fc.tiers.map((tier, i) => (
-              <TierCard key={tier.label} tier={tier} selected={selectedIdx === i} onSelect={() => setSelectedIdx(i)} />
-            ))}
+          {/* Pricing cards — swipe carousel on mobile, 3-col grid from md */}
+          <div>
+            {/* Mobile: horizontal scroll-snap */}
+            <div className="flex md:hidden gap-4 overflow-x-auto snap-x snap-mandatory pb-4 carousel-track"
+              style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}>
+              {fc.tiers.map((tier, i) => (
+                <div key={tier.label} className="flex-none w-[78vw] max-w-[300px] snap-center">
+                  <TierCard tier={tier} selected={selectedIdx === i} onSelect={() => setSelectedIdx(i)} />
+                </div>
+              ))}
+            </div>
+            <p className="md:hidden text-center text-white/30 text-xs mt-1">← Swipe to see all plans →</p>
+            {/* Tablet+: 3-column grid */}
+            <div className="hidden md:grid md:grid-cols-3 gap-5">
+              {fc.tiers.map((tier, i) => (
+                <TierCard key={tier.label} tier={tier} selected={selectedIdx === i} onSelect={() => setSelectedIdx(i)} />
+              ))}
+            </div>
           </div>
 
-          {/* Lead form — sticky on desktop */}
-          <div className="lg:sticky lg:top-32">
+          {/* Lead form — sticky from md up */}
+          <div className="md:sticky md:top-28">
             <LeadForm selectedTier={selectedTier} whatsapp={whatsapp} fc={fc} />
           </div>
         </div>

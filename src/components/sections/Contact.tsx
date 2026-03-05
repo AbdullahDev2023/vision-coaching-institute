@@ -143,7 +143,7 @@ export default function Contact() {
       <div className="layout-container section-inner">
         <SectionHeading title={t.contact.title} subtitle={t.contact.subtitle} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2" style={{ gap: "var(--igap)" }}>
+        <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "var(--igap)" }}>
 
           {/* ── Left: Info + WhatsApp ── */}
           <motion.div className="item-gap"
@@ -189,7 +189,7 @@ export default function Contact() {
 
             {/* Map */}
             <motion.div
-              className="rounded-2xl overflow-hidden border border-white/8 h-[220px]"
+              className="map-wrap rounded-2xl overflow-hidden border border-white/8 h-[220px]"
               initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }} viewport={{ once: true }}>
               <iframe

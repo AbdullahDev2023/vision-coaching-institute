@@ -58,7 +58,7 @@ export default function About() {
       <div className="relative z-10 layout-container section-inner">
         <SectionHeading title={t.about.title} subtitle={t.about.subtitle} light={false} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-start" style={{ gap: "var(--igap)" }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 items-start" style={{ gap: "var(--igap)" }}>
 
           {/* LEFT — body text + bullet points */}
           <div ref={leftRef} style={{ opacity: 0 }} className="item-gap">

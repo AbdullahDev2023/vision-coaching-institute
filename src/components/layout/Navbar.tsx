@@ -103,7 +103,7 @@ export default function Navbar() {
           <a ref={logoRef} href="#home" onClick={(e) => handleNavClick(e, "home")}
             className="flex items-center gap-2 sm:gap-3 group flex-shrink-0 whitespace-nowrap">
             <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full overflow-hidden flex-shrink-0 shadow-lg shadow-gold/20 group-hover:scale-105 transition-transform border border-gold/20">
-              <Image src="/logo.png" alt="Vision Coaching Institute" width={48} height={48} className="w-full h-full object-cover" priority />
+              <Image src="/logo.png" alt="Vision Coaching Institute" width={96} height={96} className="w-full h-full object-contain p-0.5" priority sizes="96px" />
             </div>
             <div className="leading-tight">
               <div className="text-white font-heading font-bold text-sm sm:text-lg tracking-wide group-hover:text-gold transition-colors duration-200">

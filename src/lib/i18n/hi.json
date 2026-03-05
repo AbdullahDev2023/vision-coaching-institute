@@ -74,7 +74,7 @@
       { "name": "CBSE", "classes": "6वीं – 12वीं", "subjects": ["गणित", "भौतिकी", "रसायन विज्ञान", "जीव विज्ञान"] },
       { "name": "ICSE", "classes": "6वीं – 10वीं", "subjects": ["गणित", "भौतिकी", "रसायन विज्ञान", "जीव विज्ञान"] },
       { "name": "ISC", "classes": "11वीं – 12वीं", "subjects": ["गणित", "भौतिकी", "रसायन विज्ञान", "जीव विज्ञान"] },
-      { "name": "UP Board", "classes": "6वीं – 12वीं", "subjects": ["गणित", "भौतिकी", "रसायन विज्ञान", "जीव विज्ञान"] }
+      { "name": "UP Board", "classes": "6वीं – 12वीं", "subjects": ["Maths", "Physics", "Chemistry", "Biology"] }
     ]
   },
   "faculty": {
@@ -82,10 +82,10 @@
     "subtitle": "आपकी सफलता के लिए समर्पित अनुभवी शिक्षक",
     "photoSoon": "फ़ोटो जल्द आएगी",
     "members": [
-      { "name": "शिवम सर", "subject": "भौतिकी", "qualification": "M.Sc. भौतिकी, B.Ed", "exp": "8+ वर्ष", "photo": "/images/faculty/shivam-sir-physics.jpeg" },
-      { "name": "यूसुफ सर", "subject": "भौतिकी", "qualification": "M.Sc. भौतिकी, B.Ed", "exp": "7+ वर्ष", "photo": "/images/faculty/yusuf-sir-physics.jpeg" },
       { "name": "सतीश सर", "subject": "रसायन विज्ञान", "qualification": "M.Sc. रसायन, B.Ed", "exp": "10+ वर्ष", "photo": "/images/faculty/satish-sir-chemistry.jpeg" },
-      { "name": "फरहान सर", "subject": "जीव विज्ञान", "qualification": "M.Sc. जीव विज्ञान, B.Ed", "exp": "9+ वर्ष", "photo": "/images/faculty/farhan-sir-biology.jpeg" }
+      { "name": "फरहान सर", "subject": "जीव विज्ञान", "qualification": "M.Sc. जीव विज्ञान, B.Ed", "exp": "9+ वर्ष", "photo": "/images/faculty/farhan-sir-biology.jpeg" },
+      { "name": "यूसुफ सर", "subject": "भौतिकी", "qualification": "M.Sc. भौतिकी, B.Ed", "exp": "7+ वर्ष", "photo": "/images/faculty/yusuf-sir-physics.jpeg" },
+      { "name": "शिवम सर", "subject": "भौतिकी", "qualification": "M.Sc. भौतिकी, B.Ed", "exp": "8+ वर्ष", "photo": "/images/faculty/shivam-sir-physics.jpeg" }
     ]
   },
   "results": {

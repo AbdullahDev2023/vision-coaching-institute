@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useEffect } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 import { gsap } from "gsap";
@@ -82,6 +83,18 @@ export default function Hero() {
         {/* ── LEFT column ── */}
         <div className="flex flex-col w-full max-w-[600px]" style={{ gap: "var(--igap-sm)" }}>
 
+          {/* Logo */}
+          <div className="flex items-center gap-3">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-gold/40 shadow-lg shadow-gold/20 flex-shrink-0"
+              style={{ background: "rgba(10,31,92,0.6)" }}>
+              <Image src="/logo.png" alt="Vision Coaching Institute" width={128} height={128} className="w-full h-full object-contain p-1" priority sizes="128px" />
+            </div>
+            <div className="leading-tight">
+              <div className="text-white font-heading font-bold text-base sm:text-lg tracking-wide">Vision Coaching</div>
+              <div className="text-gold text-[10px] font-semibold tracking-widest uppercase">Institute · Tulsipur</div>
+            </div>
+          </div>
+
           {/* Tagline */}
           <p ref={taglineRef} style={{ opacity: 0 }}
             className="text-gold font-bold text-[11px] uppercase tracking-[0.22em]">
@@ -100,9 +113,9 @@ export default function Hero() {
           </div>
 
           {/* Heading — institute name + location; extra top margin for visual breathing */}
-          <h1 ref={headingRef} style={{ opacity: 0 }}
+          <h1 ref={headingRef} style={{ opacity: 0, textWrap: "balance" }}
             className="font-heading font-bold text-white leading-tight mt-2 sm:mt-3">
-            <span className="block text-[1.75rem] sm:text-4xl lg:text-5xl xl:text-6xl">{t.hero.institute}</span>
+            <span className="block text-fluid-xl sm:text-4xl lg:text-5xl xl:text-6xl">{t.hero.institute}</span>
             <span className="inline-flex items-center gap-2 text-xl sm:text-2xl lg:text-3xl xl:text-4xl mt-2 sm:mt-3 text-gold-shimmer">
               <svg className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 opacity-80" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
@@ -161,7 +174,7 @@ export default function Hero() {
           ref={canvasRef}
           className="relative w-full rounded-3xl overflow-hidden"
           style={{
-            height: "clamp(260px, 50vw, 520px)",
+            height: "clamp(180px, 40vw, 520px)",
             background: "radial-gradient(ellipse at center, rgba(26,58,143,0.20) 0%, transparent 70%)",
           }}
         >
