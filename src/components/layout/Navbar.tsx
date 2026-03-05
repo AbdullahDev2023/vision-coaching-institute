@@ -53,7 +53,7 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      ref={navRef as React.RefObject<HTMLElement> & React.RefObject<HTMLDivElement>}
+      ref={navRef}
       aria-label="Main navigation"
       style={{ opacity: 0 }}
       className={`navbar-fixed fixed top-0 z-50 transition-all duration-500 ${
@@ -79,7 +79,7 @@ export default function Navbar() {
         `}</style>
         <div className="ticker-track flex items-center gap-12 h-10 px-4">
           {[...t.nav.ticker, ...t.nav.ticker].map((msg, i) => (
-            <span key={i} className="inline-flex items-center gap-2 text-xs font-semibold"
+            <span key={`ticker-${i}-${msg.slice(0, 12)}`} className="inline-flex items-center gap-2 text-xs font-semibold"
               style={{ color: "rgba(212,160,23,0.90)", letterSpacing: "0.06em" }}>
               {msg}
               {i < [...t.nav.ticker, ...t.nav.ticker].length - 1 && (

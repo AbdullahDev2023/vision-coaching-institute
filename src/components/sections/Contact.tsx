@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { WhatsAppIcon } from "@/components/ui/icons/WhatsAppIcon";
 
 /* ─── Copy-phone helper ──────────────────────────────────────────── */
 function CopyPhone({ phone }: { phone: string }) {
@@ -45,13 +46,24 @@ type EnquiryFormProps = {
 function EnquiryForm({ tf, whatsapp }: EnquiryFormProps) {
   const [name,    setName]    = useState("");
   const [phone,   setPhone]   = useState("");
-  const [cls,     setCls]     = useState(tf.classOptions[3]);   // default 9th
-  const [board,   setBoard]   = useState(tf.boardOptions[0]);   // default CBSE
+  const [cls,     setCls]     = useState(tf.classOptions[3]);
+  const [board,   setBoard]   = useState(tf.boardOptions[0]);
   const [sending, setSending] = useState(false);
+  const [errors,  setErrors]  = useState<{ name?: string; phone?: string }>({});
+
+  const validate = () => {
+    const e: { name?: string; phone?: string } = {};
+    if (!name.trim()) e.name = "Please enter the student's name.";
+    const digits = phone.replace(/\D/g, "");
+    if (!digits) e.phone = "Please enter a mobile number.";
+    else if (!/^[6-9]\d{9}$/.test(digits)) e.phone = "Enter a valid 10-digit Indian mobile number.";
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !phone.trim()) return;
+    if (!validate()) return;
     setSending(true);
     const raw = whatsapp.replace(/\D/g, "");
     const msg = encodeURIComponent(
@@ -85,9 +97,12 @@ function EnquiryForm({ tf, whatsapp }: EnquiryFormProps) {
       {/* Form body */}
       <form onSubmit={submit} className="px-6 py-6 item-gap">
         {/* Name */}
-        <input
-          type="text" required value={name} onChange={e => setName(e.target.value)}
-          placeholder={tf.namePlaceholder} className={inputCls} />
+        <div>
+          <input
+            type="text" required value={name} onChange={e => { setName(e.target.value); setErrors(p => ({ ...p, name: undefined })); }}
+            placeholder={tf.namePlaceholder} className={inputCls} />
+          {errors.name && <p className="mt-1.5 text-red-400 text-xs">{errors.name}</p>}
+        </div>
 
         {/* Class + Board side by side */}
         <div className="grid grid-cols-2" style={{ gap: "var(--igap-sm)" }}>
@@ -111,9 +126,12 @@ function EnquiryForm({ tf, whatsapp }: EnquiryFormProps) {
         
 
         {/* Phone */}
-        <input
-          type="tel" required value={phone} onChange={e => setPhone(e.target.value)}
-          placeholder={tf.phonePlaceholder} className={inputCls} />
+        <div>
+          <input
+            type="tel" required value={phone} onChange={e => { setPhone(e.target.value); setErrors(p => ({ ...p, phone: undefined })); }}
+            placeholder={tf.phonePlaceholder} className={inputCls} />
+          {errors.phone && <p className="mt-1.5 text-red-400 text-xs">{errors.phone}</p>}
+        </div>
 
         {/* Submit */}
         <button type="submit" disabled={sending}

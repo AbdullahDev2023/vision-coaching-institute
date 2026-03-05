@@ -33,10 +33,10 @@
     "title": "Why Choose Vision?",
     "subtitle": "Everything your child needs to excel",
     "items": [
-      { "icon": "👥", "title": "Small Batches", "desc": "Personal attention in small, focused batches for every student" },
-      { "icon": "🙋", "title": "Daily Doubt Solving", "desc": "Dedicated sessions every day to clear doubts and revise concepts" },
-      { "icon": "📝", "title": "Weekly Tests", "desc": "Regular tests with performance tracking to monitor progress" },
-      { "icon": "🎓", "title": "Free Demo Class", "desc": "Try before you enroll — free demo classes available" }
+      { "icon": "👥", "title": "Small Batches", "desc": "Personal attention with limited students per batch for focused learning." },
+      { "icon": "🙋", "title": "Daily Doubt Solving", "desc": "Dedicated daily doubt sessions with expert teachers after every class." },
+      { "icon": "📝", "title": "Weekly Tests", "desc": "Regular weekly tests with detailed performance tracking and feedback." },
+      { "icon": "🎓", "title": "Free Demo Class", "desc": "Try a free demo class before enrolling — no commitment required." }
     ],
     "ctaTitle": "Ready to start your journey?",
     "ctaBody": "Join hundreds of students who've achieved top results with Vision Coaching.",

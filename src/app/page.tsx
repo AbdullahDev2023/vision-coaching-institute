@@ -38,8 +38,8 @@ export default function Home() {
         <section id="fees"          aria-label="Fee Structure"><FeeCard /></section>
         <section id="faculty"       aria-label="Our Faculty"><Faculty /></section>
         <section id="results"       aria-label="Results &amp; Toppers"><Results /></section>
-        <CtaBanner />
-        <FaqSection />
+        <section id="cta"           aria-label="Call to Action"><CtaBanner /></section>
+        <section id="faq"           aria-label="Frequently Asked Questions"><FaqSection /></section>
         <section id="gallery"       aria-label="Gallery"><Gallery /></section>
         <section id="testimonials"  aria-label="Student Testimonials"><Testimonials /></section>
         <section id="contact"       aria-label="Contact Us"><Contact /></section>

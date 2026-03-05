@@ -1,8 +1,29 @@
 import type { Metadata } from "next";
+import { Playfair_Display, Inter, Noto_Sans_Devanagari } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import CustomCursor from "@/components/ui/CustomCursor";
 import HtmlLangSync from "@/components/ui/HtmlLangSync";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
+});
+const notoDevanagari = Noto_Sans_Devanagari({
+  subsets: ["devanagari"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-noto-devanagari",
+  display: "swap",
+});
 
 const SITE_URL = "https://vision-coaching-institute.vercel.app";
 const OG_IMAGE = `${SITE_URL}/opengraph-image`;
@@ -63,14 +84,12 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico",    sizes: "any" },
-      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon_32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon_48.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon_16.png", sizes: "16x16", type: "image/png" },
     ],
-    apple:    { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    apple:    { url: "/favicon_180.png", sizes: "180x180", type: "image/png" },
     shortcut: "/favicon.ico",
-    other: [
-      { rel: "icon", url: "/icon-192.png", sizes: "192x192", type: "image/png" },
-      { rel: "icon", url: "/icon-512.png", sizes: "512x512", type: "image/png" },
-    ],
   },
   other: {
     "theme-color": "#0A1F5C",
@@ -115,7 +134,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`${playfair.variable} ${inter.variable} ${notoDevanagari.variable} scroll-smooth`}>
       <head suppressHydrationWarning>
         <script
           type="application/ld+json"

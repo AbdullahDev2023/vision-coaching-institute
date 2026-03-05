@@ -4,13 +4,7 @@ import { useLanguage } from "@/lib/LanguageContext";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import { useCountUp } from "@/lib/useCountUp";
 import SectionHeading from "@/components/ui/SectionHeading";
-
-/* ── Stat config: parse "500+" → { target:500, suffix:"+" } */
-const STATS_META = [
-  { target: 500, suffix: "+", duration: 2.0 },
-  { target: 95,  suffix: "%", duration: 1.8 },
-  { target: 10,  suffix: "+", duration: 1.5 },
-];
+import { STATS_META } from "@/lib/statsConfig";
 
 function StatCard({
   label, target, suffix, duration, triggerRef,

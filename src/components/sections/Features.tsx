@@ -98,14 +98,6 @@ export default function Features() {
   const sectionRef = useRef<HTMLDivElement>(null);
   useScrollReveal(sectionRef as React.RefObject<HTMLElement>, { stagger: 0.14 });
 
-  /* Updated, outcome-focused descriptions */
-  const DESCS = [
-    "Personal attention with limited students per batch for focused learning.",
-    "Dedicated daily doubt sessions with expert teachers after every class.",
-    "Regular weekly tests with detailed performance tracking and feedback.",
-    "Try a free demo class before enrolling — no commitment required.",
-  ];
-
   return (
     <div className="relative section-pad bg-bg-dark overflow-clip" ref={sectionRef}>
 
@@ -125,7 +117,7 @@ export default function Features() {
         {/* Cards — 1 col mobile, 2 col tablet, 4 col desktop */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" style={{ gap: "var(--igap-sm)" }}>
           {t.features.items.map((item, i) => (
-            <TiltCard key={item.title} icon={item.icon} title={item.title} desc={DESCS[i]} index={i} />
+            <TiltCard key={item.title} icon={item.icon} title={item.title} desc={item.desc} index={i} />
           ))}
         </div>
 

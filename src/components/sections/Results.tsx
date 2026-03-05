@@ -7,6 +7,7 @@ import { useCarousel } from "@/lib/useCarousel";
 import { CarouselNav } from "@/components/sections/Testimonials";
 import { useCountUp } from "@/lib/useCountUp";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { STATS_META } from "@/lib/statsConfig";
 
 const BADGE: Record<string, string> = {
   CBSE:       "bg-blue-500/15 text-blue-300 border-blue-400/30",
@@ -15,11 +16,6 @@ const BADGE: Record<string, string> = {
   "UP Board": "bg-orange-500/15 text-orange-300 border-orange-400/30",
 };
 
-const STATS_META = [
-  { target: 95,  suffix: "%", duration: 2.2 },
-  { target: 500, suffix: "+", duration: 2.0 },
-  { target: 10,  suffix: "+", duration: 1.6 },
-];
 
 function StatCounter({ target, suffix, duration, label, triggerRef }: {
   target: number; suffix: string; duration: number; label: string;
@@ -40,7 +36,7 @@ function StatCounter({ target, suffix, duration, label, triggerRef }: {
   );
 }
 
-/* ── Single topper card ── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬ Single topper card Ã¢â€â‚¬Ã¢â€â‚¬ */
 function TopperCard({ tp, featured = false }: {
   tp: { name: string; board: string; percentage: string; year: string; class: string };
   featured?: boolean;
@@ -58,7 +54,7 @@ function TopperCard({ tp, featured = false }: {
       </div>
       <div className="text-gold font-heading text-4xl font-bold text-gold-shimmer">{tp.percentage}</div>
       <h3 className="text-white font-semibold leading-snug" style={{ marginTop: "var(--igap-sm)" }}>{tp.name}</h3>
-      <p className="text-white/45 text-sm font-normal" style={{ marginTop: "calc(var(--igap-sm) / 2)" }}>{tp.class} · {tp.year}</p>
+      <p className="text-white/45 text-sm font-normal" style={{ marginTop: "calc(var(--igap-sm) / 2)" }}>{tp.class} Ã‚Â· {tp.year}</p>
       <span className={`badge ${BADGE[tp.board] ?? "bg-white/10 text-white border-white/20"}`}
         style={{ marginTop: "var(--igap-sm)" }}>
         {tp.board}
@@ -145,7 +141,7 @@ export default function Results() {
         <CarouselNav total={n} index={index} onPrev={prev} onNext={next} onGoTo={goTo} />
 
         <p className="text-center text-white/25 text-xs">
-          {index + 1} / {n} · ← → keys or swipe to navigate
+          {index + 1} / {n} Ã‚Â· Ã¢â€ Â Ã¢â€ â€™ keys or swipe to navigate
         </p>
       </div>
     </div>

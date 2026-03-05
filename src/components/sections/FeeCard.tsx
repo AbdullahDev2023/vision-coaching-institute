@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { WhatsAppIcon } from "@/components/ui/icons/WhatsAppIcon";
 
 /* ── Tier colour tokens ── */
 const TIER_META: Record<string, { ring: string; glow: string; bg: string; badge: string }> = {
@@ -128,10 +129,21 @@ function LeadForm({ selectedTier, whatsapp, fc }: {
   const [phone,   setPhone]   = useState("");
   const [sending, setSending] = useState(false);
   const [sent,    setSent]    = useState(false);
+  const [errors,  setErrors]  = useState<{ name?: string; phone?: string }>({});
+
+  const validate = () => {
+    const e: { name?: string; phone?: string } = {};
+    if (!name.trim()) e.name = "Please enter the student's name.";
+    const digits = phone.replace(/\D/g, "");
+    if (!digits) e.phone = "Please enter a mobile number.";
+    else if (!/^[6-9]\d{9}$/.test(digits)) e.phone = "Enter a valid 10-digit Indian mobile number.";
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !phone.trim()) return;
+    if (!validate()) return;
     setSending(true);
     const raw = whatsapp.replace(/\D/g, "");
     const plan = selectedTier
@@ -215,12 +227,18 @@ function LeadForm({ selectedTier, whatsapp, fc }: {
 
       {/* Form body */}
       <form onSubmit={submit} className="px-6 py-6 item-gap">
-        <input
-          type="text" required value={name} onChange={e => setName(e.target.value)}
-          placeholder={fc.namePlaceholder} className={inputCls} />
-        <input
-          type="tel" required value={phone} onChange={e => setPhone(e.target.value)}
+        <div>
+          <input
+            type="text" required value={name} onChange={e => { setName(e.target.value); setErrors(p => ({ ...p, name: undefined })); }}
+            placeholder={fc.namePlaceholder} className={inputCls} />
+          {errors.name && <p className="mt-1.5 text-red-400 text-xs">{errors.name}</p>}
+        </div>
+        <div>
+          <input
+          type="tel" required value={phone} onChange={e => { setPhone(e.target.value); setErrors(p => ({ ...p, phone: undefined })); }}
           placeholder={fc.phonePlaceholder} className={inputCls} />
+          {errors.phone && <p className="mt-1.5 text-red-400 text-xs">{errors.phone}</p>}
+        </div>
 
         {/* Submit */}
         <motion.button
@@ -332,7 +350,7 @@ export default function FeeCard() {
           </div>
 
           {/* Lead form — sticky from md up */}
-          <div className="md:sticky md:top-28">
+          <div className="md:sticky" style={{ top: "calc(var(--navbar-h) + 1.5rem)" }}>
             <LeadForm selectedTier={selectedTier} whatsapp={whatsapp} fc={fc} />
           </div>
         </div>
