@@ -39,10 +39,10 @@ function MicroscopeModel() {
         const size = new THREE.Vector3();
         box.getSize(size);
         const s = 4.5 / Math.max(size.x, size.y, size.z, 0.001);
-        scene.scale.setScalar(s * 2.2);
+        scene.scale.setScalar(s * 2.0);
         const center = new THREE.Vector3();
         box.getCenter(center);
-        scene.position.set(-center.x * s * 2.2, -center.y * s * 2.2, -center.z * s * 2.2);
+        scene.position.set(-center.x * s * 2.0, -center.y * s * 2.0, -center.z * s * 2.0);
         scene.rotation.y = Math.PI / 2;   // right side faces viewer
         scene.rotation.x = -0.25;          // tilt slightly inward
         setModel(scene);
