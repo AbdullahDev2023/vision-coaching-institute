@@ -213,13 +213,14 @@ export default function Contact() {
 
             {/* Map */}
             <motion.div
-              className="map-wrap rounded-2xl overflow-hidden border border-white/8 h-[220px]"
+              className="map-wrap rounded-2xl overflow-hidden border border-white/8"
+              style={{ height: "220px", minHeight: "220px" }}
               initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }} viewport={{ once: true }}>
               <iframe
                 src="https://maps.google.com/maps?q=GCM8%2BGJW+Tulsipur+Uttar+Pradesh&output=embed"
-                width="100%" height="100%"
-                style={{ border: 0, display: "block" }}
+                width="100%" height="220"
+                style={{ border: 0, display: "block", width: "100%", height: "220px" }}
                 allowFullScreen loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Vision Coaching Institute Location" />

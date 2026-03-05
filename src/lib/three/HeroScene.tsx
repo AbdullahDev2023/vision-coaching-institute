@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, PointerLockControls } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
@@ -150,63 +150,38 @@ function OrbitRing({ r, tilt }: { r: number; tilt: number }) {
 
 // ─── Canvas export ────────────────────────────────────────────────────────────
 export default function HeroScene() {
-  const [locked, setLocked] = useState(false);
-
   return (
-    <div style={{ position: "relative", width: "100%", height: "100%" }}>
-      <Canvas
-        camera={{ position: [0, 0, 2.75], fov: 55 }}
-        style={{ width: "100%", height: "100%", display: "block", background: "transparent" }}
-        dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true }}
-      >
-        <ambientLight intensity={0.5} />
-        <pointLight position={[ 3,  4,  3]} intensity={3.0} color={0xD4A017} />
-        <pointLight position={[-3, -2, -3]} intensity={1.5} color={0x4466ff} />
-        <pointLight position={[ 0,  0,  5]} intensity={0.8} color={0xffffff} />
-        <pointLight position={[ 0,  4,  0]} intensity={1.2} color={0xffeebb} />
-        <pointLight position={[ 2, -3,  2]} intensity={0.9} color={0x44aaff} />
+    <Canvas
+      camera={{ position: [0, 0, 1.75], fov: 55 }}
+      style={{ width: "100%", height: "100%", display: "block", background: "transparent" }}
+      dpr={[1, 2]}
+      gl={{ antialias: true, alpha: true }}
+    >
+      <ambientLight intensity={0.5} />
+      <pointLight position={[ 3,  4,  3]} intensity={3.0} color={0xD4A017} />
+      <pointLight position={[-3, -2, -3]} intensity={1.5} color={0x4466ff} />
+      <pointLight position={[ 0,  0,  5]} intensity={0.8} color={0xffffff} />
+      <pointLight position={[ 0,  4,  0]} intensity={1.2} color={0xffeebb} />
+      <pointLight position={[ 2, -3,  2]} intensity={0.9} color={0x44aaff} />
 
-        <PointerLockControls
-          onLock={() => setLocked(true)}
-          onUnlock={() => setLocked(false)}
-        />
+      <OrbitControls
+        enableZoom={true}
+        enablePan={false}
+        enableDamping={true}
+        dampingFactor={0.08}
+        rotateSpeed={0.7}
+        zoomSpeed={1.2}
+        minDistance={1.0}
+        maxDistance={12}
+        minPolarAngle={Math.PI * 0.1}
+        maxPolarAngle={Math.PI * 0.9}
+        makeDefault
+      />
 
-        <StarField />
-        <MicroscopeModel />
-        {ORBIT_CONFIG.map((cfg, i) => <OrbitingShape key={i} {...cfg} />)}
-        {ORBIT_CONFIG.map((cfg, i) => <OrbitRing key={i} r={cfg.r} tilt={cfg.tilt} />)}
-      </Canvas>
-
-      {/* Click-to-enter overlay — shown when pointer is not locked */}
-      {!locked && (
-        <div
-          style={{
-            position: "absolute", inset: 0,
-            display: "flex", flexDirection: "column",
-            alignItems: "center", justifyContent: "center",
-            gap: "10px", cursor: "pointer",
-            background: "rgba(5,13,31,0.35)",
-            backdropFilter: "blur(2px)",
-          }}
-        >
-          <div style={{
-            width: "52px", height: "52px", borderRadius: "50%",
-            border: "2px solid rgba(212,160,23,0.7)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: "22px", background: "rgba(10,31,92,0.6)",
-          }}>
-            👁️
-          </div>
-          <p style={{
-            color: "rgba(255,255,255,0.75)", fontSize: "12px",
-            fontWeight: 600, letterSpacing: "0.12em",
-            textTransform: "uppercase", margin: 0,
-          }}>
-            Click to explore · ESC to exit
-          </p>
-        </div>
-      )}
-    </div>
+      <StarField />
+      <MicroscopeModel />
+      {ORBIT_CONFIG.map((cfg, i) => <OrbitingShape key={i} {...cfg} />)}
+      {ORBIT_CONFIG.map((cfg, i) => <OrbitRing key={i} r={cfg.r} tilt={cfg.tilt} />)}
+    </Canvas>
   );
 }
