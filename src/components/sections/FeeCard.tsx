@@ -85,12 +85,6 @@ function TierCard({
         <p className="text-white/45 text-xs mt-1 font-normal">{tier.classes}</p>
       </div>
 
-      {/* Price */}
-      <div className="flex items-end gap-1" style={{ marginBottom: "var(--igap-sm)" }}>
-        <span className="font-heading font-bold text-4xl sm:text-5xl leading-none text-white">{tier.price}</span>
-        <span className="text-white/40 text-sm mb-1 font-normal">{fc.perMonth}</span>
-      </div>
-
       {/* Divider */}
       <div className="h-px w-full" style={{ marginBottom: "var(--igap-sm)", background: `linear-gradient(90deg,transparent,${m.ring}55,transparent)` }} />
 
@@ -195,9 +189,7 @@ function LeadForm({ selectedTier, whatsapp, fc }: {
           </div>
           <div>
             <h3 className="text-white font-heading font-bold text-base leading-tight">
-              {selectedTier
-                ? `${selectedTier.label} — ${selectedTier.price}${fc.perMonth}`
-                : fc.ctaBtn}
+              {selectedTier ? `${selectedTier.label} — ${selectedTier.classes}` : fc.ctaBtn}
             </h3>
             <p className="text-white/40 text-xs mt-0.5 font-normal">
               {selectedTier ? selectedTier.classes : "← Select a plan first"}

@@ -143,19 +143,19 @@ export default function Courses() {
             <span className="text-lg">🕐</span>
             <span className="text-gold font-bold text-sm uppercase tracking-wider">{t.courses.timingsTitle}</span>
           </div>
-          <div className="divide-y divide-white/8">
+          <div className="divide-y divide-white/8 sm:divide-y-0 sm:grid sm:grid-cols-4">
             {[
-              { group: "6th – 8th",       batch: "Morning", time: "7:00 AM – 9:00 AM",   icon: "🌅" },
-              { group: "9th – 10th",      batch: "Morning", time: "9:30 AM – 11:30 AM",  icon: "☀️" },
-              { group: "11th – 12th",     batch: "Evening", time: "5:00 PM – 7:00 PM",   icon: "🌆" },
-              { group: "BSc 1st–3rd Yr",  batch: "Night",   time: "7:30 PM – 9:30 PM",   icon: "🔬" },
-            ].map((row) => (
+              { group: "6th – 8th",       batch: "Morning", time: "7:00 – 9:00 AM",   icon: "🌅" },
+              { group: "9th – 10th",      batch: "Morning", time: "9:30 – 11:30 AM",  icon: "☀️" },
+              { group: "11th – 12th",     batch: "Evening", time: "5:00 – 7:00 PM",   icon: "🌆" },
+              { group: "BSc 1st–3rd Yr",  batch: "Night",   time: "7:30 – 9:30 PM",   icon: "🔬" },
+            ].map((row, i) => (
               <div key={row.group}
-                className="grid items-center px-5 sm:px-6 py-4 gap-x-2"
-                style={{ gridTemplateColumns: "auto 1fr auto" }}>
-                <span className="text-white/80 text-sm font-semibold whitespace-nowrap">{row.group}</span>
-                <span className="text-white/40 text-xs text-center">{row.icon} {row.batch}</span>
-                <span className="text-gold/80 text-sm font-medium text-right whitespace-nowrap">{row.time}</span>
+                className={`flex flex-col items-center justify-center text-center px-4 py-5 ${i > 0 ? "sm:border-l sm:border-white/8" : ""}`}>
+                <span className="text-2xl mb-2">{row.icon}</span>
+                <span className="text-white/80 text-sm font-semibold">{row.group}</span>
+                <span className="text-white/40 text-xs mt-1">{row.batch}</span>
+                <span className="text-gold/80 text-sm font-medium mt-1">{row.time}</span>
               </div>
             ))}
           </div>
