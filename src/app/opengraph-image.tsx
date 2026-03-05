@@ -74,7 +74,7 @@ export default async function OGImage() {
             <div style={{
               width: "220px", height: "220px", borderRadius: "50%",
               display: "flex", alignItems: "center", justifyContent: "center",
-              overflow: "hidden",
+              overflow: "hidden", position: "relative",
               background: `linear-gradient(135deg, ${PRIMARY}, #1A3A8F)`,
               border: `3px solid ${GOLD}`,
               boxShadow: "0 0 60px rgba(212,160,23,0.35)",
@@ -83,7 +83,12 @@ export default async function OGImage() {
               <img
                 src={LOGO_OG_B64}
                 alt="Vision Coaching Institute"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                style={{
+                  position: "absolute",
+                  top: "-15%", left: "-15%",
+                  width: "130%", height: "130%",
+                  objectFit: "cover",
+                }}
               />
             </div>
           </div>
