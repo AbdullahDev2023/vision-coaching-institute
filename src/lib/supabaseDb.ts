@@ -61,6 +61,24 @@ export async function fetchGallery(): Promise<GalleryItem[]> {
   return (data ?? []).map(toGallery);
 }
 
+export async function fetchAllGallery(): Promise<GalleryItem[]> {
+  const { data, error } = await supabase
+    .from("gallery")
+    .select("*")
+    .order("order", { ascending: true });
+  if (error) throw error;
+  return (data ?? []).map(toGallery);
+}
+
+export async function updateGalleryDoc(id: string, patch: Partial<Pick<GalleryItem, "label" | "order" | "active">>): Promise<void> {
+  const update: Record<string, unknown> = {};
+  if (patch.label  !== undefined) update.label  = patch.label;
+  if (patch.order  !== undefined) update.order  = patch.order;
+  if (patch.active !== undefined) update.active = patch.active;
+  const { error } = await supabase.from("gallery").update(update).eq("id", id);
+  if (error) throw error;
+}
+
 export async function saveGalleryDoc(item: {
   type: "photo" | "video"; label: string; url: string;
   storagePath: string; order: number;
