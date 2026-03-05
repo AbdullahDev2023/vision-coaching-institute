@@ -25,6 +25,12 @@ const TIER_META: Record<string, { ring: string; glow: string; bg: string; badge:
     bg:    "rgba(20,184,166,0.07)",
     badge: "rgba(20,184,166,0.15)",
   },
+  purple: {
+    ring:  "#a78bfa",
+    glow:  "rgba(167,139,250,0.25)",
+    bg:    "rgba(167,139,250,0.07)",
+    badge: "rgba(167,139,250,0.15)",
+  },
 };
 
 type Tier = {

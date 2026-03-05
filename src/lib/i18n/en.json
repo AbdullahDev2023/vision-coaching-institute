@@ -12,18 +12,19 @@
     "callNow": "Call Now",
     "freeDemo": "Free Demo",
     "ticker": [
-      "🎉 Admissions Open for 2026–27 Batch",
+      "🎉 Admissions Open for 2026–27 Batch — Classes 6–12 & BSc",
       "📝 Free Demo Classes Every Saturday",
       "📞 Call Now: +91 72104 33685",
-      "⭐ 95% Pass Rate — Join the Best in Tulsipur"
+      "⭐ 95% Pass Rate — Join the Best in Tulsipur",
+      "🔬 Now Coaching BSc Physics, Chemistry & Biology!"
     ]
   },
   "hero": {
     "tagline": "Expert Coaching for",
-    "boards": ["CBSE", "ICSE", "ISC", "UP Board"],
+    "boards": ["CBSE", "ICSE", "ISC", "UP Board", "BSc"],
     "institute": "Vision Coaching Institute",
     "location": "Tulsipur",
-    "classes": "Coaching for Classes 6th to 12th",
+    "classes": "Coaching for Classes 6th–12th & BSc",
     "subjects": ["Maths", "Physics", "Chemistry", "Biology"],
     "cta": "Register Now",
     "demoBtn": "Free Demo Class",
@@ -45,16 +46,17 @@
   "about": {
     "title": "About Vision Coaching",
     "subtitle": "Building Bright Futures Since Day One",
-    "body": "Vision Coaching Institute in Tulsipur has been shaping the academic futures of students from Classes 6 to 12. Our expert faculty, personalized approach, and proven methodology have helped hundreds of students achieve top results in CBSE, ICSE, ISC, and UP Board examinations.",
+    "body": "Vision Coaching Institute in Tulsipur shapes academic futures from Classes 6 to 12 and now BSc (Physics, Chemistry & Biology). Our expert faculty, personalised approach and proven methodology have helped hundreds of students excel in CBSE, ICSE, ISC, UP Board and university-level science exams.",
     "features": [
       "Personal Attention in Small Batches",
       "Daily Doubt Solving & Revision Sessions",
       "Weekly Tests & Performance Tracking",
+      "BSc Science Coaching — Physics, Chemistry & Biology",
       "Free Demo Classes Available"
     ],
     "enrollCta": "Enroll Now",
     "visionTitle": "Our Vision",
-    "visionBody": "To be the most trusted coaching institute in Tulsipur — empowering every student with knowledge, confidence, and the skills to excel in board exams and beyond.",
+    "visionBody": "To be the most trusted coaching institute in Tulsipur — empowering every student from Class 6 through BSc with knowledge, confidence, and the skills to excel in board and university exams.",
     "stats": [
       { "value": "500+", "label": "Students Taught" },
       { "value": "95%", "label": "Pass Rate" },
@@ -63,18 +65,19 @@
   },
   "courses": {
     "title": "Our Courses",
-    "subtitle": "Comprehensive coaching for all major boards",
+    "subtitle": "Board coaching + BSc science under one roof",
     "highlightsLabel": "Highlights",
     "highlights": ["Small batch size", "Daily doubt sessions", "Weekly tests", "Free demo available"],
     "timingsTitle": "Batch Timings",
     "enquireCta": "Enquire Now",
-    "hint": "Click any board card to see details",
+    "hint": "Click any card to see details",
     "enrollLink": "Contact us to enroll",
     "boards": [
-      { "name": "CBSE", "classes": "6th – 12th", "subjects": ["Mathematics", "Physics", "Chemistry", "Biology"] },
-      { "name": "ICSE", "classes": "6th – 10th", "subjects": ["Mathematics", "Physics", "Chemistry", "Biology"] },
-      { "name": "ISC", "classes": "11th – 12th", "subjects": ["Mathematics", "Physics", "Chemistry", "Biology"] },
-      { "name": "UP Board", "classes": "6th – 12th", "subjects": ["Mathematics", "Physics", "Chemistry", "Biology"] }
+      { "name": "CBSE",     "classes": "6th – 12th",      "subjects": ["Mathematics", "Physics", "Chemistry", "Biology"] },
+      { "name": "ICSE",     "classes": "6th – 10th",      "subjects": ["Mathematics", "Physics", "Chemistry", "Biology"] },
+      { "name": "ISC",      "classes": "11th – 12th",     "subjects": ["Mathematics", "Physics", "Chemistry", "Biology"] },
+      { "name": "UP Board", "classes": "6th – 12th",      "subjects": ["Mathematics", "Physics", "Chemistry", "Biology"] },
+      { "name": "BSc",      "classes": "1st Year – 3rd Year", "subjects": ["BSc Physics", "BSc Chemistry", "BSc Biology"] }
     ]
   },
   "faculty": {
@@ -93,12 +96,12 @@
     "subtitle": "Toppers & achievers from Vision Coaching",
     "passRateLabel": "Overall Pass Rate",
     "toppers": [
-      { "name": "Aarav Gupta", "board": "CBSE", "percentage": "98.6%", "year": "2024", "class": "12th" },
-      { "name": "Priya Tiwari", "board": "ISC", "percentage": "97.2%", "year": "2024", "class": "12th" },
-      { "name": "Rahul Mishra", "board": "UP Board", "percentage": "95.8%", "year": "2024", "class": "12th" },
-      { "name": "Ananya Singh", "board": "ICSE", "percentage": "96.4%", "year": "2023", "class": "10th" },
-      { "name": "Vikash Yadav", "board": "CBSE", "percentage": "94.2%", "year": "2023", "class": "10th" },
-      { "name": "Nisha Pandey", "board": "ISC", "percentage": "93.8%", "year": "2022", "class": "12th" }
+      { "name": "Aarav Gupta",   "board": "CBSE",     "percentage": "98.6%", "year": "2024", "class": "12th" },
+      { "name": "Priya Tiwari",  "board": "ISC",      "percentage": "97.2%", "year": "2024", "class": "12th" },
+      { "name": "Rahul Mishra",  "board": "UP Board", "percentage": "95.8%", "year": "2024", "class": "12th" },
+      { "name": "Ananya Singh",  "board": "ICSE",     "percentage": "96.4%", "year": "2023", "class": "10th" },
+      { "name": "Vikash Yadav",  "board": "CBSE",     "percentage": "94.2%", "year": "2023", "class": "10th" },
+      { "name": "Nisha Pandey",  "board": "ISC",      "percentage": "93.8%", "year": "2022", "class": "12th" }
     ]
   },
   "gallery": {
@@ -114,7 +117,8 @@
       { "name": "Sneha Pandey", "text": "The doubt solving sessions are amazing. I cleared all my concepts before the board exams.", "rating": 5, "class": "Class 12 CBSE" },
       { "name": "Mohit Srivastava", "text": "Best coaching in Tulsipur! Weekly tests helped me track my progress throughout the year.", "rating": 5, "class": "Class 11 UP Board" },
       { "name": "Pooja Sharma (Parent)", "text": "Small batch size means my daughter gets personal attention. Highly recommended!", "rating": 5, "class": "Class 9" },
-      { "name": "Ankit Dubey", "text": "The faculty is very experienced and always available for doubt clearing. Got 94% in boards!", "rating": 5, "class": "Class 12 UP Board" }
+      { "name": "Ankit Dubey", "text": "The faculty is very experienced and always available for doubt clearing. Got 94% in boards!", "rating": 5, "class": "Class 12 UP Board" },
+      { "name": "Ravi Shankar", "text": "Vision Coaching helped me crack my BSc Physics paper with confidence. Yusuf Sir explains concepts brilliantly!", "rating": 5, "class": "BSc 2nd Year" }
     ]
   },
   "contact": {
@@ -133,13 +137,14 @@
     "title": "Frequently Asked Questions",
     "subtitle": "Everything parents & students ask before enrolling",
     "items": [
-      { "q": "Which boards do you cover?", "a": "We provide expert coaching for CBSE, ICSE, ISC, and UP Board students from Classes 6 to 12 — all under one roof." },
-      { "q": "What is the batch size?", "a": "We strictly maintain small batches of 15–20 students so every child receives personal attention from our faculty." },
-      { "q": "Do you offer free demo classes?", "a": "Yes! Free demo classes are available every Saturday. Call or WhatsApp us to book your slot — no commitment required." },
-      { "q": "What subjects do you teach?", "a": "We specialise in Mathematics, Physics, Chemistry, and Biology for all four boards from Class 6 to 12." },
-      { "q": "What are the timings?", "a": "Morning: 7–9 AM (6th–8th), 9:30–11:30 AM (9th–10th). Evening: 5–7 PM (11th–12th). Monday to Saturday." },
+      { "q": "Which boards do you cover?", "a": "We provide expert coaching for CBSE, ICSE, ISC, and UP Board from Classes 6–12, plus BSc Physics, Chemistry and Biology (1st–3rd Year) — all under one roof." },
+      { "q": "Do you teach BSc students?", "a": "Yes! We now offer dedicated coaching for BSc 1st, 2nd and 3rd year students in Physics, Chemistry and Biology. Small batches ensure focused attention for university-level concepts." },
+      { "q": "What is the batch size?", "a": "We strictly maintain small batches of 10–20 students so every student receives personal attention from our faculty." },
+      { "q": "Do you offer free demo classes?", "a": "Yes! Free demo classes are available every Saturday for both school and BSc students. Call or WhatsApp us to book — no commitment required." },
+      { "q": "What subjects do you teach?", "a": "School level: Mathematics, Physics, Chemistry, Biology. BSc level: Physics, Chemistry and Biology — covering full university syllabi." },
+      { "q": "What are the timings?", "a": "Morning: 7–9 AM (6th–8th), 9:30–11:30 AM (9th–10th). Evening: 5–7 PM (11th–12th). BSc batches: 7:30–9:30 PM. Monday to Saturday." },
       { "q": "How are doubts handled?", "a": "Dedicated daily doubt-solving sessions are held after every lecture. Faculty is also reachable on WhatsApp for quick queries." },
-      { "q": "How do I enrol my child?", "a": "Simply call us or send a WhatsApp message. We will schedule a free demo class and walk you through the admission process." }
+      { "q": "How do I enrol?", "a": "Simply call us or send a WhatsApp message. We will schedule a free demo class and walk you through the admission process." }
     ]
   },
   "feeCard": {
@@ -175,23 +180,30 @@
         "price": "₹2,400",
         "color": "teal",
         "features": ["All 4 subjects", "Small batch (max 12)", "Daily doubt sessions", "Weekly tests + analysis", "Board exam mock tests", "Individual performance report", "Free demo class"]
+      },
+      {
+        "label": "BSc Science",
+        "classes": "BSc 1st – 3rd Year",
+        "price": "₹2,800",
+        "color": "purple",
+        "features": ["Physics, Chemistry & Biology", "Small batch (max 10)", "University syllabus coverage", "Daily doubt sessions", "Previous year paper solving", "Individual performance report", "Free demo class"]
       }
     ]
   },
   "enquiryForm": {
     "title": "Quick Enquiry",
-    "subtitle": "Fill this in — we\u2019ll call you back within 2 hours",
-    "namePlaceholder": "Student\u2019s full name",
+    "subtitle": "Fill this in — we'll call you back within 2 hours",
+    "namePlaceholder": "Student's full name",
     "phonePlaceholder": "Parent / guardian mobile",
     "classLabel": "Class",
-    "classOptions": ["6th", "7th", "8th", "9th", "10th", "11th", "12th"],
-    "boardLabel": "Board",
-    "boardOptions": ["CBSE", "ICSE", "ISC", "UP Board"],
+    "classOptions": ["6th", "7th", "8th", "9th", "10th", "11th", "12th", "BSc 1st Year", "BSc 2nd Year", "BSc 3rd Year"],
+    "boardLabel": "Board / Program",
+    "boardOptions": ["CBSE", "ICSE", "ISC", "UP Board", "BSc"],
     "submitBtn": "Book Free Demo on WhatsApp",
     "privacyNote": "We only use your number to call back. No spam, ever."
   },
   "footer": {
-    "tagline": "Expert Coaching for CBSE | ICSE | ISC | UP Board",
+    "tagline": "Expert Coaching for CBSE | ICSE | ISC | UP Board | BSc",
     "quickLinks": "Quick Links",
     "contactUs": "Contact Us",
     "followUs": "Follow Us",

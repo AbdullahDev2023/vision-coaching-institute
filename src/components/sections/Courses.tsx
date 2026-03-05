@@ -12,6 +12,7 @@ const BOARD_META = [
   { color: "#44ddaa", icon: "📗", bg: "rgba(68,221,170,0.08)", border: "rgba(68,221,170,0.25)" },
   { color: "#D4A017", icon: "📙", bg: "rgba(212,160,23,0.08)",  border: "rgba(212,160,23,0.25)"  },
   { color: "#ff6688", icon: "📕", bg: "rgba(255,102,136,0.08)", border: "rgba(255,102,136,0.25)" },
+  { color: "#a78bfa", icon: "🔬", bg: "rgba(167,139,250,0.08)", border: "rgba(167,139,250,0.25)" },
 ];
 
 const SUBJECT_ICONS: Record<string, string> = {
@@ -19,6 +20,8 @@ const SUBJECT_ICONS: Record<string, string> = {
   Physics: "⚛️", Bhautiki: "⚛️", भौतिकी: "⚛️",
   Chemistry: "🧪", "Rasayan Vigyan": "🧪", रसायन: "🧪", "रसायन विज्ञान": "🧪",
   Biology: "🧬", "Jeev Vigyan": "🧬", "जीव विज्ञान": "🧬",
+  "BSc Physics": "⚛️", "BSc Chemistry": "🧪", "BSc Biology": "🧬",
+  "BSc भौतिकी": "⚛️", "BSc रसायन": "🧪", "BSc जीव विज्ञान": "🧬",
 };
 
 export default function Courses() {
@@ -42,14 +45,15 @@ export default function Courses() {
       <div className="relative z-10 layout-container section-inner">
         <SectionHeading title={t.courses.title} subtitle={t.courses.subtitle} />
 
-        {/* ── 4-board card grid ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: "var(--igap-sm)" }}>
+        {/* ── board card grid — 2 cols on sm, 3 on lg, BSc gets full width on its row ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" style={{ gap: "var(--igap-sm)" }}>
           {boards.map((board, i) => {
             const meta    = BOARD_META[i];
             const isActive = active === i;
+            const isBsc   = board.name === "BSc";
             return (
               <motion.div key={board.name}
-                className="gsap-reveal relative rounded-2xl p-5 sm:p-6 cursor-pointer overflow-hidden border transition-all duration-300"
+                className={`gsap-reveal relative rounded-2xl p-5 sm:p-6 cursor-pointer overflow-hidden border transition-all duration-300${isBsc ? " sm:col-span-2 lg:col-span-1" : ""}`}
                 style={{
                   background: isActive ? meta.bg : "rgba(13,27,75,0.7)",
                   borderColor: isActive ? meta.border : "rgba(255,255,255,0.07)",
@@ -141,9 +145,10 @@ export default function Courses() {
           </div>
           <div className="divide-y divide-white/8">
             {[
-              { group: "6th – 8th",   batch: "Morning", time: "7:00 AM – 9:00 AM",   icon: "🌅" },
-              { group: "9th – 10th",  batch: "Morning", time: "9:30 AM – 11:30 AM",  icon: "☀️" },
-              { group: "11th – 12th", batch: "Evening", time: "5:00 PM – 7:00 PM",   icon: "🌆" },
+              { group: "6th – 8th",       batch: "Morning", time: "7:00 AM – 9:00 AM",   icon: "🌅" },
+              { group: "9th – 10th",      batch: "Morning", time: "9:30 AM – 11:30 AM",  icon: "☀️" },
+              { group: "11th – 12th",     batch: "Evening", time: "5:00 PM – 7:00 PM",   icon: "🌆" },
+              { group: "BSc 1st–3rd Yr",  batch: "Night",   time: "7:30 PM – 9:30 PM",   icon: "🔬" },
             ].map((row) => (
               <div key={row.group}
                 className="grid items-center px-5 sm:px-6 py-4 gap-x-2"
