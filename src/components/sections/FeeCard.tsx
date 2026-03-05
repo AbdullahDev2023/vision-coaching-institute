@@ -297,15 +297,18 @@ export default function FeeCard() {
   /* Default to the popular (middle) tier */
   const defaultIdx = fc.tiers.findIndex(t => t.popular) ?? 1;
   const [selectedIdx, setSelectedIdx] = useState<number>(defaultIdx);
+  const [scrollIdx,   setScrollIdx]   = useState<number>(defaultIdx);
   const selectedTier = fc.tiers[selectedIdx] ?? null;
 
   return (
     <div
-      className="relative overflow-hidden"
+      className="relative"
       style={{
         background: "linear-gradient(180deg,#050D1F 0%,#0A1F5C 60%,#050D1F 100%)",
         paddingTop: "clamp(2.5rem, 5vw, 4rem)",
         paddingBottom: "clamp(2.5rem, 5vw, 4rem)",
+        overflowX: "hidden",
+        overflowY: "visible",
       }}
       ref={sectionRef}>
 
@@ -330,19 +333,54 @@ export default function FeeCard() {
         {/* Main layout: tiers left + form right */}
         <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] items-start gsap-reveal" style={{ gap: "var(--igap)" }}>
 
-          {/* Pricing cards — swipe carousel on mobile, 3-col grid from md */}
+          {/* Pricing cards */}
           <div>
-            {/* Mobile: horizontal scroll-snap */}
-            <div className="flex md:hidden gap-4 overflow-x-auto snap-x snap-mandatory pb-4 carousel-track"
-              style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}>
+            {/* ── Mobile: horizontal scroll-snap ── */}
+            <style>{`
+              .fee-scroll::-webkit-scrollbar { display: none; }
+              .fee-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+            `}</style>
+            <div
+              className="fee-scroll flex md:hidden gap-4 overflow-x-auto snap-x snap-mandatory pb-3"
+              style={{ WebkitOverflowScrolling: "touch" }}
+              onScroll={e => {
+                const el = e.currentTarget;
+                const idx = Math.round(el.scrollLeft / (el.scrollWidth / fc.tiers.length));
+                setScrollIdx(idx);
+              }}>
+              {/* Left spacer so first card is centred */}
+              <div className="flex-none w-[11vw]" />
               {fc.tiers.map((tier, i) => (
-                <div key={tier.label} className="flex-none w-[78vw] max-w-[300px] snap-center">
+                <div key={tier.label} className="flex-none w-[72vw] max-w-[290px] snap-center">
                   <TierCard tier={tier} selected={selectedIdx === i} onSelect={() => setSelectedIdx(i)} />
                 </div>
               ))}
+              {/* Right spacer */}
+              <div className="flex-none w-[11vw]" />
             </div>
-            <p className="md:hidden text-center text-white/30 text-xs mt-1">← Swipe to see all plans →</p>
-            {/* Tablet+: 3-column grid */}
+
+            {/* Dot indicators — mobile only */}
+            <div className="flex md:hidden justify-center gap-2 mt-3">
+              {fc.tiers.map((tier, i) => {
+                const m = TIER_META[tier.color] ?? TIER_META.blue;
+                return (
+                  <div
+                    key={tier.label}
+                    className="rounded-full transition-all duration-300"
+                    style={{
+                      width:      scrollIdx === i ? "20px" : "8px",
+                      height:     "8px",
+                      background: scrollIdx === i ? m.ring : "rgba(255,255,255,0.20)",
+                    }}
+                  />
+                );
+              })}
+            </div>
+            <p className="md:hidden text-center text-white/30 text-[11px] mt-2">
+              ← Swipe to see all plans →
+            </p>
+
+            {/* ── Tablet +: 3-column grid ── */}
             <div className="hidden md:grid md:grid-cols-3 gap-5">
               {fc.tiers.map((tier, i) => (
                 <TierCard key={tier.label} tier={tier} selected={selectedIdx === i} onSelect={() => setSelectedIdx(i)} />
