@@ -152,7 +152,7 @@ function OrbitRing({ r, tilt }: { r: number; tilt: number }) {
 export default function HeroScene() {
   return (
     <Canvas
-      camera={{ position: [0, 0, 1.75], fov: 55 }}
+      camera={{ position: [0, 0, 2.75], fov: 55 }}
       style={{ width: "100%", height: "100%", display: "block", background: "transparent" }}
       dpr={[1, 2]}
       gl={{ antialias: true, alpha: true }}
