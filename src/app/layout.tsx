@@ -284,12 +284,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${playfair.variable} ${inter.variable} ${notoDevanagari.variable} scroll-smooth`}>
       <head suppressHydrationWarning>
-        {/* ── Critical resource hints — must be first in <head> ── */}
-        {/* Google Fonts (next/font uses these domains) */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* ── Critical resource hints ── */}
+        {/* next/font already owns fonts.googleapis.com + fonts.gstatic.com —
+            do NOT add those preconnects here or you waste a connection slot. */}
+
+        {/* Preload LCP image — logo is the first above-fold branded element */}
+        <link rel="preload" as="image" href="/logo.webp" type="image/webp" />
+
         {/* Supabase CDN — gallery + faculty images load from here */}
         <link rel="preconnect" href="https://ncvcdhcdpiylvyvbjrot.supabase.co" />
+
         {/* GA4 — dns-prefetch only (not critical path) */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
@@ -310,9 +314,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-              strategy="afterInteractive"
+              strategy="lazyOnload"
             />
-            <Script id="ga4-init" strategy="afterInteractive">
+            <Script id="ga4-init" strategy="lazyOnload">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}

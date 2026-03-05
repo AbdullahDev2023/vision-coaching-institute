@@ -12,10 +12,24 @@ export default function LoadingScreen() {
   const taglineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Skip the loading screen on every visit after the first in the same session.
+    // On back-navigation or tab switches, the hero is already painted — the overlay
+    // would only delay visual completeness and hurt Speed Index.
+    try {
+      if (sessionStorage.getItem("vci-loaded")) {
+        setHidden(true);
+        return;
+      }
+      sessionStorage.setItem("vci-loaded", "1");
+    } catch {
+      // sessionStorage unavailable (private mode edge case) — show normally
+    }
+
+    // Shortened timeline: 0.18 + 0.14 + 0.12 + 0.28 + 0.18 = ~0.9s total (was ~1.75s)
     const tl = gsap.timeline({
       onComplete: () => {
         gsap.to(containerRef.current, {
-          opacity: 0, duration: 0.3, delay: 0.1,
+          opacity: 0, duration: 0.18, delay: 0.05,
           onComplete: () => setHidden(true),
         });
       },
@@ -23,18 +37,18 @@ export default function LoadingScreen() {
 
     tl.fromTo(logoRingRef.current,
       { scale: 0, opacity: 0, rotation: -180 },
-      { scale: 1, opacity: 1, rotation: 0, duration: 0.4, ease: "back.out(1.7)" }
+      { scale: 1, opacity: 1, rotation: 0, duration: 0.18, ease: "back.out(1.7)" }
     )
     .fromTo(logoTextRef.current,
-      { opacity: 0, y: 15 },
-      { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, "-=0.1"
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.14, ease: "power2.out" }, "-=0.05"
     )
     .fromTo(taglineRef.current,
-      { opacity: 0, y: 10 },
-      { opacity: 1, y: 0, duration: 0.25 }, "-=0.05"
+      { opacity: 0, y: 8 },
+      { opacity: 1, y: 0, duration: 0.12 }, "-=0.04"
     )
     .to(barRef.current,
-      { width: "100%", duration: 0.5, ease: "power1.inOut" }, "-=0.05"
+      { width: "100%", duration: 0.28, ease: "power1.inOut" }, "-=0.04"
     );
   }, []);
 
