@@ -212,19 +212,18 @@ export default function Contact() {
             </motion.a>
 
             {/* Map */}
-            <motion.div
-              className="map-wrap rounded-2xl overflow-hidden border border-white/8"
-              style={{ height: "220px", minHeight: "220px" }}
-              initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }} viewport={{ once: true }}>
+            <div
+              className="rounded-2xl overflow-hidden border border-white/8"
+              style={{ height: "240px", minHeight: "240px", width: "100%", position: "relative" }}>
               <iframe
-                src="https://maps.google.com/maps?q=GCM8%2BGJW+Tulsipur+Uttar+Pradesh&output=embed"
-                width="100%" height="220"
-                style={{ border: 0, display: "block", width: "100%", height: "220px" }}
-                allowFullScreen loading="lazy"
+                src="https://maps.google.com/maps?q=GCM8%2BGJW+Tulsipur+Uttar+Pradesh&output=embed&z=15"
+                style={{ border: 0, display: "block", width: "100%", height: "240px", minHeight: "240px" }}
+                allowFullScreen
+                loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Vision Coaching Institute Location" />
-            </motion.div>
+                title="Vision Coaching Institute Location"
+              />
+            </div>
           </motion.div>
 
           {/* ── Right: Enquiry Form ── */}
