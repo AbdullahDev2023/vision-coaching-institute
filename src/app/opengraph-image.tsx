@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { LOGO_B64 } from "@/lib/logo-b64";
 
 export const runtime = "edge";
 export const alt    = "Vision Coaching Institute Tulsipur — Expert Coaching for CBSE, ICSE, ISC & UP Board";
@@ -100,16 +101,18 @@ export default function OGImage() {
             width: "96px",
             height: "96px",
             borderRadius: "50%",
-            background: "linear-gradient(135deg, #D4A017, #F0C842)",
+            background: "linear-gradient(135deg, #0A1F5C, #1A3A8F)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             marginBottom: "28px",
             boxShadow: "0 0 40px rgba(212,160,23,0.45)",
-            border: "3px solid rgba(255,255,255,0.15)",
+            border: "3px solid rgba(212,160,23,0.60)",
+            overflow: "hidden",
           }}
         >
-          <span style={{ fontSize: "48px", fontWeight: 900, color: "#0A1F5C" }}>V</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={LOGO_B64} alt="logo" width={80} height={80} style={{ objectFit: "contain" }} />
         </div>
 
         {/* ── Institute name ── */}
