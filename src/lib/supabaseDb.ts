@@ -131,26 +131,25 @@ export async function updateFacultyDoc(id: string, data: Partial<FacultyMember>)
   if (error) throw error;
 }
 
-/* ─── File upload via Supabase Storage ──────────────────────────── */
+/* ─── File upload via server-side API route (bypasses CORS) ─────── */
 export async function uploadFile(
   storagePath: string,
   file: File,
   onProgress: (pct: number) => void,
 ): Promise<string> {
-  // Supabase JS v2 doesn't expose upload progress in the browser;
-  // fire a fake 50 % tick so the UI doesn't look frozen.
-  onProgress(50);
+  onProgress(30);
 
-  // Derive bucket from path prefix (gallery/… or faculty/…)
-  const bucket = storagePath.startsWith("faculty") ? "faculty" : "gallery";
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("path", storagePath);
 
-  const { error } = await supabase.storage
-    .from(bucket)
-    .upload(storagePath, file, { upsert: true, contentType: file.type });
+  onProgress(60);
 
-  if (error) throw error;
+  const res  = await fetch("/api/upload", { method: "POST", body: formData });
+  const json = await res.json();
+
+  if (!res.ok || json.error) throw new Error(json.error ?? "Upload failed");
+
   onProgress(100);
-
-  const { data } = supabase.storage.from(bucket).getPublicUrl(storagePath);
-  return data.publicUrl;
+  return json.url;
 }
