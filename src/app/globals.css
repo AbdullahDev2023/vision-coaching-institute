@@ -405,6 +405,183 @@ button, a[role="button"] { min-height: 44px; }
    MISC
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
+/* ══════════════════════════════════════════════════════════════
+   ACCORDION SECTION  — AccordionSection.tsx
+   Collapsed: header strip only (≈80px on mobile).
+   Expanded:  full section animates in below the header.
+══════════════════════════════════════════════════════════════ */
+
+/* Outer wrapper — no vertical padding when collapsed */
+.acc-section {
+  /* No section-pad here; the expanded child applies its own section-pad */
+}
+
+/* Header strip — always visible */
+.acc-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 2rem 0 1.25rem;
+}
+@media (min-width: 640px) {
+  .acc-header { padding: 2.5rem 0 1.5rem; align-items: center; }
+}
+
+/* SEO block — heading + subtitle + tags */
+.acc-seo-block { flex: 1; min-width: 0; }
+
+/* Gold ornament — mirrors SectionHeading */
+.acc-ornament {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.acc-ornament-line {
+  height: 1px;
+  width: 2rem;
+  background: rgba(212,160,23,0.5);
+  display: block;
+}
+@media (min-width: 640px) { .acc-ornament-line { width: 3rem; } }
+.acc-ornament-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #D4A017;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* h2 title */
+.acc-title {
+  font-size: clamp(1.375rem, 4vw + 0.5rem, 2.25rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.4rem;
+}
+.acc-title-icon {
+  font-size: 0.85em;
+  flex-shrink: 0;
+}
+
+/* Subtitle */
+.acc-subtitle {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  font-weight: 400;
+  max-width: 52ch;
+  margin-bottom: 0.875rem;
+}
+@media (min-width: 640px) {
+  .acc-subtitle { font-size: 1rem; }
+}
+
+/* Preview tag pills — always in DOM */
+.acc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  padding: 0; margin: 0;
+}
+.acc-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+  line-height: 1;
+}
+.acc-tag--light {
+  background: rgba(212,160,23,0.12);
+  color: #F0C842;
+  border: 1px solid rgba(212,160,23,0.25);
+}
+.acc-tag--dark {
+  background: rgba(10,31,92,0.10);
+  color: #0A1F5C;
+  border: 1px solid rgba(10,31,92,0.20);
+}
+
+/* Expand / Collapse button */
+.acc-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.55rem 1.1rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.18s, border-color 0.18s, box-shadow 0.18s, transform 0.15s;
+  border: 1.5px solid transparent;
+  min-height: 40px;
+  white-space: nowrap;
+  align-self: flex-start;
+  margin-top: 0.15rem;
+}
+@media (min-width: 640px) {
+  .acc-toggle { align-self: center; margin-top: 0; }
+}
+.acc-toggle--light {
+  background: rgba(212,160,23,0.10);
+  border-color: rgba(212,160,23,0.35);
+  color: #F0C842;
+}
+.acc-toggle--light:hover, .acc-toggle--light:focus-visible {
+  background: rgba(212,160,23,0.20);
+  border-color: rgba(212,160,23,0.60);
+  box-shadow: 0 0 0 3px rgba(212,160,23,0.15);
+  transform: scale(1.03);
+}
+.acc-toggle--dark {
+  background: rgba(10,31,92,0.07);
+  border-color: rgba(10,31,92,0.22);
+  color: #0A1F5C;
+}
+.acc-toggle--dark:hover, .acc-toggle--dark:focus-visible {
+  background: rgba(10,31,92,0.13);
+  border-color: rgba(10,31,92,0.42);
+  box-shadow: 0 0 0 3px rgba(10,31,92,0.10);
+  transform: scale(1.03);
+}
+.acc-toggle.acc-toggle--open.acc-toggle--light {
+  background: linear-gradient(135deg, #D4A017, #F0C842);
+  color: #0A1F5C;
+  border-color: transparent;
+}
+.acc-toggle.acc-toggle--open.acc-toggle--dark {
+  background: #0A1F5C;
+  color: #F0C842;
+  border-color: transparent;
+}
+.acc-toggle-label { pointer-events: none; }
+.acc-toggle-chevron {
+  display: inline-flex;
+  font-size: 0.85rem;
+  pointer-events: none;
+  line-height: 1;
+}
+
+/* Divider between header and content */
+.acc-divider {
+  height: 1px;
+  width: 100%;
+  margin-bottom: 0; /* content has its own top padding */
+}
+
+/* ── END ACCORDION SECTION ───────────────────────────────── */
+
 :focus-visible { outline: 2px solid #D4A017; outline-offset: 3px; border-radius: 4px; }
 
 ::-webkit-scrollbar { width: 5px; }
