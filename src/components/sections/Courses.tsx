@@ -3,6 +3,8 @@ import { useRef, useState } from "react";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import SectionHeading from "@/components/ui/SectionHeading";
+import ShareButton from "@/components/ui/ShareButton";
+import { shareCourse } from "@/lib/shareUtils";
 import { motion, AnimatePresence } from "framer-motion";
 
 const BOARD_META = [
@@ -109,11 +111,17 @@ export default function Courses() {
                           {h}
                         </div>
                       ))}
-                      <a href="#contact"
-                        className="btn-sm mt-4"
-                        style={{ background: `linear-gradient(135deg, ${meta.color}, ${meta.color}cc)`, color: "#050D1F" }}>
-                        {t.courses.enquireCta} →
-                      </a>
+                      <div className="flex items-center gap-3 mt-4">
+                        <a href="#contact"
+                          className="btn-sm"
+                          style={{ background: `linear-gradient(135deg, ${meta.color}, ${meta.color}cc)`, color: "#050D1F" }}>
+                          {t.courses.enquireCta} →
+                        </a>
+                        <ShareButton
+                          href={shareCourse(board.name, board.classes, board.subjects)}
+                          label="Share"
+                        />
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>

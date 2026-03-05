@@ -136,6 +136,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable} ${notoDevanagari.variable} scroll-smooth`}>
       <head suppressHydrationWarning>
+        {/* Hard favicon links — belt-and-suspenders for Vercel edge caching */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon_32.png" type="image/png" sizes="32x32" />
+        <link rel="icon" href="/favicon_48.png" type="image/png" sizes="48x48" />
+        <link rel="apple-touch-icon" href="/favicon_180.png" sizes="180x180" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
