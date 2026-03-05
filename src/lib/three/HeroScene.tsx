@@ -152,7 +152,7 @@ function OrbitRing({ r, tilt }: { r: number; tilt: number }) {
 export default function HeroScene() {
   return (
     <Canvas
-      camera={{ position: [0, 0, 2.75], fov: 55 }}
+      camera={{ position: [0, 1.2, 8], fov: 100 }}
       style={{ width: "100%", height: "100%", display: "block", background: "transparent" }}
       dpr={[1, 2]}
       gl={{ antialias: true, alpha: true }}
@@ -171,8 +171,8 @@ export default function HeroScene() {
         dampingFactor={0.08}
         rotateSpeed={0.7}
         zoomSpeed={1.2}
-        minDistance={1.0}
-        maxDistance={12}
+        minDistance={4}
+        maxDistance={10}
         minPolarAngle={Math.PI * 0.1}
         maxPolarAngle={Math.PI * 0.9}
         makeDefault

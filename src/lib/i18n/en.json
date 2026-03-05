@@ -20,13 +20,15 @@
     ]
   },
   "hero": {
-    "tagline": "Expert Coaching for",
+    "tagline": "Top Coaching in Tulsipur",
     "boards": ["CBSE", "ICSE", "ISC", "UP Board", "BSc"],
-    "institute": "Vision Coaching Institute",
-    "location": "Tulsipur",
-    "classes": "Coaching for Classes 6th–12th & BSc",
+    "institute": "Classes 6–12 & BSc",
+    "location": "Tulsipur, Uttar Pradesh",
+    "classes": "Maths · Physics · Chemistry · Biology — Expert faculty, small batches, daily doubt sessions.",
+    "stats": ["500+ Students", "95% Pass Rate", "10+ Yrs"],
     "subjects": ["Maths", "Physics", "Chemistry", "Biology"],
-    "cta": "Register Now",
+    "cta": "📞 Book FREE Demo Class",
+    "ctaSub": "No fees. No commitment. Walk in Saturday.",
     "demoBtn": "Free Demo Class",
     "callUs": "Call Us"
   },

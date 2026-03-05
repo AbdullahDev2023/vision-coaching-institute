@@ -28,7 +28,7 @@ function StatCounter({ target, suffix, duration, label, triggerRef }: {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-[2px] bg-gold/60 rounded-full" />
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none rounded-2xl"
         style={{ background: "radial-gradient(circle at 50% 50%,rgba(212,160,23,0.08) 0%,transparent 70%)" }} />
-      <span ref={numRef} className="block text-2xl sm:text-3xl font-heading font-bold text-gold-shimmer mb-2">
+      <span ref={numRef} className="block text-2xl sm:text-3xl font-heading font-bold text-gold mb-2">
         {target}{suffix}
       </span>
       <span className="text-white/45 text-[10px] sm:text-xs uppercase tracking-wide leading-snug">{label}</span>
@@ -52,7 +52,7 @@ function TopperCard({ tp, featured = false }: {
         style={{ background: "linear-gradient(135deg,#0A1F5C,#1A3A8F)", marginBottom: "var(--igap-sm)" }}>
         {tp.name[0]}
       </div>
-      <div className="text-gold font-heading text-4xl font-bold text-gold-shimmer">{tp.percentage}</div>
+      <div className="text-gold font-heading text-4xl font-bold">{tp.percentage}</div>
       <h3 className="text-white font-semibold leading-snug" style={{ marginTop: "var(--igap-sm)" }}>{tp.name}</h3>
       <p className="text-white/45 text-sm font-normal" style={{ marginTop: "calc(var(--igap-sm) / 2)" }}>{tp.class} Ã‚Â· {tp.year}</p>
       <span className={`badge ${BADGE[tp.board] ?? "bg-white/10 text-white border-white/20"}`}

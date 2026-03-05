@@ -214,10 +214,12 @@ export default function Contact() {
             {/* Map */}
             <div
               className="rounded-2xl overflow-hidden border border-white/8"
-              style={{ height: "240px", minHeight: "240px", width: "100%", position: "relative" }}>
+              style={{ height: "240px", width: "100%" }}>
               <iframe
-                src="https://maps.google.com/maps?q=GCM8%2BGJW+Tulsipur+Uttar+Pradesh&output=embed&z=15"
-                style={{ border: 0, display: "block", width: "100%", height: "240px", minHeight: "240px" }}
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d613.4987134371574!2d82.41609769429172!3d27.533285584260216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3997710016fd98a3%3A0xb66020be5839a23!2sVision%20Coaching%20Institute!5e0!3m2!1sen!2sin!4v1772711762324!5m2!1sen!2sin"
+                width="100%"
+                height="240"
+                style={{ border: 0, display: "block" }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

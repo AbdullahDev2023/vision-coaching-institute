@@ -21,7 +21,7 @@ function StatCard({
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-[2px] bg-gold rounded-full" />
       <div className="relative z-10 pt-1">
         <span ref={numRef}
-          className="block text-xl sm:text-3xl lg:text-4xl font-heading font-bold text-gold-shimmer mb-1 sm:mb-2">
+          className="block text-xl sm:text-3xl lg:text-4xl font-heading font-bold text-gold mb-1 sm:mb-2">
           {target}{suffix}
         </span>
         <span className="text-white/60 text-[10px] sm:text-xs uppercase tracking-wide leading-snug block">{label}</span>

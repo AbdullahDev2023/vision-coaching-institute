@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import LanguageToggle from "@/components/ui/LanguageToggle";
 
-const NAV_LINKS = ["about", "features", "courses", "faculty", "results", "gallery", "testimonials", "contact"] as const;
+const NAV_LINKS = ["courses", "results", "faculty", "contact"] as const;
 
 export default function Navbar() {
   const { t: _t } = useLanguage();
@@ -20,7 +20,7 @@ export default function Navbar() {
   const linksRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const tl = gsap.timeline({ delay: 1.9 });
+    const tl = gsap.timeline({ delay: 0.1 });
     tl.fromTo(navRef.current,
       { y: -80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" });
     tl.fromTo(logoRef.current,
@@ -61,34 +61,6 @@ export default function Navbar() {
           ? "bg-[#050D1F]/95 backdrop-blur-xl shadow-2xl shadow-black/40 border-b border-white/5"
           : "bg-transparent"
       }`}>
-
-      {/* ── Announcement ticker ── */}
-      <div className="overflow-hidden"
-        style={{
-          background: "rgba(212,160,23,0.07)",
-          borderBottom: "1px solid rgba(212,160,23,0.12)",
-          height: "40px",
-        }}>
-        <style>{`
-          @keyframes ticker-scroll {
-            0%   { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-          }
-          .ticker-track { animation: ticker-scroll 22s linear infinite; white-space: nowrap; display: inline-block; }
-          .ticker-track:hover { animation-play-state: paused; }
-        `}</style>
-        <div className="ticker-track flex items-center gap-12 h-10 px-4">
-          {[...t.nav.ticker, ...t.nav.ticker].map((msg, i) => (
-            <span key={`ticker-${i}-${msg.slice(0, 12)}`} className="inline-flex items-center gap-2 text-xs font-semibold"
-              style={{ color: "rgba(212,160,23,0.90)", letterSpacing: "0.06em" }}>
-              {msg}
-              {i < [...t.nav.ticker, ...t.nav.ticker].length - 1 && (
-                <span style={{ color: "rgba(212,160,23,0.30)", marginLeft: "1rem" }}>◆</span>
-              )}
-            </span>
-          ))}
-        </div>
-      </div>
 
       <div className="layout-container">
         {/*
