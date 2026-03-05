@@ -87,7 +87,7 @@ export default function Hero() {
           <div className="flex items-center gap-3">
             <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-gold/40 shadow-lg shadow-gold/20 flex-shrink-0"
               style={{ background: "rgba(10,31,92,0.6)" }}>
-              <Image src="/logo.png" alt="Vision Coaching Institute" width={128} height={128} className="w-full h-full object-contain p-1" priority sizes="128px" />
+              <Image src="/logo.png" alt="Vision Coaching Institute Tulsipur — Expert Coaching CBSE ICSE UP Board" width={128} height={128} className="w-full h-full object-cover scale-[1.15]" priority sizes="128px" />
             </div>
             <div className="leading-tight">
               <div className="text-white font-heading font-bold text-base sm:text-lg tracking-wide">Vision Coaching</div>

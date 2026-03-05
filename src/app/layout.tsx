@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter, Noto_Sans_Devanagari } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import CustomCursor from "@/components/ui/CustomCursor";
 import HtmlLangSync from "@/components/ui/HtmlLangSync";
+
+// Set NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX in Vercel environment variables
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -147,6 +151,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        {/* ── Google Analytics 4 ── loads after page is interactive (strategy="afterInteractive") */}
+        {GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_ID}', {
+                  page_path: window.location.pathname,
+                });
+              `}
+            </Script>
+          </>
+        )}
         <LanguageProvider>
           <HtmlLangSync />
           <CustomCursor />
