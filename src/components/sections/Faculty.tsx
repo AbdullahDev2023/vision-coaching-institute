@@ -5,8 +5,8 @@ import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { fetchFaculty } from "@/lib/firestoreDb";
-import type { FacultyMember as FSMember } from "@/lib/firestoreDb";
+import { fetchFaculty } from "@/lib/supabaseDb";
+import type { FacultyMember as FSMember } from "@/lib/supabaseDb";
 
 type Member = { name: string; subject: string; qualification: string; exp: string; photo?: string };
 

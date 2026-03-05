@@ -1,12 +1,11 @@
 "use client";
-export const dynamic = "force-dynamic";
 import { useState, useEffect, useRef, useCallback } from "react";
 import {
   fetchGallery, fetchFaculty, uploadFile,
   saveGalleryDoc, saveFacultyDoc, deleteGalleryItem, deleteFacultyMember,
   updateFacultyDoc,
-} from "@/lib/supabaseDb";
-import type { GalleryItem, FacultyMember } from "@/lib/supabaseDb";
+} from "@/lib/firestoreDb";
+import type { GalleryItem, FacultyMember } from "@/lib/firestoreDb";
 
 const ADMIN_PIN = process.env.NEXT_PUBLIC_ADMIN_PIN ?? "vision2026";
 
@@ -130,7 +129,7 @@ function GalleryTab() {
 
         <button onClick={upload} disabled={uploading || !file}
           style={{ background: uploading || !file ? "rgba(212,160,23,0.3)" : "linear-gradient(135deg,#D4A017,#F0C842)", color: "#0A1F5C", fontWeight: 800, borderRadius: 10, padding: "12px 24px", border: "none", cursor: uploading || !file ? "not-allowed" : "pointer", fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
-          {uploading ? <><Spinner /> Uploading… {progress}%</> : "⬆️  Upload to Supabase"}
+          {uploading ? <><Spinner /> Uploading… {progress}%</> : "⬆️  Upload to Firebase"}
         </button>
       </div>
 
@@ -363,7 +362,7 @@ export default function AdminPage() {
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div>
             <div style={{ color: "#F0C842", fontWeight: 900, fontSize: 22 }}>🎓 Vision Coaching — Media Admin</div>
-            <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 13, marginTop: 4 }}>Upload gallery photos/videos and faculty images to Supabase</div>
+            <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 13, marginTop: 4 }}>Upload gallery photos/videos and faculty images to Firebase</div>
           </div>
           <a href="/" style={{ color: "rgba(255,255,255,0.4)", fontSize: 13, textDecoration: "none" }}>← Back to site</a>
         </div>
