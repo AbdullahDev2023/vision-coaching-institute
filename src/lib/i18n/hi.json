@@ -82,10 +82,10 @@
     "subtitle": "आपकी सफलता के लिए समर्पित अनुभवी शिक्षक",
     "photoSoon": "फ़ोटो जल्द आएगी",
     "members": [
-      { "name": "सतीश सर", "subject": "रसायन विज्ञान", "qualification": "M.Sc. रसायन, B.Ed", "exp": "10+ वर्ष", "photo": "/images/faculty/satish-sir-chemistry.jpeg" },
-      { "name": "फरहान सर", "subject": "जीव विज्ञान", "qualification": "M.Sc. जीव विज्ञान, B.Ed", "exp": "9+ वर्ष", "photo": "/images/faculty/farhan-sir-biology.jpeg" },
-      { "name": "यूसुफ सर", "subject": "भौतिकी", "qualification": "M.Sc. भौतिकी, B.Ed", "exp": "7+ वर्ष", "photo": "/images/faculty/yusuf-sir-physics.jpeg" },
-      { "name": "शिवम सर", "subject": "भौतिकी", "qualification": "M.Sc. भौतिकी, B.Ed", "exp": "8+ वर्ष", "photo": "/images/faculty/shivam-sir-physics.jpeg" }
+      { "name": "सतीश सर", "subject": "रसायन विज्ञान", "qualification": "M.Sc. रसायन, B.Ed", "exp": "8+ वर्ष", "photo": "/images/faculty/satish-sir-chemistry.jpeg" },
+      { "name": "फरहान सर", "subject": "जीव विज्ञान", "qualification": "M.Sc. जीव विज्ञान, B.Ed", "exp": "8+ वर्ष", "photo": "/images/faculty/farhan-sir-biology.jpeg" },
+      { "name": "यूसुफ सर", "subject": "भौतिकी", "qualification": "M.Sc. भौतिकी, B.Ed", "exp": "10+ वर्ष", "photo": "/images/faculty/yusuf-sir-physics.jpeg" },
+      { "name": "शिवम सर", "subject": "भौतिकी", "qualification": "BSc + BEd", "exp": "7+ वर्ष", "photo": "/images/faculty/shivam-sir-physics.jpeg" }
     ]
   },
   "results": {
@@ -171,7 +171,7 @@
       {
         "label": "सीनियर",
         "classes": "कक्षा 11 – 12",
-        "price": "₹1,800",
+        "price": "₹2,400",
         "color": "teal",
         "features": ["सभी 4 विषय", "छोटा बैच (अधिकतम 12)", "रोज़ डाउट सेशन", "साप्ताहिक टेस्ट + विश्लेषण", "बोर्ड परीक्षा मॉक टेस्ट", "व्यक्तिगत प्रदर्शन रिपोर्ट", "मुफ्त डेमो क्लास"]
       }

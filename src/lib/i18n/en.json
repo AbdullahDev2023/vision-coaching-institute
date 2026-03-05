@@ -82,10 +82,10 @@
     "subtitle": "Experienced educators dedicated to your success",
     "photoSoon": "Photo soon",
     "members": [
-      { "name": "Satish Sir", "subject": "Chemistry", "qualification": "M.Sc. Chemistry, B.Ed", "exp": "10+ Years", "photo": "/images/faculty/satish-sir-chemistry.jpeg" },
-      { "name": "Farhan Sir", "subject": "Biology", "qualification": "M.Sc. Biology, B.Ed", "exp": "9+ Years", "photo": "/images/faculty/farhan-sir-biology.jpeg" },
-      { "name": "Yusuf Sir", "subject": "Physics", "qualification": "M.Sc. Physics, B.Ed", "exp": "7+ Years", "photo": "/images/faculty/yusuf-sir-physics.jpeg" },
-      { "name": "Shivam Sir", "subject": "Physics", "qualification": "M.Sc. Physics, B.Ed", "exp": "8+ Years", "photo": "/images/faculty/shivam-sir-physics.jpeg" }
+      { "name": "Satish Sir", "subject": "Chemistry", "qualification": "M.Sc. Chemistry, B.Ed", "exp": "8+ Years", "photo": "/images/faculty/satish-sir-chemistry.jpeg" },
+      { "name": "Farhan Sir", "subject": "Biology", "qualification": "M.Sc. Biology, B.Ed", "exp": "8+ Years", "photo": "/images/faculty/farhan-sir-biology.jpeg" },
+      { "name": "Yusuf Sir", "subject": "Physics", "qualification": "M.Sc. Physics, B.Ed", "exp": "10+ Years", "photo": "/images/faculty/yusuf-sir-physics.jpeg" },
+      { "name": "Shivam Sir", "subject": "Physics", "qualification": "BSc + BEd", "exp": "7+ Years", "photo": "/images/faculty/shivam-sir-physics.jpeg" }
     ]
   },
   "results": {
@@ -172,7 +172,7 @@
       {
         "label": "Senior",
         "classes": "Class 11 – 12",
-        "price": "₹1,800",
+        "price": "₹2,400",
         "color": "teal",
         "features": ["All 4 subjects", "Small batch (max 12)", "Daily doubt sessions", "Weekly tests + analysis", "Board exam mock tests", "Individual performance report", "Free demo class"]
       }
