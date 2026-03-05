@@ -15,7 +15,7 @@ export default function LoadingScreen() {
     const tl = gsap.timeline({
       onComplete: () => {
         gsap.to(containerRef.current, {
-          opacity: 0, duration: 0.5, delay: 0.2,
+          opacity: 0, duration: 0.3, delay: 0.1,
           onComplete: () => setHidden(true),
         });
       },
@@ -23,18 +23,18 @@ export default function LoadingScreen() {
 
     tl.fromTo(logoRingRef.current,
       { scale: 0, opacity: 0, rotation: -180 },
-      { scale: 1, opacity: 1, rotation: 0, duration: 0.7, ease: "back.out(1.7)" }
+      { scale: 1, opacity: 1, rotation: 0, duration: 0.4, ease: "back.out(1.7)" }
     )
     .fromTo(logoTextRef.current,
       { opacity: 0, y: 15 },
-      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.2"
+      { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, "-=0.1"
     )
     .fromTo(taglineRef.current,
       { opacity: 0, y: 10 },
-      { opacity: 1, y: 0, duration: 0.4 }, "-=0.1"
+      { opacity: 1, y: 0, duration: 0.25 }, "-=0.05"
     )
     .to(barRef.current,
-      { width: "100%", duration: 1.2, ease: "power1.inOut" }, "-=0.1"
+      { width: "100%", duration: 0.5, ease: "power1.inOut" }, "-=0.05"
     );
   }, []);
 

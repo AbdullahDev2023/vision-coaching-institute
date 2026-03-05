@@ -2,9 +2,9 @@
 @config "../../tailwind.config.ts";
 
 :root {
-  --font-playfair:          'Playfair Display', serif;
-  --font-inter:             'Inter', sans-serif;
-  --font-noto-devanagari:   'Noto Sans Devanagari', sans-serif;
+  /* --font-playfair / --font-inter / --font-noto-devanagari are injected by
+     next/font via className on <html> — do NOT redefine them here or you will
+     override the optimised font stack and re-introduce render-blocking requests. */
   --primary:      #0A1F5C;
   --primary-light:#1A3A8F;
   --gold:         #D4A017;
