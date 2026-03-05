@@ -156,12 +156,12 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ── RIGHT column: Three.js canvas — desktop only ── */}
+        {/* ── RIGHT column: Three.js canvas — all screen sizes ── */}
         <div
           ref={canvasRef}
-          className="hidden lg:block relative w-full rounded-3xl overflow-hidden"
+          className="relative w-full rounded-3xl overflow-hidden"
           style={{
-            height: "520px",
+            height: "clamp(260px, 50vw, 520px)",
             background: "radial-gradient(ellipse at center, rgba(26,58,143,0.20) 0%, transparent 70%)",
           }}
         >
