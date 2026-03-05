@@ -180,27 +180,15 @@ export default function Gallery() {
     setFsLoaded(true);
   }, []);
 
+  useEffect(() => { loadFirebase(); }, [loadFirebase]);
+
   const items = allItems.filter(item =>
     filter === 0 ? true : filter === 1 ? item.type === "photo" : item.type === "video"
   );
   const n = items.length || 1;
 
-  // sectionRef must be declared before the IntersectionObserver effect
   const { index, dir, next, prev, goTo, onDragEnd, reset, sectionRef } =
     useCarousel(n, lightbox ? 0 : 4000);
-
-  // Only connect to Firestore once the gallery section is scrolled into view.
-  // This prevents 16+ Firestore channel connections on initial page load.
-  useEffect(() => {
-    const el = (sectionRef as React.RefObject<HTMLDivElement>).current;
-    if (!el) { loadFirebase(); return; }
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { observer.disconnect(); loadFirebase(); } },
-      { rootMargin: "200px" }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [loadFirebase, sectionRef]);
 
   const handleFilter = (i: number) => { setFilter(i); reset(); };
 

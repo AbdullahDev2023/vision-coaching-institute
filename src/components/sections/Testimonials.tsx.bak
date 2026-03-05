@@ -61,8 +61,7 @@ export function CarouselNav({
       <div className="flex gap-2 items-center">
         {Array.from({ length: total }).map((_, i) => (
           <button key={i} onClick={() => onGoTo(i)} aria-label={`Item ${i + 1}`}
-            className={`h-1.5 w-1.5 rounded-full transition-transform duration-300 origin-left ${i === index ? dotActive : dotIdle}`}
-            style={{ transform: i === index ? "scaleX(4)" : "scaleX(1)" }} />
+            className={`h-1.5 rounded-full transition-all duration-300 ${i === index ? `w-6 ${dotActive}` : `w-1.5 ${dotIdle}`}`} />
         ))}
       </div>
       <button onClick={onNext} aria-label="Next" className={`${btnBase} ${btnStyle}`}>›</button>
