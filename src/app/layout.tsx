@@ -6,8 +6,7 @@ import { LanguageProvider } from "@/lib/LanguageContext";
 import CustomCursor from "@/components/ui/CustomCursor";
 import HtmlLangSync from "@/components/ui/HtmlLangSync";
 
-// Set NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX in Vercel environment variables
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "G-FWQX2WWT41";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
