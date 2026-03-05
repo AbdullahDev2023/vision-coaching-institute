@@ -23,9 +23,9 @@ export default function CtaBanner() {
         style={{ gap: "var(--igap-sm)" }}>
 
         {/* Urgency pill */}
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider"
+        <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] font-bold uppercase tracking-wider"
           style={{ background: "rgba(239,68,68,0.15)", border: "1px solid rgba(239,68,68,0.35)", color: "#fca5a5" }}>
-          <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse flex-shrink-0" />
+          <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse flex-shrink-0" />
           2026–27 Admissions — Only 8 seats left
         </span>
 

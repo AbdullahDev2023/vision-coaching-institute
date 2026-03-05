@@ -23,6 +23,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     // ── Named section anchors (required by the brief) ─────────────
     {
+      url: `${SITE_URL}/#fees`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/#faq`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${SITE_URL}/#about`,
       lastModified: now,
       changeFrequency: "monthly",
@@ -70,6 +82,50 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.7,
+    },
+
+    // ── Phase 5 content / landing pages ───────────────────────────
+    {
+      url: `${SITE_URL}/cbse-coaching-tulsipur`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.95,
+    },
+    {
+      url: `${SITE_URL}/up-board-coaching-tulsipur`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.95,
+    },
+    {
+      url: `${SITE_URL}/class-10-science-coaching`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/class-12-pcb-coaching`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/results`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/blog/how-to-prepare-cbse-board-exam`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/blog/top-scoring-students-tulsipur`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.8,
     },
   ];
 }

@@ -56,7 +56,7 @@ function TierCard({
   return (
     <motion.div
       onClick={onSelect}
-      className="relative rounded-2xl p-6 sm:p-7 cursor-pointer overflow-hidden border transition-all duration-300 h-full"
+      className="relative rounded-2xl p-7 sm:p-8 cursor-pointer overflow-hidden border transition-all duration-300 h-full"
       style={{
         background:   selected ? m.bg   : "rgba(13,27,75,0.7)",
         borderColor:  selected ? m.ring : "rgba(255,255,255,0.07)",
@@ -180,7 +180,7 @@ function LeadForm({ selectedTier, whatsapp, fc }: {
       }}>
 
       {/* Header */}
-      <div className="px-6 py-5 border-b"
+      <div className="px-6 sm:px-8 py-5 border-b"
         style={{ borderColor: activeMeta ? `${activeMeta.ring}25` : "rgba(255,255,255,0.07)", background: "rgba(212,160,23,0.04)" }}>
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
@@ -204,7 +204,7 @@ function LeadForm({ selectedTier, whatsapp, fc }: {
           <motion.div
             initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }}
-            className="px-6 pt-5 overflow-hidden">
+            className="px-6 sm:px-8 pt-5 overflow-hidden">
             <div className="flex flex-wrap gap-2">
               {selectedTier.features.slice(0, 3).map((f: string) => (
                 <span key={f} className="badge-xs"
@@ -223,7 +223,7 @@ function LeadForm({ selectedTier, whatsapp, fc }: {
       </AnimatePresence>
 
       {/* Form body */}
-      <form onSubmit={submit} className="px-6 py-6 item-gap">
+      <form onSubmit={submit} className="px-6 sm:px-8 py-7 item-gap">
         <div>
           <input
             type="text" required value={name} onChange={e => { setName(e.target.value); setErrors(p => ({ ...p, name: undefined })); }}
@@ -258,7 +258,7 @@ function LeadForm({ selectedTier, whatsapp, fc }: {
       </form>
 
       {/* Trust strip */}
-      <div className="grid grid-cols-3 px-6 pb-6" style={{ gap: "var(--igap-sm)" }}>
+      <div className="grid grid-cols-3 px-6 sm:px-8 pb-7" style={{ gap: "var(--igap-sm)" }}>
         {[
           { icon: "🔒", label: "100% Private" },
           { icon: "⚡", label: "2-hr Response" },
@@ -321,9 +321,9 @@ export default function FeeCard() {
 
         {/* Urgency pill */}
         <div className="flex justify-center gsap-reveal">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold"
+          <span className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-sm font-bold min-h-[46px]"
             style={{ background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.30)", color: "#fca5a5" }}>
-            <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse flex-shrink-0" />
+            <span className="w-2.5 h-2.5 rounded-full bg-red-400 animate-pulse flex-shrink-0" />
             {fc.seatsLeft}
           </span>
         </div>
@@ -340,7 +340,7 @@ export default function FeeCard() {
             `}</style>
             <div
               className="fee-scroll flex md:hidden gap-4 overflow-x-auto snap-x snap-mandatory pb-3"
-              style={{ WebkitOverflowScrolling: "touch" }}
+              style={{ WebkitOverflowScrolling: "touch", paddingLeft: "1.5rem", paddingRight: "1.5rem" }}
               onScroll={e => {
                 const el = e.currentTarget;
                 const idx = Math.round(el.scrollLeft / (el.scrollWidth / fc.tiers.length));

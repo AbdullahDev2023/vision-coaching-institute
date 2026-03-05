@@ -82,7 +82,7 @@ function EnquiryForm({ tf, whatsapp }: EnquiryFormProps) {
     <div className="rounded-2xl border border-gold/18 overflow-hidden"
       style={{ background: "linear-gradient(160deg, #0D1B4B 0%, #091540 100%)" }}>
       {/* Header stripe */}
-      <div className="px-6 py-5 border-b border-white/8"
+      <div className="px-6 sm:px-8 py-5 border-b border-white/8"
         style={{ background: "linear-gradient(90deg, rgba(212,160,23,0.08), transparent)" }}>
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg bg-gold/15 border border-gold/30 flex items-center justify-center text-lg flex-shrink-0">
@@ -97,7 +97,7 @@ function EnquiryForm({ tf, whatsapp }: EnquiryFormProps) {
       
 
       {/* Form body */}
-      <form onSubmit={submit} className="px-6 py-6 item-gap">
+      <form onSubmit={submit} className="px-6 sm:px-8 py-7 item-gap">
         {/* Name */}
         <div>
           <input

@@ -53,7 +53,7 @@ export default function Courses() {
             const isBsc   = board.name === "BSc";
             return (
               <motion.div key={board.name}
-                className={`gsap-reveal relative rounded-2xl p-5 sm:p-6 cursor-pointer overflow-hidden border transition-all duration-300${isBsc ? " sm:col-span-2 lg:col-span-1" : ""}`}
+                className={`gsap-reveal relative rounded-2xl p-6 sm:p-7 cursor-pointer overflow-hidden border transition-all duration-300${isBsc ? " sm:col-span-2 lg:col-span-1" : ""}`}
                 style={{
                   background: isActive ? meta.bg : "rgba(13,27,75,0.7)",
                   borderColor: isActive ? meta.border : "rgba(255,255,255,0.07)",

@@ -1,388 +1,260 @@
 "use client";
-export const dynamic = "force-dynamic";
-import { useState, useEffect, useRef, useCallback } from "react";
-import {
-  fetchGallery, fetchFaculty, uploadFile,
-  saveGalleryDoc, saveFacultyDoc, deleteGalleryItem, deleteFacultyMember,
-  updateFacultyDoc,
-} from "@/lib/supabaseDb";
-import type { GalleryItem, FacultyMember } from "@/lib/supabaseDb";
+import { useState } from "react";
+import Image from "next/image";
 
-const ADMIN_PIN = process.env.NEXT_PUBLIC_ADMIN_PIN ?? "vision2026";
+/* ─── Types ─────────────────────────────────────────────── */
+type SiteConfig = {
+  social: { facebook: string; instagram: string; youtube: string };
+  seo:    { aggregateRating: { ratingValue: string; reviewCount: string } };
+};
 
-/* ── tiny helpers ── */
-function Spinner() {
-  return <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />;
-}
-function Badge({ children, color = "#D4A017" }: { children: React.ReactNode; color?: string }) {
-  return (
-    <span style={{ background: `${color}22`, border: `1px solid ${color}55`, color, borderRadius: 9999, padding: "2px 10px", fontSize: 11, fontWeight: 700 }}>
-      {children}
-    </span>
-  );
-}
+type Msg = { type: "success" | "error"; text: string };
 
-/* ════════════════════════════════════════════════════════════════════
-   GALLERY UPLOAD TAB
-══════════════════════════════════════════════════════════════════════ */
-function GalleryTab() {
-  const [items,    setItems]    = useState<GalleryItem[]>([]);
-  const [loading,  setLoading]  = useState(true);
-  const [uploading,setUploading]= useState(false);
-  const [progress, setProgress] = useState(0);
-  const [label,    setLabel]    = useState("");
-  const [type,     setType]     = useState<"photo"|"video">("photo");
-  const [file,     setFile]     = useState<File|null>(null);
-  const [dragOver, setDragOver] = useState(false);
-  const [error,    setError]    = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
+/* ─── Shared input style ─────────────────────────────────── */
+const inputCls =
+  "w-full rounded-xl px-4 py-3 text-sm text-white/85 bg-white/5 " +
+  "border border-white/12 outline-none transition-all duration-200 " +
+  "focus:border-[#D4A017] focus:ring-2 focus:ring-[#D4A017]/20 " +
+  "placeholder-white/25 font-normal";
 
-  const load = useCallback(async () => {
-    setLoading(true);
-    try { setItems(await fetchGallery()); } catch { setError("Failed to load gallery."); }
-    setLoading(false);
-  }, []);
+/* ─── Password Gate ──────────────────────────────────────── */
+function PasswordGate({ onAuth }: { onAuth: (pw: string, cfg: SiteConfig) => void }) {
+  const [pw,  setPw]  = useState("");
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => { load(); }, [load]);
-
-  const handleFile = (f: File) => {
-    setFile(f);
-    setType(f.type.startsWith("video") ? "video" : "photo");
-    if (!label) setLabel(f.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " "));
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault(); setDragOver(false);
-    const f = e.dataTransfer.files[0];
-    if (f) handleFile(f);
-  };
-
-  const upload = async () => {
-    if (!file || !label.trim()) { setError("Please pick a file and enter a label."); return; }
-    setError(""); setUploading(true); setProgress(0);
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!pw.trim()) return;
+    setLoading(true); setErr("");
     try {
-      const ext  = file.name.split(".").pop();
-      const path = `gallery/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-      const url  = await uploadFile(path, file, setProgress);
-      const order = items.length;
-      await saveGalleryDoc({ type, label: label.trim(), url, storagePath: path, order });
-      setFile(null); setLabel(""); setProgress(0);
-      await load();
-    } catch (e) { setError(String(e)); }
-    setUploading(false);
-  };
-
-  const remove = async (item: GalleryItem) => {
-    if (!confirm(`Delete "${item.label}"?`)) return;
-    await deleteGalleryItem(item);
-    setItems(p => p.filter(x => x.id !== item.id));
+      const res  = await fetch(`/api/admin/config?pw=${encodeURIComponent(pw)}`);
+      const data = await res.json();
+      if (data.success) { onAuth(pw, data.config as SiteConfig); }
+      else              { setErr(data.error ?? "Invalid password."); }
+    } catch { setErr("Connection error. Is the dev server running?"); }
+    setLoading(false);
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-      {/* Upload zone */}
-      <div style={{ background: "#0D1B4B", border: "1px solid rgba(212,160,23,0.2)", borderRadius: 16, padding: 24, display: "flex", flexDirection: "column", gap: 16 }}>
-        <div style={{ color: "#F0C842", fontWeight: 700, fontSize: 14, letterSpacing: "0.1em", textTransform: "uppercase" }}>Upload New Media</div>
-
-        {/* Drop zone */}
-        <div
-          onDragOver={e => { e.preventDefault(); setDragOver(true); }}
-          onDragLeave={() => setDragOver(false)}
-          onDrop={handleDrop}
-          onClick={() => inputRef.current?.click()}
-          style={{
-            border: `2px dashed ${dragOver ? "#D4A017" : "rgba(255,255,255,0.15)"}`,
-            borderRadius: 12, padding: "32px 24px", textAlign: "center", cursor: "pointer",
-            background: dragOver ? "rgba(212,160,23,0.06)" : "rgba(255,255,255,0.02)",
-            transition: "all 0.2s",
-          }}>
-          <div style={{ fontSize: 32, marginBottom: 8 }}>{file ? "✅" : "📁"}</div>
-          <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 14 }}>
-            {file ? file.name : "Drag & drop photo / video — or click to browse"}
+    <div style={{ minHeight: "100vh", background: "#050D1F", display: "flex", alignItems: "center", justifyContent: "center", padding: "1.5rem" }}>
+      <div style={{ width: "100%", maxWidth: "400px" }}>
+        {/* Logo */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "2rem" }}>
+          <div style={{ width: "72px", height: "72px", borderRadius: "50%", overflow: "hidden", border: "2px solid rgba(212,160,23,0.4)", marginBottom: "0.75rem" }}>
+            <Image src="/logo.png" alt="VCI" width={72} height={72} style={{ width: "100%", height: "100%", objectFit: "cover", transform: "scale(1.15)" }} />
           </div>
-          {file && <div style={{ color: "rgba(255,255,255,0.35)", fontSize: 12, marginTop: 4 }}>{(file.size / 1024 / 1024).toFixed(1)} MB</div>}
-          <input ref={inputRef} type="file" accept="image/*,video/*" style={{ display: "none" }}
-            onChange={e => e.target.files?.[0] && handleFile(e.target.files[0])} />
+          <h1 style={{ color: "#D4A017", fontWeight: 800, fontSize: "1.3rem", letterSpacing: "0.06em", textAlign: "center" }}>ADMIN PANEL</h1>
+          <p style={{ color: "rgba(255,255,255,0.35)", fontSize: "0.8rem", marginTop: "0.25rem" }}>Vision Coaching Institute · Tulsipur</p>
         </div>
 
-        {/* Label + type */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 12 }}>
+        {/* Card */}
+        <form onSubmit={submit} style={{ background: "rgba(13,27,75,0.8)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "1.25rem", padding: "2rem", backdropFilter: "blur(12px)" }}>
+          <label style={{ display: "block", color: "rgba(255,255,255,0.5)", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.5rem" }}>
+            Admin Password
+          </label>
           <input
-            value={label} onChange={e => setLabel(e.target.value)}
-            placeholder="Caption / label (e.g. Chemistry class 2025)"
-            style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 10, padding: "10px 14px", color: "white", fontSize: 14, outline: "none" }}
+            type="password" value={pw}
+            onChange={e => { setPw(e.target.value); setErr(""); }}
+            placeholder="Enter password…"
+            className={inputCls}
+            autoFocus
           />
-          <select value={type} onChange={e => setType(e.target.value as "photo"|"video")}
-            style={{ background: "#0A1F5C", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 10, padding: "10px 14px", color: "white", fontSize: 13, cursor: "pointer" }}>
-            <option value="photo">📷 Photo</option>
-            <option value="video">🎥 Video</option>
-          </select>
-        </div>
-
-        {/* Progress */}
-        {uploading && (
-          <div style={{ background: "rgba(255,255,255,0.06)", borderRadius: 99, height: 8, overflow: "hidden" }}>
-            <div style={{ width: `${progress}%`, height: "100%", background: "linear-gradient(90deg,#D4A017,#F0C842)", borderRadius: 99, transition: "width 0.3s" }} />
-          </div>
-        )}
-
-        {error && <div style={{ color: "#f87171", fontSize: 13 }}>{error}</div>}
-
-        <button onClick={upload} disabled={uploading || !file}
-          style={{ background: uploading || !file ? "rgba(212,160,23,0.3)" : "linear-gradient(135deg,#D4A017,#F0C842)", color: "#0A1F5C", fontWeight: 800, borderRadius: 10, padding: "12px 24px", border: "none", cursor: uploading || !file ? "not-allowed" : "pointer", fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
-          {uploading ? <><Spinner /> Uploading… {progress}%</> : "⬆️  Upload to Supabase"}
-        </button>
-      </div>
-
-      {/* Existing items */}
-      <div style={{ background: "#0D1B4B", border: "1px solid rgba(212,160,23,0.15)", borderRadius: 16, padding: 24 }}>
-        <div style={{ color: "#F0C842", fontWeight: 700, fontSize: 14, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16 }}>
-          Live Gallery ({items.length} items)
-        </div>
-        {loading ? (
-          <div style={{ display: "flex", justifyContent: "center", padding: 32 }}><Spinner /></div>
-        ) : items.length === 0 ? (
-          <div style={{ color: "rgba(255,255,255,0.35)", textAlign: "center", padding: 32 }}>No items yet — upload your first media above.</div>
-        ) : (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 12 }}>
-            {items.map(item => (
-              <div key={item.id} style={{ background: "rgba(255,255,255,0.04)", borderRadius: 12, overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)" }}>
-                <div style={{ aspectRatio: "16/9", background: "#050D1F", position: "relative", overflow: "hidden" }}>
-                  {item.type === "photo"
-                    ? <img src={item.url} alt={item.label} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                    : <video src={item.url} style={{ width: "100%", height: "100%", objectFit: "cover" }} muted />
-                  }
-                </div>
-                <div style={{ padding: "10px 12px", display: "flex", flexDirection: "column", gap: 6 }}>
-                  <div style={{ color: "rgba(255,255,255,0.8)", fontSize: 12, fontWeight: 600, lineHeight: 1.3 }}>{item.label}</div>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                    <Badge color={item.type === "video" ? "#ef4444" : "#4488ff"}>{item.type.toUpperCase()}</Badge>
-                    <button onClick={() => remove(item)} style={{ background: "rgba(239,68,68,0.15)", border: "1px solid rgba(239,68,68,0.35)", color: "#f87171", borderRadius: 6, padding: "3px 8px", fontSize: 11, cursor: "pointer", fontWeight: 700 }}>
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-/* ════════════════════════════════════════════════════════════════════
-   FACULTY UPLOAD TAB
-══════════════════════════════════════════════════════════════════════ */
-const BLANK = { name: "", subject: "", qualification: "", exp: "" };
-
-function FacultyTab() {
-  const [members,  setMembers]  = useState<FacultyMember[]>([]);
-  const [loading,  setLoading]  = useState(true);
-  const [uploading,setUploading]= useState(false);
-  const [progress, setProgress] = useState(0);
-  const [form,     setForm]     = useState(BLANK);
-  const [file,     setFile]     = useState<File|null>(null);
-  const [preview,  setPreview]  = useState("");
-  const [dragOver, setDragOver] = useState(false);
-  const [error,    setError]    = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const load = useCallback(async () => {
-    setLoading(true);
-    try { setMembers(await fetchFaculty()); } catch { setError("Failed to load faculty."); }
-    setLoading(false);
-  }, []);
-
-  useEffect(() => { load(); }, [load]);
-
-  const handleFile = (f: File) => {
-    setFile(f);
-    setPreview(URL.createObjectURL(f));
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault(); setDragOver(false);
-    const f = e.dataTransfer.files[0];
-    if (f) handleFile(f);
-  };
-
-  const upload = async () => {
-    if (!file || !form.name.trim() || !form.subject.trim()) {
-      setError("Name, subject, and photo are required."); return;
-    }
-    setError(""); setUploading(true); setProgress(0);
-    try {
-      const ext  = file.name.split(".").pop();
-      const path = `faculty/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-      const photoUrl = await uploadFile(path, file, setProgress);
-      await saveFacultyDoc({ ...form, photoUrl, storagePath: path, order: members.length });
-      setForm(BLANK); setFile(null); setPreview(""); setProgress(0);
-      await load();
-    } catch (e) { setError(String(e)); }
-    setUploading(false);
-  };
-
-  const remove = async (m: FacultyMember) => {
-    if (!confirm(`Delete ${m.name}?`)) return;
-    await deleteFacultyMember(m);
-    setMembers(p => p.filter(x => x.id !== m.id));
-  };
-
-  const field = (key: keyof typeof BLANK, placeholder: string) => (
-    <input
-      value={form[key]} onChange={e => setForm(p => ({ ...p, [key]: e.target.value }))}
-      placeholder={placeholder}
-      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 10, padding: "10px 14px", color: "white", fontSize: 14, outline: "none", width: "100%", boxSizing: "border-box" as const }}
-    />
-  );
-
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-      {/* Upload form */}
-      <div style={{ background: "#0D1B4B", border: "1px solid rgba(212,160,23,0.2)", borderRadius: 16, padding: 24, display: "flex", flexDirection: "column", gap: 16 }}>
-        <div style={{ color: "#F0C842", fontWeight: 700, fontSize: 14, letterSpacing: "0.1em", textTransform: "uppercase" }}>Add / Update Faculty Member</div>
-
-        {/* Photo drop zone */}
-        <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
-          <div
-            onDragOver={e => { e.preventDefault(); setDragOver(true); }}
-            onDragLeave={() => setDragOver(false)}
-            onDrop={handleDrop}
-            onClick={() => inputRef.current?.click()}
+          {err && (
+            <p style={{ marginTop: "0.5rem", color: "#fca5a5", fontSize: "0.8rem" }}>{err}</p>
+          )}
+          <button
+            type="submit" disabled={loading || !pw.trim()}
             style={{
-              width: 100, height: 100, borderRadius: "50%", border: `2px dashed ${dragOver ? "#D4A017" : "rgba(255,255,255,0.2)"}`,
-              display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
-              overflow: "hidden", flexShrink: 0, background: "rgba(255,255,255,0.03)",
+              width: "100%", marginTop: "1.25rem", padding: "0.875rem",
+              background: loading ? "rgba(212,160,23,0.5)" : "linear-gradient(135deg,#D4A017,#F0C842)",
+              color: "#0A1F5C", fontWeight: 800, fontSize: "0.9rem",
+              borderRadius: "0.75rem", border: "none", cursor: loading ? "wait" : "pointer",
+              letterSpacing: "0.04em", transition: "opacity 0.2s",
             }}>
-            {preview
-              ? <img src={preview} alt="preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-              : <div style={{ textAlign: "center", color: "rgba(255,255,255,0.4)", fontSize: 11 }}>📷<br />Photo</div>
-            }
-            <input ref={inputRef} type="file" accept="image/*" style={{ display: "none" }}
-              onChange={e => e.target.files?.[0] && handleFile(e.target.files[0])} />
-          </div>
-
-          <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 10 }}>
-            {field("name", "Full name (e.g. Satish Sir)")}
-            {field("subject", "Subject (e.g. Chemistry)")}
-          </div>
-        </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-          {field("qualification", "Qualification (e.g. M.Sc. Chemistry, B.Ed)")}
-          {field("exp", "Experience (e.g. 8+ Years)")}
-        </div>
-
-        {uploading && (
-          <div style={{ background: "rgba(255,255,255,0.06)", borderRadius: 99, height: 8, overflow: "hidden" }}>
-            <div style={{ width: `${progress}%`, height: "100%", background: "linear-gradient(90deg,#D4A017,#F0C842)", borderRadius: 99, transition: "width 0.3s" }} />
-          </div>
-        )}
-
-        {error && <div style={{ color: "#f87171", fontSize: 13 }}>{error}</div>}
-
-        <button onClick={upload} disabled={uploading || !file || !form.name.trim()}
-          style={{ background: uploading || !file ? "rgba(212,160,23,0.3)" : "linear-gradient(135deg,#D4A017,#F0C842)", color: "#0A1F5C", fontWeight: 800, borderRadius: 10, padding: "12px 24px", border: "none", cursor: uploading ? "not-allowed" : "pointer", fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
-          {uploading ? <><Spinner /> Uploading… {progress}%</> : "⬆️  Save Faculty Member"}
-        </button>
-      </div>
-
-      {/* Existing members */}
-      <div style={{ background: "#0D1B4B", border: "1px solid rgba(212,160,23,0.15)", borderRadius: 16, padding: 24 }}>
-        <div style={{ color: "#F0C842", fontWeight: 700, fontSize: 14, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16 }}>
-          Current Faculty ({members.length})
-        </div>
-        {loading ? (
-          <div style={{ display: "flex", justifyContent: "center", padding: 32 }}><Spinner /></div>
-        ) : members.length === 0 ? (
-          <div style={{ color: "rgba(255,255,255,0.35)", textAlign: "center", padding: 32 }}>No faculty members added yet.</div>
-        ) : (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 12 }}>
-            {members.map(m => (
-              <div key={m.id} style={{ background: "rgba(255,255,255,0.04)", borderRadius: 12, padding: 16, border: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, textAlign: "center" }}>
-                {m.photoUrl
-                  ? <img src={m.photoUrl} alt={m.name} style={{ width: 72, height: 72, borderRadius: "50%", objectFit: "cover", border: "2px solid rgba(212,160,23,0.4)" }} />
-                  : <div style={{ width: 72, height: 72, borderRadius: "50%", background: "#0A1F5C", display: "flex", alignItems: "center", justifyContent: "center", color: "#D4A017", fontWeight: 700, fontSize: 20 }}>{m.name[0]}</div>
-                }
-                <div style={{ color: "white", fontWeight: 700, fontSize: 13 }}>{m.name}</div>
-                <Badge>{m.subject}</Badge>
-                <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 11 }}>{m.qualification}</div>
-                <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 11 }}>{m.exp}</div>
-                <button onClick={() => remove(m)} style={{ background: "rgba(239,68,68,0.15)", border: "1px solid rgba(239,68,68,0.35)", color: "#f87171", borderRadius: 6, padding: "4px 10px", fontSize: 11, cursor: "pointer", fontWeight: 700 }}>
-                  Delete
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
+            {loading ? "Verifying…" : "🔓 Login"}
+          </button>
+        </form>
+        <p style={{ textAlign: "center", color: "rgba(255,255,255,0.2)", fontSize: "0.72rem", marginTop: "1rem" }}>
+          Default password: <code style={{ color: "rgba(212,160,23,0.5)" }}>vci@admin2026</code><br />
+          Override via <code style={{ color: "rgba(212,160,23,0.5)" }}>ADMIN_PASSWORD</code> env var.
+        </p>
       </div>
     </div>
   );
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   ADMIN PAGE
-══════════════════════════════════════════════════════════════════════ */
-export default function AdminPage() {
-  const [pin,       setPin]       = useState("");
-  const [authed,    setAuthed]    = useState(false);
-  const [pinError,  setPinError]  = useState(false);
-  const [tab,       setTab]       = useState<"gallery"|"faculty">("gallery");
-
-  const tryLogin = () => {
-    if (pin === ADMIN_PIN) { setAuthed(true); setPinError(false); }
-    else { setPinError(true); setPin(""); }
-  };
-
-  if (!authed) return (
-    <div style={{ minHeight: "100vh", background: "#050D1F", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "system-ui,sans-serif" }}>
-      <div style={{ background: "#0D1B4B", border: "1px solid rgba(212,160,23,0.25)", borderRadius: 20, padding: 40, width: 360, display: "flex", flexDirection: "column", gap: 20, alignItems: "center" }}>
-        <div style={{ fontSize: 40 }}>🔐</div>
-        <div style={{ color: "#F0C842", fontWeight: 900, fontSize: 20 }}>Admin Access</div>
-        <div style={{ color: "rgba(255,255,255,0.45)", fontSize: 13, textAlign: "center" }}>Vision Coaching Institute — Media Manager</div>
-        <input
-          type="password" value={pin} onChange={e => setPin(e.target.value)}
-          onKeyDown={e => e.key === "Enter" && tryLogin()}
-          placeholder="Enter admin PIN"
-          style={{ width: "100%", boxSizing: "border-box" as const, background: "rgba(255,255,255,0.06)", border: `1px solid ${pinError ? "#ef4444" : "rgba(255,255,255,0.15)"}`, borderRadius: 12, padding: "14px 18px", color: "white", fontSize: 18, outline: "none", textAlign: "center", letterSpacing: "0.3em" }}
-        />
-        {pinError && <div style={{ color: "#f87171", fontSize: 13 }}>Incorrect PIN. Try again.</div>}
-        <button onClick={tryLogin} style={{ background: "linear-gradient(135deg,#D4A017,#F0C842)", color: "#0A1F5C", fontWeight: 800, borderRadius: 12, padding: "14px 40px", border: "none", cursor: "pointer", fontSize: 15, width: "100%" }}>
-          Enter
-        </button>
-      </div>
+/* ─── Section Card wrapper ───────────────────────────────── */
+function Card({ title, icon, children }: { title: string; icon: string; children: React.ReactNode }) {
+  return (
+    <div style={{ background: "rgba(13,27,75,0.7)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "1.25rem", padding: "1.75rem", marginBottom: "1.25rem" }}>
+      <h2 style={{ color: "#D4A017", fontWeight: 800, fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1.25rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <span>{icon}</span>{title}
+      </h2>
+      {children}
     </div>
   );
+}
+
+/* ─── Field ─────────────────────────────────────────────── */
+function Field({ label, hint, value, onChange, placeholder, type = "url" }: {
+  label: string; hint?: string; value: string;
+  onChange: (v: string) => void; placeholder: string; type?: string;
+}) {
+  return (
+    <div style={{ marginBottom: "1rem" }}>
+      <label style={{ display: "block", color: "rgba(255,255,255,0.5)", fontSize: "0.72rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.09em", marginBottom: "0.4rem" }}>
+        {label}
+      </label>
+      <input
+        type={type} value={value}
+        onChange={e => onChange(e.target.value)}
+        placeholder={placeholder}
+        className={inputCls}
+        style={{ width: "100%", boxSizing: "border-box" }}
+      />
+      {hint && <p style={{ color: "rgba(255,255,255,0.25)", fontSize: "0.7rem", marginTop: "0.3rem" }}>{hint}</p>}
+    </div>
+  );
+}
+
+/* ─── Dashboard ──────────────────────────────────────────── */
+function Dashboard({ password, initialConfig, onLogout }: {
+  password: string; initialConfig: SiteConfig; onLogout: () => void;
+}) {
+  const [cfg,  setCfg]  = useState<SiteConfig>(initialConfig);
+  const [msg,  setMsg]  = useState<Msg | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  const setSocial = (key: keyof SiteConfig["social"], val: string) =>
+    setCfg(c => ({ ...c, social: { ...c.social, [key]: val } }));
+  const setRating = (key: keyof SiteConfig["seo"]["aggregateRating"], val: string) =>
+    setCfg(c => ({ ...c, seo: { aggregateRating: { ...c.seo.aggregateRating, [key]: val } } }));
+
+  const save = async () => {
+    setBusy(true); setMsg(null);
+    try {
+      const res  = await fetch("/api/admin/config", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password, ...cfg }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setCfg(data.config);
+        setMsg({ type: "success", text: "✅ Saved to site-config.json! Commit + redeploy to go live." });
+      } else {
+        setMsg({ type: "error", text: data.error ?? "Save failed." });
+      }
+    } catch { setMsg({ type: "error", text: "Connection error." }); }
+    setBusy(false);
+  };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#050D1F", fontFamily: "system-ui,sans-serif", padding: "32px 20px" }}>
-      <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", flexDirection: "column", gap: 28 }}>
+    <div style={{ minHeight: "100vh", background: "#050D1F", padding: "2rem 1.5rem" }}>
+      <div style={{ maxWidth: "680px", margin: "0 auto" }}>
 
         {/* Header */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div>
-            <div style={{ color: "#F0C842", fontWeight: 900, fontSize: 22 }}>🎓 Vision Coaching — Media Admin</div>
-            <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 13, marginTop: 4 }}>Upload gallery photos/videos and faculty images to Supabase</div>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "2rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <div style={{ width: "44px", height: "44px", borderRadius: "50%", overflow: "hidden", border: "2px solid rgba(212,160,23,0.4)", flexShrink: 0 }}>
+              <Image src="/logo.png" alt="VCI" width={44} height={44} style={{ width: "100%", height: "100%", objectFit: "cover", transform: "scale(1.15)" }} />
+            </div>
+            <div>
+              <h1 style={{ color: "#fff", fontWeight: 800, fontSize: "1.05rem", lineHeight: 1.2 }}>Vision Coaching Institute</h1>
+              <p style={{ color: "#D4A017", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }}>Admin Panel</p>
+            </div>
           </div>
-          <a href="/" style={{ color: "rgba(255,255,255,0.4)", fontSize: 13, textDecoration: "none" }}>← Back to site</a>
+          <button onClick={onLogout}
+            style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.5)", borderRadius: "0.625rem", padding: "0.5rem 1rem", fontSize: "0.78rem", cursor: "pointer", transition: "all 0.2s" }}>
+            Logout
+          </button>
         </div>
 
-        {/* Tabs */}
-        <div style={{ display: "flex", gap: 8, background: "rgba(255,255,255,0.04)", borderRadius: 12, padding: 4, width: "fit-content" }}>
-          {(["gallery", "faculty"] as const).map(t => (
-            <button key={t} onClick={() => setTab(t)}
-              style={{ padding: "10px 24px", borderRadius: 9, border: "none", cursor: "pointer", fontWeight: 700, fontSize: 14, transition: "all 0.2s",
-                background: tab === t ? "linear-gradient(135deg,#D4A017,#F0C842)" : "transparent",
-                color:      tab === t ? "#0A1F5C" : "rgba(255,255,255,0.5)",
-              }}>
-              {t === "gallery" ? "🖼️  Gallery" : "👩‍🏫  Faculty"}
-            </button>
-          ))}
+        {/* Info banner */}
+        <div style={{ background: "rgba(212,160,23,0.08)", border: "1px solid rgba(212,160,23,0.2)", borderRadius: "0.875rem", padding: "0.875rem 1.25rem", marginBottom: "1.5rem", fontSize: "0.8rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.6 }}>
+          <strong style={{ color: "#D4A017" }}>How it works:</strong> Changes save to <code style={{ color: "#F0C842" }}>src/lib/site-config.json</code>.
+          The SEO schema and footer social icons update after you <strong style={{ color: "rgba(255,255,255,0.7)" }}>commit &amp; redeploy</strong> to Vercel.
         </div>
 
-        {tab === "gallery" ? <GalleryTab /> : <FacultyTab />}
+        {/* ── Social Media ── */}
+        <Card title="Social Media Links" icon="🌐">
+          <Field label="Facebook Page URL" hint="e.g. https://www.facebook.com/VisionCoachingTulsipur"
+            value={cfg.social.facebook} onChange={v => setSocial("facebook", v)}
+            placeholder="https://www.facebook.com/yourpage" />
+          <Field label="Instagram Profile URL" hint="e.g. https://www.instagram.com/vciTulsipur"
+            value={cfg.social.instagram} onChange={v => setSocial("instagram", v)}
+            placeholder="https://www.instagram.com/yourprofile" />
+          <Field label="YouTube Channel URL" hint="e.g. https://www.youtube.com/@VisionCoachingTulsipur"
+            value={cfg.social.youtube} onChange={v => setSocial("youtube", v)}
+            placeholder="https://www.youtube.com/@yourchannel" />
+          <p style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.72rem", marginTop: "0.5rem" }}>
+            ℹ️ Social URLs are added to the JSON-LD <code>sameAs</code> field (helps Google verify your entity) and shown as icons in the website footer.
+          </p>
+        </Card>
+
+        {/* ── SEO / Ratings ── */}
+        <Card title="Google Rating (JSON-LD)" icon="⭐">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+            <Field label="Rating Value" hint="e.g. 4.9 (out of 5)"
+              value={cfg.seo.aggregateRating.ratingValue}
+              onChange={v => setRating("ratingValue", v)}
+              placeholder="4.9" type="text" />
+            <Field label="Review Count" hint="Total number of Google reviews"
+              value={cfg.seo.aggregateRating.reviewCount}
+              onChange={v => setRating("reviewCount", v)}
+              placeholder="47" type="text" />
+          </div>
+          <p style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.72rem", marginTop: "0.5rem" }}>
+            ℹ️ These display as ⭐ gold stars directly in Google search results. Update whenever your review count changes.
+          </p>
+        </Card>
+
+        {/* ── Save ── */}
+        {msg && (
+          <div style={{
+            padding: "0.875rem 1.25rem", borderRadius: "0.875rem", marginBottom: "1rem", fontSize: "0.83rem",
+            background: msg.type === "success" ? "rgba(34,197,94,0.1)"  : "rgba(239,68,68,0.1)",
+            border:     msg.type === "success" ? "1px solid rgba(34,197,94,0.3)" : "1px solid rgba(239,68,68,0.3)",
+            color:      msg.type === "success" ? "#86efac" : "#fca5a5",
+          }}>
+            {msg.text}
+          </div>
+        )}
+
+        <button onClick={save} disabled={busy}
+          style={{
+            width: "100%", padding: "1rem", borderRadius: "0.875rem", border: "none",
+            background: busy ? "rgba(212,160,23,0.4)" : "linear-gradient(135deg,#D4A017,#F0C842)",
+            color: "#0A1F5C", fontWeight: 800, fontSize: "0.95rem",
+            cursor: busy ? "wait" : "pointer", letterSpacing: "0.04em",
+            transition: "opacity 0.2s",
+          }}>
+          {busy ? "Saving…" : "💾 Save Changes"}
+        </button>
       </div>
     </div>
+  );
+}
+
+/* ─── Page ───────────────────────────────────────────────── */
+export default function AdminPage() {
+  const [authed,   setAuthed]   = useState(false);
+  const [password, setPassword] = useState("");
+  const [config,   setConfig]   = useState<SiteConfig | null>(null);
+
+  if (!authed || !config) {
+    return (
+      <PasswordGate
+        onAuth={(pw, cfg) => { setPassword(pw); setConfig(cfg); setAuthed(true); }}
+      />
+    );
+  }
+  return (
+    <Dashboard
+      password={password}
+      initialConfig={config}
+      onLogout={() => { setAuthed(false); setPassword(""); setConfig(null); }}
+    />
   );
 }

@@ -215,14 +215,32 @@ export default function Gallery() {
         <SectionHeading title={t.gallery.title} subtitle={t.gallery.subtitle} light={false} />
 
         {/* Filter tabs */}
-        <div className="flex justify-center gsap-reveal flex-wrap" style={{ gap: "var(--igap-sm)" }}>
+        <div className="flex justify-center gsap-reveal flex-wrap" style={{ gap: "0.75rem" }}>
           {t.gallery.filters.map((f: string, i: number) => (
             <button key={f} onClick={() => handleFilter(i)}
-              className={`px-6 py-2.5 rounded-full text-sm font-semibold leading-none transition-all duration-200 ${
-                filter === i
-                  ? "bg-gold text-primary shadow-lg shadow-gold/30"
-                  : "border border-primary/25 text-primary/60 hover:border-primary/60 hover:text-primary bg-transparent"
-              }`}>
+              className="transition-all duration-200"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "0.625rem 1.75rem",
+                borderRadius: "9999px",
+                fontSize: "0.9rem",
+                fontWeight: 700,
+                minHeight: "46px",
+                minWidth: "100px",
+                letterSpacing: "0.03em",
+                border: `2px solid ${filter === i ? "transparent" : "rgba(10,31,92,0.22)"}`,
+                background: filter === i
+                  ? "linear-gradient(135deg, #0A1F5C, #1A3A8F)"
+                  : "rgba(255,255,255,0.7)",
+                color: filter === i ? "#ffffff" : "rgba(10,31,92,0.65)",
+                boxShadow: filter === i
+                  ? "0 6px 20px rgba(10,31,92,0.28)"
+                  : "0 2px 8px rgba(0,0,0,0.06)",
+                cursor: "pointer",
+                backdropFilter: "blur(4px)",
+              }}>
               {f}
             </button>
           ))}

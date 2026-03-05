@@ -50,10 +50,11 @@ export default function ShareButton({ variant = "banner", className = "" }: Shar
       <button
         onClick={handleShare}
         aria-label="Share Vision Coaching Institute on WhatsApp"
-        className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-[12px] font-semibold tracking-wide transition-all duration-200 active:scale-95 ${className}`}
+        className={`inline-flex items-center gap-2.5 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-200 active:scale-95 flex-shrink-0 min-w-max ${className}`}
         style={{
+          padding: "0.625rem 1.375rem",
           background:  state !== "idle" ? "rgba(37,211,102,0.18)" : "rgba(37,211,102,0.10)",
-          border:      `1px solid ${state !== "idle" ? "rgba(37,211,102,0.55)" : "rgba(37,211,102,0.28)"}`,
+          border:      `1.5px solid ${state !== "idle" ? "rgba(37,211,102,0.55)" : "rgba(37,211,102,0.32)"}`,
           color:       "#25D366",
           cursor:      "pointer",
         }}
@@ -69,8 +70,9 @@ export default function ShareButton({ variant = "banner", className = "" }: Shar
     <button
       onClick={handleShare}
       aria-label="Share Vision Coaching Institute on WhatsApp"
-      className={`inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl font-bold text-sm tracking-wide transition-all duration-200 active:scale-95 hover:brightness-110 ${className}`}
+      className={`inline-flex items-center justify-center gap-2.5 rounded-xl font-bold text-sm tracking-wide transition-all duration-200 active:scale-95 hover:brightness-110 ${className}`}
       style={{
+        padding: "0.875rem 1.875rem",
         background: state !== "idle"
           ? "rgba(37,211,102,0.22)"
           : "rgba(37,211,102,0.14)",
@@ -85,7 +87,7 @@ export default function ShareButton({ variant = "banner", className = "" }: Shar
       <span>{label}</span>
       {state === "idle" && (
         <span
-          className="text-[10px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded-full"
+          className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
           style={{ background: "rgba(37,211,102,0.18)", color: "#4ade80" }}
         >
           Status

@@ -53,7 +53,7 @@ export default function LoadingScreen() {
           style={{ boxShadow: "0 0 30px rgba(212,160,23,0.4)" }}>
           {/* Logo image — fills the full ring */}
           <div className="absolute inset-0 rounded-full overflow-hidden z-10">
-            <Image src="/logo.png" alt="Vision Coaching Institute" width={96} height={96} className="w-full h-full object-cover scale-[1.15]" priority sizes="96px" />
+            <Image src="/logo.webp" alt="Vision Coaching Institute" width={96} height={96} className="w-full h-full object-cover scale-[1.15]" priority sizes="96px" />
           </div>
         </div>
       </div>

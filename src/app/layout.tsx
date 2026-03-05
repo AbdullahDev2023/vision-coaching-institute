@@ -5,6 +5,7 @@ import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import CustomCursor from "@/components/ui/CustomCursor";
 import HtmlLangSync from "@/components/ui/HtmlLangSync";
+import siteConfig from "@/lib/site-config.json";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "G-FWQX2WWT41";
 
@@ -28,56 +29,101 @@ const notoDevanagari = Noto_Sans_Devanagari({
   display: "swap",
 });
 
-const SITE_URL = "https://www.visioncoachinginstitute.online";
-const OG_IMAGE = `${SITE_URL}/og-image.png`;          // static file — works on WhatsApp Web
-const OG_IMAGE_DYNAMIC = `${SITE_URL}/opengraph-image`; // dynamic (kept for direct access)
-const OG_TITLE = "Vision Coaching Institute Tulsipur | CBSE · ICSE · ISC · UP Board";
-const OG_DESC  =
-  "Expert coaching for Classes 6–12 in Maths, Physics, Chemistry & Biology. " +
-  "Small batches · Daily doubt solving · Weekly tests · Free demo classes. " +
-  "Purani Bazar, Tulsipur, Uttar Pradesh. Call: +91 72104 33685";
+const SITE_URL  = "https://www.visioncoachinginstitute.online";
+const OG_IMAGE  = `${SITE_URL}/og-image.png`;
+const OG_TITLE  = "Best Coaching in Tulsipur | CBSE ICSE UP Board | Vision Institute";
+const OG_DESC   =
+  "Top coaching institute in Tulsipur for CBSE, ICSE, ISC & UP Board Classes 6–12. " +
+  "Maths, Science, PCB, PCM — small batches, daily doubt sessions, free demo class. " +
+  "Purani Bazar, Tulsipur, UP. Call: +91 72104 33685";
 
 export const metadata: Metadata = {
   title: {
     default: OG_TITLE,
-    template: "%s | Vision Coaching Institute Tulsipur",
+    template: "%s | Vision Coaching Tulsipur",
   },
   description: OG_DESC,
   keywords: [
-    "coaching tulsipur", "CBSE coaching tulsipur", "ICSE coaching tulsipur",
-    "UP Board coaching", "maths physics coaching", "vision coaching institute",
-    "class 6 to 12 coaching tulsipur", "best coaching tulsipur",
-    "physics chemistry biology coaching", "board exam coaching uttar pradesh",
+    /* ── Primary city-level ── */
+    "coaching in tulsipur",
+    "best coaching tulsipur",
+    "tuition tulsipur",
+    "coaching centre tulsipur",
+    "science coaching tulsipur",
+    "maths coaching tulsipur",
+    "best coaching center tulsipur up",
+    "coaching classes tulsipur uttar pradesh",
+    "class 10 coaching tulsipur",
+    "class 12 coaching tulsipur",
+    "class 9 coaching tulsipur",
+    "CBSE coaching tulsipur",
+    "ICSE coaching tulsipur",
+    "UP Board coaching tulsipur",
+    "ISC coaching tulsipur",
+    /* ── Nearby city radius targets ── */
+    "coaching near balrampur",
+    "coaching near gonda",
+    "coaching near bahraich",
+    "best coaching shravasti up",
+    "tuition near tulsipur",
+    "education center tulsipur uttar pradesh",
+    /* ── Subject & intent keywords ── */
+    "PCB coaching tulsipur",
+    "PCM coaching tulsipur",
+    "physics chemistry biology coaching tulsipur",
+    "board exam preparation tulsipur",
+    "class 9 10 coaching uttar pradesh",
+    "class 11 12 coaching tulsipur",
+    "free demo class coaching tulsipur",
+    "admission open coaching 2026 tulsipur",
+    "BSc coaching tulsipur",
+    "BSc science coaching UP",
+    "vision coaching institute",
+    "vision coaching tulsipur",
+    /* ── Hindi keywords (critical for local search) ── */
+    "तुलसीपुर कोचिंग",
+    "तुलसीपुर ट्यूशन",
+    "विज्ञान कोचिंग तुलसीपुर",
+    "बेस्ट कोचिंग सेंटर तुलसीपुर",
+    "क्लास 12 कोचिंग उत्तर प्रदेश",
+    "विजन कोचिंग इंस्टीट्यूट तुलसीपुर",
+    /* ── General education ── */
+    "coaching classes uttar pradesh",
+    "CBSE coaching uttar pradesh",
+    "UP board tuition center",
+    "small batch coaching UP",
+    "daily doubt solving coaching",
+    "weekly test coaching UP board",
   ],
-  authors: [{ name: "Vision Coaching Institute" }],
-  creator: "Vision Coaching Institute",
+  authors:   [{ name: "Vision Coaching Institute" }],
+  creator:   "Vision Coaching Institute",
   publisher: "Vision Coaching Institute",
-  robots: { index: true, follow: true },
+  robots:    { index: true, follow: true },
   metadataBase: new URL(SITE_URL),
-  alternates: { canonical: "/" },
+  alternates:   { canonical: "/" },
   openGraph: {
-    type: "website",
-    url: SITE_URL,
+    type:     "website",
+    url:      SITE_URL,
     siteName: "Vision Coaching Institute",
-    title: OG_TITLE,
+    title:    OG_TITLE,
     description: OG_DESC,
-    locale: "en_IN",
+    locale:   "en_IN",
     images: [
       {
-        url: OG_IMAGE,          // dynamic generated image (edge runtime, fast)
-        secureUrl: OG_IMAGE,    // explicit HTTPS — required by WhatsApp crawler
-        width: 1200,
-        height: 630,
-        alt: "Vision Coaching Institute Tulsipur — Expert Coaching for CBSE, ICSE, ISC & UP Board",
+        url:       OG_IMAGE,
+        secureUrl: OG_IMAGE,
+        width:     1200,
+        height:    630,
+        alt:  "Vision Coaching Institute Tulsipur — Expert Coaching CBSE ICSE ISC UP Board",
         type: "image/png",
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: OG_TITLE,
+    card:        "summary_large_image",
+    title:       OG_TITLE,
     description: OG_DESC,
-    images: [OG_IMAGE],
+    images:      [OG_IMAGE],
   },
   icons: {
     icon: [
@@ -90,10 +136,8 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
   },
   other: {
-    "theme-color": "#0A1F5C",
+    "theme-color":             "#0A1F5C",
     "google-site-verification": "VT__ykYSkc_c9HPva45gsnFfsfkBJlhSzUgNNXM-os8",
-    // WhatsApp / Facebook crawler explicit tags
-    "fb:app_id":           "your_facebook_app_id_here", // optional — suppresses debugger warning
     "og:image:secure_url": OG_IMAGE,
     "og:image:width":  "1200",
     "og:image:height": "630",
@@ -106,43 +150,153 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  /* Build sameAs from site-config — only include non-empty URLs */
+  const sameAs = [
+    siteConfig.social.facebook,
+    siteConfig.social.instagram,
+    siteConfig.social.youtube,
+  ].filter(Boolean);
+
+  const { ratingValue, reviewCount } = siteConfig.seo.aggregateRating;
+
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    "name": "Vision Coaching Institute",
-    "url": SITE_URL,
-    "telephone": "+917210433685",
-    "image": OG_IMAGE,
-    "description": "Expert coaching for Classes 6\u201312 in CBSE, ICSE, ISC & UP Board. Maths, Physics, Chemistry, Biology. Purani Bazar, Tulsipur, Uttar Pradesh.",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Purani Bazar",
-      "addressLocality": "Tulsipur",
-      "addressRegion": "Uttar Pradesh",
-      "postalCode": "271602",
-      "addressCountry": "IN"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "27.5500",
-      "longitude": "82.4167"
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-      "opens": "07:00",
-      "closes": "20:00"
-    },
-    "sameAs": []
+    "@graph": [
+      /* ── 1. Organisation (LocalBusiness + EducationalOrganization) ── */
+      {
+        "@type": ["EducationalOrganization", "LocalBusiness"],
+        "@id":   `${SITE_URL}/#organization`,
+        "name":  "Vision Coaching Institute",
+        "alternateName": [
+          "Vision Coaching",
+          "VCI Tulsipur",
+          "विज़न कोचिंग इंस्टीट्यूट",
+        ],
+        "url":   SITE_URL,
+        "logo": {
+          "@type": "ImageObject",
+          "url":   `${SITE_URL}/logo.png`,
+        },
+        "image": OG_IMAGE,
+        "description":
+          "Expert coaching for Classes 6–12 and BSc in CBSE, ICSE, ISC & UP Board. " +
+          "Maths, Physics, Chemistry, Biology. Small batches, daily doubt solving, " +
+          "weekly tests. Purani Bazar, Tulsipur, Uttar Pradesh.",
+        "telephone":          ["+917210433685", "+917235937827", "+919956841282"],
+        "priceRange":         "₹₹",
+        "currenciesAccepted": "INR",
+        "paymentAccepted":    "Cash, UPI",
+        "address": {
+          "@type":           "PostalAddress",
+          "streetAddress":   "Purani Bazar",
+          "addressLocality": "Tulsipur",
+          "addressRegion":   "Uttar Pradesh",
+          "postalCode":      "271208",
+          "addressCountry":  "IN",
+        },
+        "geo": {
+          "@type":    "GeoCoordinates",
+          "latitude":  27.55,
+          "longitude": 82.4167,
+        },
+        "hasMap":
+          "https://maps.google.com/?q=Purani+Bazar,+Tulsipur,+Uttar+Pradesh",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday",
+            ],
+            "opens":  "07:00",
+            "closes": "20:00",
+          },
+        ],
+        "areaServed": [
+          { "@type": "City", "name": "Tulsipur"  },
+          { "@type": "City", "name": "Balrampur" },
+          { "@type": "City", "name": "Gonda"     },
+          { "@type": "City", "name": "Bahraich"  },
+          { "@type": "City", "name": "Shravasti" },
+        ],
+        "knowsAbout": [
+          "CBSE","ICSE","ISC","UP Board",
+          "Physics","Chemistry","Biology","Mathematics","BSc Science",
+        ],
+        "teaches":
+          "Science and Mathematics coaching for Classes 6–12 and BSc in Tulsipur, UP",
+        /* Aggregate rating — shown as gold stars in Google SERPs */
+        ...(Number(reviewCount) > 0 && {
+          "aggregateRating": {
+            "@type":       "AggregateRating",
+            "ratingValue": ratingValue,
+            "reviewCount": reviewCount,
+            "bestRating":  "5",
+            "worstRating": "1",
+          },
+        }),
+        /* Social media profiles — updated from admin panel */
+        ...(sameAs.length > 0 && { "sameAs": sameAs }),
+      },
+
+      /* ── 2. WebSite ── */
+      {
+        "@type":     "WebSite",
+        "@id":       `${SITE_URL}/#website`,
+        "url":        SITE_URL,
+        "name":       "Vision Coaching Institute Tulsipur",
+        "description": OG_DESC,
+        "publisher":  { "@id": `${SITE_URL}/#organization` },
+        "inLanguage": ["en-IN", "hi-IN"],
+        "potentialAction": {
+          "@type":       "SearchAction",
+          "target":      `${SITE_URL}/?s={search_term_string}`,
+          "query-input": "required name=search_term_string",
+        },
+      },
+
+      /* ── 3. WebPage ── */
+      {
+        "@type":        "WebPage",
+        "@id":          `${SITE_URL}/#webpage`,
+        "url":           SITE_URL,
+        "name":          OG_TITLE,
+        "description":   OG_DESC,
+        "isPartOf":     { "@id": `${SITE_URL}/#website`      },
+        "about":        { "@id": `${SITE_URL}/#organization` },
+        "inLanguage":   "en-IN",
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type":    "ListItem",
+              "position": 1,
+              "name":     "Home",
+              "item":      SITE_URL,
+            },
+          ],
+        },
+      },
+    ],
   };
 
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable} ${notoDevanagari.variable} scroll-smooth`}>
+    <html
+      lang="en"
+      className={`${playfair.variable} ${inter.variable} ${notoDevanagari.variable} scroll-smooth`}>
       <head suppressHydrationWarning>
+        {/* ── Critical resource hints — must be first in <head> ── */}
+        {/* Google Fonts (next/font uses these domains) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Supabase CDN — gallery + faculty images load from here */}
+        <link rel="preconnect" href="https://ncvcdhcdpiylvyvbjrot.supabase.co" />
+        {/* GA4 — dns-prefetch only (not critical path) */}
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
         {/* Hard favicon links — belt-and-suspenders for Vercel edge caching */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/favicon_32.png" type="image/png" sizes="32x32" />
-        <link rel="icon" href="/favicon_48.png" type="image/png" sizes="48x48" />
+        <link rel="icon"             href="/favicon.ico"    sizes="any" />
+        <link rel="icon"             href="/favicon_32.png" type="image/png" sizes="32x32" />
+        <link rel="icon"             href="/favicon_48.png" type="image/png" sizes="48x48" />
         <link rel="apple-touch-icon" href="/favicon_180.png" sizes="180x180" />
         <script
           suppressHydrationWarning
@@ -151,7 +305,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        {/* ── Google Analytics 4 ── loads after page is interactive (strategy="afterInteractive") */}
+        {/* ── Google Analytics 4 ── */}
         {GA_ID && (
           <>
             <Script
@@ -163,9 +317,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${GA_ID}', {
-                  page_path: window.location.pathname,
-                });
+                gtag('config', '${GA_ID}', { page_path: window.location.pathname });
               `}
             </Script>
           </>
