@@ -29,8 +29,8 @@ const notoDevanagari = Noto_Sans_Devanagari({
 });
 
 const SITE_URL = "https://www.visioncoachinginstitute.online";
-const OG_IMAGE = `${SITE_URL}/opengraph-image`;
-const OG_IMAGE_FALLBACK = `${SITE_URL}/og-image.png`; // static fallback
+const OG_IMAGE = `${SITE_URL}/og-image.png`;          // static file — works on WhatsApp Web
+const OG_IMAGE_DYNAMIC = `${SITE_URL}/opengraph-image`; // dynamic (kept for direct access)
 const OG_TITLE = "Vision Coaching Institute Tulsipur | CBSE · ICSE · ISC · UP Board";
 const OG_DESC  =
   "Expert coaching for Classes 6–12 in Maths, Physics, Chemistry & Biology. " +
@@ -93,6 +93,7 @@ export const metadata: Metadata = {
     "theme-color": "#0A1F5C",
     "google-site-verification": "VT__ykYSkc_c9HPva45gsnFfsfkBJlhSzUgNNXM-os8",
     // WhatsApp / Facebook crawler explicit tags
+    "fb:app_id":           "your_facebook_app_id_here", // optional — suppresses debugger warning
     "og:image:secure_url": OG_IMAGE,
     "og:image:width":  "1200",
     "og:image:height": "630",
