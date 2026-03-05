@@ -30,6 +30,7 @@ const notoDevanagari = Noto_Sans_Devanagari({
 
 const SITE_URL = "https://www.visioncoachinginstitute.online";
 const OG_IMAGE = `${SITE_URL}/opengraph-image`;
+const OG_IMAGE_FALLBACK = `${SITE_URL}/og-image.png`; // static fallback
 const OG_TITLE = "Vision Coaching Institute Tulsipur | CBSE · ICSE · ISC · UP Board";
 const OG_DESC  =
   "Expert coaching for Classes 6–12 in Maths, Physics, Chemistry & Biology. " +
@@ -63,7 +64,8 @@ export const metadata: Metadata = {
     locale: "en_IN",
     images: [
       {
-        url: OG_IMAGE,
+        url: OG_IMAGE,          // dynamic generated image (edge runtime, fast)
+        secureUrl: OG_IMAGE,    // explicit HTTPS — required by WhatsApp crawler
         width: 1200,
         height: 630,
         alt: "Vision Coaching Institute Tulsipur — Expert Coaching for CBSE, ICSE, ISC & UP Board",
@@ -75,14 +77,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: OG_TITLE,
     description: OG_DESC,
-    images: [
-      {
-        url: OG_IMAGE,
-        width: 1200,
-        height: 630,
-        alt: "Vision Coaching Institute Tulsipur",
-      },
-    ],
+    images: [OG_IMAGE],
   },
   icons: {
     icon: [
@@ -97,10 +92,14 @@ export const metadata: Metadata = {
   other: {
     "theme-color": "#0A1F5C",
     "google-site-verification": "VT__ykYSkc_c9HPva45gsnFfsfkBJlhSzUgNNXM-os8",
-    // WhatsApp reads og: tags — no extra tags needed, but these reinforce it
+    // WhatsApp / Facebook crawler explicit tags
+    "og:image:secure_url": OG_IMAGE,
+    "og:image:width":  "1200",
+    "og:image:height": "630",
+    "og:image:type":   "image/png",
     "og:phone_number": "+917210433685",
-    "og:locality": "Tulsipur",
-    "og:region": "Uttar Pradesh",
+    "og:locality":     "Tulsipur",
+    "og:region":       "Uttar Pradesh",
     "og:country-name": "India",
   },
 };
