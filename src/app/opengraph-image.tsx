@@ -1,10 +1,10 @@
 import { ImageResponse } from "next/og";
+import { LOGO_OG_B64 } from "@/lib/logo-og-b64";
 
 export const alt         = "Vision Coaching Institute Tulsipur — Expert Coaching CBSE · ICSE · ISC · UP Board";
 export const size        = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const runtime     = "edge";
-
 const SITE_URL = "https://www.visioncoachinginstitute.online";
 const PRIMARY  = "#0A1F5C";
 const DARK     = "#050D1F";
@@ -28,14 +28,7 @@ const BOARDS = [
 ];
 
 export default async function OGImage() {
-  // Fetch logo as ArrayBuffer and convert to base64 data URL for ImageResponse
-  let logoSrc = "";
-  try {
-    const res    = await fetch(`${SITE_URL}/logo.png`);
-    const buffer = await res.arrayBuffer();
-    const b64    = Buffer.from(buffer).toString("base64");
-    logoSrc      = `data:image/png;base64,${b64}`;
-  } catch { /* skip logo on fetch error */ }
+  const logoSrc = LOGO_OG_B64; // 200×200 pre-resized, ~19 KB — no runtime fetch needed
 
   return new ImageResponse(
     (
