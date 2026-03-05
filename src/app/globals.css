@@ -641,3 +641,26 @@ input, select, textarea {
 @media (max-width: 1023px) {
   body { padding-bottom: 4.5rem; /* height of MobileBookingBar */ }
 }
+
+/* Mobile bottom nav clearance — BottomTabNav 56px + safe-area */
+@media (max-width: 1023px) {
+  body { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* ── prefers-reduced-motion ──────────────────────────────────────────────
+   Kills all animation for users with Reduce Motion enabled (accessibility
+   setting, also triggered by low-battery/data-saver on Android).
+   Better accessibility + measurable performance gain on low-end devices.
+──────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration:        0.01ms !important;
+    animation-iteration-count: 1      !important;
+    transition-duration:       0.01ms !important;
+    scroll-behavior:           auto   !important;
+  }
+  .text-gold-shimmer { animation: none !important; background-position: 0 !important; }
+  .animate-spin      { animation: none !important; }
+  .animate-pulse     { animation: none !important; }
+  .animate-bounce    { animation: none !important; }
+}

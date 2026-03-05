@@ -3,7 +3,7 @@ import Navbar           from "@/components/layout/Navbar";
 import Footer           from "@/components/layout/Footer";
 import WhatsAppFloat    from "@/components/ui/WhatsAppFloat";
 import BackToTop        from "@/components/ui/BackToTop";
-import MobileBookingBar from "@/components/ui/MobileBookingBar";
+import BottomTabNav      from "@/components/ui/BottomTabNav";
 import GalleryLoader    from "@/components/sections/GalleryLoader";
 import SchemaScripts    from "@/components/ui/SchemaScripts";
 import AccordionSection from "@/components/ui/AccordionSection";
@@ -292,7 +292,7 @@ export default function Home() {
       <Footer />
       <WhatsAppFloat />
       <BackToTop />
-      <MobileBookingBar />
+      <BottomTabNav />
     </>
   );
 }

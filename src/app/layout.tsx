@@ -5,6 +5,7 @@ import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import CustomCursor from "@/components/ui/CustomCursor";
 import HtmlLangSync from "@/components/ui/HtmlLangSync";
+import ScrollProgressBar from "@/components/ui/ScrollProgressBar";
 import siteConfig from "@/lib/site-config.json";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "G-FWQX2WWT41";
@@ -329,6 +330,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LanguageProvider>
           <HtmlLangSync />
           <CustomCursor />
+          <ScrollProgressBar />
           {children}
         </LanguageProvider>
       </body>

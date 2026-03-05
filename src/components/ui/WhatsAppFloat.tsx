@@ -3,6 +3,7 @@ import { useLanguage } from "@/lib/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { WhatsAppIcon } from "@/components/ui/icons/WhatsAppIcon";
+import { haptic, HapticPattern } from "@/lib/haptics";
 
 export default function WhatsAppFloat() {
   const { t } = useLanguage();
@@ -53,6 +54,7 @@ export default function WhatsAppFloat() {
             aria-label="Chat on WhatsApp"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
+            onClick={() => haptic(HapticPattern.confirm)}
             className="relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] shadow-lg hover:scale-110 transition-transform duration-200"
             style={{ boxShadow: "0 4px 20px rgba(37,211,102,0.5)" }}>
             {/* Ping stops after 3 iterations — not an infinite loop */}
