@@ -147,10 +147,12 @@ export default function Navbar() {
           {/* ── Col 3: Right controls ── */}
           <div className="flex items-center gap-3 flex-shrink-0">
             <LanguageToggle />
-            <a href="tel:+917210433685" className="hidden md:inline-flex btn-nav">
-              📞 {t.nav.callNow}
+            <a
+              href="/blog"
+              className="hidden lg:inline-flex items-center gap-1.5 text-white/70 hover:text-gold transition-colors duration-200 text-[0.8125rem] font-medium whitespace-nowrap"
+              style={{ letterSpacing: "0.01em" }}>
+              <span className="text-base leading-none">📝</span> Vlogs
             </a>
-
             {/* Hamburger */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -203,12 +205,14 @@ export default function Navbar() {
                   {t.nav[key as keyof typeof t.nav]}
                 </motion.a>
               ))}
-              <div className="pt-4 pb-1 grid grid-cols-2 gap-3">
-                <a href="tel:+917210433685" className="btn-nav justify-center">
-                  📞 Call Now
+              <div className="pt-4 pb-1 flex flex-col gap-2">
+                <a href="/blog"
+                  className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium transition-colors"
+                  style={{ color: "rgba(255,255,255,0.70)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                  <span>📝</span> Vlogs / Blog
                 </a>
                 <a href="https://wa.me/917210433685" target="_blank" rel="noopener noreferrer"
-                  className="btn-nav-outline justify-center">
+                  className="btn-nav-outline justify-center w-full">
                   💬 WhatsApp
                 </a>
               </div>

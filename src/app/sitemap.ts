@@ -115,6 +115,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.85,
     },
+    // ── Blog / Vlogs ──────────────────────────────────────────────
+    {
+      url: `${SITE_URL}/blog`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
     {
       url: `${SITE_URL}/blog/how-to-prepare-cbse-board-exam`,
       lastModified: now,

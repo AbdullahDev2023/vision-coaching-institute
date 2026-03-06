@@ -18,6 +18,7 @@ const STATS  = [
   { v: "95%",  l: "Pass Rate" },
   { v: "6–12", l: "Classes"   },
   { v: "Free", l: "Demo"      },
+  { v: "Blog", l: "Vlogs"     },
 ];
 const BOARDS = [
   { label: "CBSE",     color: "#4488ff" },

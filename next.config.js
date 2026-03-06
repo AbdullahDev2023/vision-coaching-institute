@@ -35,7 +35,8 @@ const nextConfig = {
         ],
       },
       {
-        // Security headers on every route
+        // Security headers — HSTS, CSP, COOP are now set by src/middleware.ts
+        // Keep only the stable headers that don't require a dynamic nonce.
         source: "/(.*)",
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff"                         },

@@ -9,7 +9,8 @@ import SchemaScripts    from "@/components/ui/SchemaScripts";
 import AccordionSection from "@/components/ui/AccordionSection";
 
 // ── HeroShell: SSR paints HeroStatic h1, then swaps to full Hero on client ─
-import HeroShell from "@/components/sections/HeroShell";
+import HeroShell     from "@/components/sections/HeroShell";
+import ContentLinks  from "@/components/ui/ContentLinks";
 
 // ── LoadingScreen: client-only overlay, must NEVER block SSR/LCP ──────────
 import LoadingScreenWrapper from "@/components/ui/LoadingScreenWrapper";
@@ -138,6 +139,8 @@ export default function Home() {
         <section id="home" aria-label="Hero">
           <HeroShell />
         </section>
+
+        <ContentLinks />
 
         {/*
           ── Results ──────────────────────────────────────────────────────

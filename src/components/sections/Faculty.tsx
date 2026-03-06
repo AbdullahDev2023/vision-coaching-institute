@@ -11,10 +11,10 @@ import type { FacultyMember as FSMember } from "@/lib/supabaseDb";
 type Member = { name: string; subject: string; qualification: string; exp: string; photo?: string };
 
 const C = {
-  math:      { ring: "#D4A017", glow: "rgba(212,160,23,0.28)", accent: "rgba(212,160,23,0.10)" },
-  physics:   { ring: "#3B82F6", glow: "rgba(59,130,246,0.28)",  accent: "rgba(59,130,246,0.10)"  },
-  chemistry: { ring: "#14B8A6", glow: "rgba(20,184,166,0.28)",  accent: "rgba(20,184,166,0.10)"  },
-  biology:   { ring: "#EF4444", glow: "rgba(239,68,68,0.28)",   accent: "rgba(239,68,68,0.10)"   },
+  math:      { ring: "#D4A017", textColor: "#7A5300", glow: "rgba(212,160,23,0.28)", accent: "rgba(212,160,23,0.10)" },
+  physics:   { ring: "#3B82F6", textColor: "#1D4ED8", glow: "rgba(59,130,246,0.28)",  accent: "rgba(59,130,246,0.10)"  },
+  chemistry: { ring: "#14B8A6", textColor: "#0F766E", glow: "rgba(20,184,166,0.28)",  accent: "rgba(20,184,166,0.10)"  },
+  biology:   { ring: "#EF4444", textColor: "#B91C1C", glow: "rgba(239,68,68,0.28)",   accent: "rgba(239,68,68,0.10)"   },
 };
 
 function subjectColor(subject: string) {
@@ -97,9 +97,9 @@ function TiltCard({ m, photoSoon }: { m: Member; photoSoon: string }) {
         </div>
 
         <h3 className="font-semibold text-primary text-sm sm:text-base leading-snug" style={{ marginTop: "var(--igap-sm)" }}>{m.name}</h3>
-        <p className="font-semibold text-xs sm:text-sm leading-snug" style={{ color: c.ring, marginTop: "calc(var(--igap-sm) / 2)" }}>{m.subject}</p>
-        <p className="text-primary/50 text-[10px] sm:text-xs leading-snug font-normal" style={{ marginTop: "calc(var(--igap-sm) / 2)" }}>{m.qualification}</p>
-        <span className="badge text-[10px] sm:text-xs" style={{ marginTop: "var(--igap-sm)", background: c.accent, color: c.ring, borderColor: `${c.ring}55` }}>
+        <p className="font-semibold text-xs sm:text-sm leading-snug" style={{ color: c.textColor, marginTop: "calc(var(--igap-sm) / 2)" }}>{m.subject}</p>
+        <p className="text-[10px] sm:text-xs leading-snug font-normal" style={{ color: "rgba(10,31,92,0.65)", marginTop: "calc(var(--igap-sm) / 2)" }}>{m.qualification}</p>
+        <span className="badge text-[10px] sm:text-xs" style={{ marginTop: "var(--igap-sm)", background: c.accent, color: c.textColor, borderColor: `${c.ring}55` }}>
           {m.exp}
         </span>
 
@@ -117,7 +117,7 @@ function TiltCard({ m, photoSoon }: { m: Member; photoSoon: string }) {
           transition={{ duration: 0.2 }}
           className="absolute bottom-5 left-0 right-0 flex justify-center pointer-events-none group-hover:pointer-events-auto">
           <span className="text-[11px] font-bold px-3 py-1 rounded-full"
-            style={{ background: c.accent, color: c.ring, border: `1px solid ${c.ring}55` }}>
+            style={{ background: c.accent, color: c.textColor, border: `1px solid ${c.ring}55` }}>
             Book Trial Class →
           </span>
         </motion.div>
