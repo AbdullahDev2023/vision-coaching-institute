@@ -7,23 +7,22 @@ function useIsMobile() {
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 1023px)");
     setIsMobile(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    const h = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", h);
+    return () => mq.removeEventListener("change", h);
   }, []);
   return isMobile;
 }
 
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
-  const isMobile = useIsMobile();
   const [waHidden, setWaHidden] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const onScroll = () => {
-      setVisible(window.scrollY > 300);
-      // Mirror WhatsAppFloat's hide condition
       const scrolled = window.scrollY;
+      setVisible(scrolled > 300);
       const docH = document.documentElement.scrollHeight;
       const winH = window.innerHeight;
       const nearBottom = scrolled + winH >= docH - 300;
@@ -33,22 +32,19 @@ export default function BackToTop() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  // On mobile, BottomTabNav "Home" tab scrolls to top — no duplicate needed
+  if (isMobile) return null;
 
-  // When WA is visible: sit above it. When WA is hidden: drop to WA's own slot.
-  const bottomStyle = isMobile
-    ? waHidden
-      ? "calc(56px + env(safe-area-inset-bottom, 0px) + 1rem)"           // WA slot
-      : "calc(56px + env(safe-area-inset-bottom, 0px) + 1rem + 56px + 0.625rem)" // above WA
-    : waHidden
-      ? "1.5rem"                        // WA slot on desktop
-      : "calc(1.5rem + 56px + 0.625rem)"; // above WA on desktop
+  // Desktop: stack above WhatsApp FAB, or drop to its slot when WA hides
+  const bottom = waHidden
+    ? "1.5rem"
+    : "calc(1.5rem + 56px + 0.625rem)";
 
   return (
     <AnimatePresence>
       {visible && (
         <motion.button
-          onClick={scrollToTop}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Back to top"
           initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -58,8 +54,8 @@ export default function BackToTop() {
           whileTap={{ scale: 0.92 }}
           className="fixed z-[54] flex items-center justify-center"
           style={{
-            bottom: bottomStyle,
-            right: isMobile ? "1rem" : "1.5rem",
+            bottom,
+            right: "1.5rem",
             width: "40px",
             height: "40px",
             borderRadius: "50%",
@@ -70,7 +66,8 @@ export default function BackToTop() {
             boxShadow: "0 4px 20px rgba(0,0,0,0.35)",
             backdropFilter: "blur(8px)",
             lineHeight: 1,
-          }}>
+          }}
+        >
           ↑
         </motion.button>
       )}

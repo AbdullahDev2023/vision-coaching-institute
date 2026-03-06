@@ -101,7 +101,14 @@ export const metadata: Metadata = {
   publisher: "Vision Coaching Institute",
   robots:    { index: true, follow: true },
   metadataBase: new URL(SITE_URL),
-  alternates:   { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-IN": "/",
+      "hi-IN": "/",
+      "x-default": "/",
+    },
+  },
   openGraph: {
     type:     "website",
     url:      SITE_URL,

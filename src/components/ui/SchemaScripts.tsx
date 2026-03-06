@@ -61,6 +61,28 @@ export default function SchemaScripts() {
     };
   });
 
+  /* ── Review schema per testimonial → boosts aggregateRating signals ── */
+  const reviewSchemas = enStrings.testimonials.reviews.map(review => ({
+    "@context": "https://schema.org",
+    "@type":    "Review",
+    "reviewBody": review.text,
+    "reviewRating": {
+      "@type":       "Rating",
+      "ratingValue": review.rating,
+      "bestRating":  "5",
+      "worstRating": "1",
+    },
+    "author": {
+      "@type": "Person",
+      "name":  review.name,
+    },
+    "itemReviewed": {
+      "@type": "EducationalOrganization",
+      "@id":   `${SITE_URL}/#organization`,
+      "name":  "Vision Coaching Institute",
+    },
+  }));
+
   return (
     <>
       <script
@@ -69,7 +91,14 @@ export default function SchemaScripts() {
       />
       {courseSchemas.map((schema, i) => (
         <script
-          key={i}
+          key={`course-${i}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+      {reviewSchemas.map((schema, i) => (
+        <script
+          key={`review-${i}`}
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
