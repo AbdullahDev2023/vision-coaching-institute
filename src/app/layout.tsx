@@ -136,13 +136,21 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico",    sizes: "any" },
-      { url: "/favicon_32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon_48.png", sizes: "48x48", type: "image/png" },
-      { url: "/favicon_16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon_16.png", sizes: "16x16",  type: "image/png" },
+      { url: "/favicon_32.png", sizes: "32x32",  type: "image/png" },
+      { url: "/favicon_48.png", sizes: "48x48",  type: "image/png" },
+      { url: "/favicon_192.png",sizes: "192x192",type: "image/png" },
+      { url: "/favicon_512.png",sizes: "512x512",type: "image/png" },
     ],
-    apple:    { url: "/favicon_180.png", sizes: "180x180", type: "image/png" },
+    apple:    [
+      { url: "/favicon_180.png", sizes: "180x180", type: "image/png" },
+    ],
     shortcut: "/favicon.ico",
+    other: [
+      { rel: "mask-icon", url: "/logo.svg" },
+    ],
   },
+  manifest: "/site.webmanifest",
   other: {
     "theme-color":             "#0A1F5C",
     "google-site-verification": "VT__ykYSkc_c9HPva45gsnFfsfkBJlhSzUgNNXM-os8",
@@ -307,10 +315,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
         {/* Hard favicon links — belt-and-suspenders for CDN edge caching */}
-        <link rel="icon"             href="/favicon.ico"    sizes="any" />
-        <link rel="icon"             href="/favicon_32.png" type="image/png" sizes="32x32" />
-        <link rel="icon"             href="/favicon_48.png" type="image/png" sizes="48x48" />
+        <link rel="icon"             href="/favicon.ico"     sizes="any" />
+        <link rel="icon"             href="/favicon_16.png"  type="image/png" sizes="16x16" />
+        <link rel="icon"             href="/favicon_32.png"  type="image/png" sizes="32x32" />
+        <link rel="icon"             href="/favicon_48.png"  type="image/png" sizes="48x48" />
+        <link rel="icon"             href="/favicon_192.png" type="image/png" sizes="192x192" />
         <link rel="apple-touch-icon" href="/favicon_180.png" sizes="180x180" />
+        <link rel="manifest"         href="/site.webmanifest" />
         <script
           nonce={nonce}
           suppressHydrationWarning
