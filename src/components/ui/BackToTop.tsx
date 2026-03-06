@@ -17,23 +17,32 @@ function useIsMobile() {
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
   const isMobile = useIsMobile();
+  const [waHidden, setWaHidden] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 300);
+    const onScroll = () => {
+      setVisible(window.scrollY > 300);
+      // Mirror WhatsAppFloat's hide condition
+      const scrolled = window.scrollY;
+      const docH = document.documentElement.scrollHeight;
+      const winH = window.innerHeight;
+      const nearBottom = scrolled + winH >= docH - 300;
+      setWaHidden(scrolled > winH * 0.8 && !nearBottom);
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
-  /**
-   * Sits directly above the WhatsApp button (w-14 h-14 = 56px):
-   *   Mobile  (<lg): above BottomTabNav (56px) + safe-area + 1rem + WA(56px) + 0.625rem gap
-   *   Desktop (≥lg): above WA (1.5rem + 56px + 0.625rem gap)
-   */
+  // When WA is visible: sit above it. When WA is hidden: drop to WA's own slot.
   const bottomStyle = isMobile
-    ? "calc(56px + env(safe-area-inset-bottom, 0px) + 1rem + 56px + 0.625rem)"
-    : "calc(1.5rem + 56px + 0.625rem)";
+    ? waHidden
+      ? "calc(56px + env(safe-area-inset-bottom, 0px) + 1rem)"           // WA slot
+      : "calc(56px + env(safe-area-inset-bottom, 0px) + 1rem + 56px + 0.625rem)" // above WA
+    : waHidden
+      ? "1.5rem"                        // WA slot on desktop
+      : "calc(1.5rem + 56px + 0.625rem)"; // above WA on desktop
 
   return (
     <AnimatePresence>
