@@ -1,8 +1,12 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
+  // null = not yet determined (SSR + first client render)
+  // false = coarse/touch device → render nothing
+  // true  = fine pointer (mouse) → render cursor
+  const [isFinePt, setIsFinePt] = useState<boolean | null>(null);
   const [visible,  setVisible]  = useState(false);
   const [clicking, setClicking] = useState(false);
   const [hovering, setHovering] = useState(false);
@@ -13,12 +17,11 @@ export default function CustomCursor() {
   const ringX = useSpring(rawX, { stiffness: 200, damping: 28 });
   const ringY = useSpring(rawY, { stiffness: 200, damping: 28 });
 
-  // Only activate on fine-pointer (mouse) devices
-  const isFinePtrRef = useRef(false);
-
   useEffect(() => {
-    isFinePtrRef.current = window.matchMedia("(pointer: fine)").matches;
-    if (!isFinePtrRef.current) return;
+    // Determine pointer type once on client — never during render (avoids #418)
+    const fine = window.matchMedia("(pointer: fine)").matches;
+    setIsFinePt(fine);
+    if (!fine) return;
 
     const onMove = (e: MouseEvent) => {
       rawX.set(e.clientX);
@@ -57,8 +60,10 @@ export default function CustomCursor() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (typeof window !== "undefined" && !window.matchMedia("(pointer: fine)").matches)
-    return null;
+  // isFinePt=null → SSR / first client render → return null (matches server)
+  // isFinePt=false → touch/coarse device → return null
+  // isFinePt=true  → fine-pointer mouse → render cursor
+  if (!isFinePt) return null;
 
   return (
     <>

@@ -36,7 +36,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   return (
     <LanguageContext.Provider value={{ lang, t, toggleLang }}>
-      <div className={lang === "hi" ? "font-hindi" : "font-body"}>
+      {/* suppressHydrationWarning: className changes post-hydration when
+          localStorage restores "hi" — intentional, not a bug */}
+      <div suppressHydrationWarning className={lang === "hi" ? "font-hindi" : "font-body"}>
         {children}
       </div>
     </LanguageContext.Provider>
