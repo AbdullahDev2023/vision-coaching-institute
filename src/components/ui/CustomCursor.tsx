@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
-  // null = not yet determined (SSR + first client render)
-  // false = coarse/touch device → render nothing
-  // true  = fine pointer (mouse) → render cursor
+  // null  = pointer type not yet determined (before first useEffect)
+  // false = coarse / touch device → render nothing
+  // true  = fine pointer (mouse)  → render cursor
+  // Note: this component is loaded with ssr:false in layout.tsx so it never
+  // runs during server-side rendering — no hydration mismatch is possible.
   const [isFinePt, setIsFinePt] = useState<boolean | null>(null);
   const [visible,  setVisible]  = useState(false);
   const [clicking, setClicking] = useState(false);
@@ -60,9 +62,9 @@ export default function CustomCursor() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // isFinePt=null → SSR / first client render → return null (matches server)
-  // isFinePt=false → touch/coarse device → return null
-  // isFinePt=true  → fine-pointer mouse → render cursor
+  // isFinePt=null  → pointer type not yet determined (before first useEffect)
+  // isFinePt=false → touch/coarse device → render nothing
+  // isFinePt=true  → fine-pointer mouse  → render cursor
   if (!isFinePt) return null;
 
   return (

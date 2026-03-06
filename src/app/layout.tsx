@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter, Noto_Sans_Devanagari } from "next/font/google";
+import { headers } from "next/headers";
 import Script from "next/script";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
-import CustomCursor from "@/components/ui/CustomCursor";
 import HtmlLangSync from "@/components/ui/HtmlLangSync";
-import ScrollProgressBar from "@/components/ui/ScrollProgressBar";
+import ClientOnlyDecorations from "@/components/ui/ClientOnlyDecorations";
 import siteConfig from "@/lib/site-config.json";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "G-FWQX2WWT41";
@@ -150,7 +150,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const nonce = (await headers()).get("x-nonce") ?? "";
   /* Build sameAs from site-config — only include non-empty URLs */
   const sameAs = [
     siteConfig.social.facebook,
@@ -304,6 +305,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon"             href="/favicon_48.png" type="image/png" sizes="48x48" />
         <link rel="apple-touch-icon" href="/favicon_180.png" sizes="180x180" />
         <script
+          nonce={nonce}
           suppressHydrationWarning
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -314,10 +316,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {GA_ID && (
           <>
             <Script
+              nonce={nonce}
               src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
               strategy="lazyOnload"
             />
-            <Script id="ga4-init" strategy="lazyOnload">
+            <Script nonce={nonce} id="ga4-init" strategy="lazyOnload">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
@@ -329,8 +332,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
         <LanguageProvider>
           <HtmlLangSync />
-          <CustomCursor />
-          <ScrollProgressBar />
+          <ClientOnlyDecorations />
           {children}
         </LanguageProvider>
       </body>
