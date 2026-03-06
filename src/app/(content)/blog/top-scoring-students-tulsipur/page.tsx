@@ -22,8 +22,17 @@ export const metadata: Metadata = {
   openGraph: {
     title: TITLE, description: DESC, url: `${SITE_URL}${SLUG}`,
     siteName: "Vision Coaching Institute",
-    images: [{ url: `${SITE_URL}/og-image.png`, width: 1200, height: 630 }],
+    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630, alt: "Top Scoring Students of Tulsipur — Vision Coaching Institute" }],
     locale: "en_IN", type: "article",
+    publishedTime: "2026-03-05T00:00:00.000Z",
+    modifiedTime:  "2026-03-05T00:00:00.000Z",
+    authors:       [`${SITE_URL}/#organization`],
+  },
+  twitter: {
+    card:        "summary_large_image",
+    title:        TITLE,
+    description:  DESC,
+    images:      [`${SITE_URL}/opengraph-image`],
   },
 };
 

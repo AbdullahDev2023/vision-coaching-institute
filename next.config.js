@@ -1,6 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   compress: true, // gzip/brotli on all responses
+  poweredByHeader: false, // don't leak "X-Powered-By: Next.js"
+
+  experimental: {
+    // Enables automatic tree-shaking of named exports for these large packages.
+    // Next.js will only bundle the specific sub-modules actually imported,
+    // reducing the initial JS payload for framer-motion and gsap.
+    optimizePackageImports: ["framer-motion", "gsap", "@gsap/react"],
+  },
 
   images: {
     // Serve AVIF first (50% smaller than WebP), fall back to WebP, then original

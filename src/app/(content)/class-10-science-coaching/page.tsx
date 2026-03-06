@@ -13,8 +13,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: TITLE, description: DESC, url: `${SITE_URL}/class-10-science-coaching`,
     siteName: "Vision Coaching Institute",
-    images: [{ url: `${SITE_URL}/og-image.png`, width: 1200, height: 630 }],
+    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630, alt: "Class 10 Science Coaching Tulsipur — Vision Coaching Institute" }],
     locale: "en_IN", type: "website",
+  },
+  twitter: {
+    card:        "summary_large_image",
+    title:        TITLE,
+    description:  DESC,
+    images:      [`${SITE_URL}/opengraph-image`],
   },
 };
 

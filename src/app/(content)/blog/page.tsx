@@ -15,9 +15,15 @@ export const metadata: Metadata = {
       "Expert tips, topper stories and exam strategies from Vision Coaching Institute, Tulsipur.",
     url: `${SITE_URL}/blog`,
     siteName: "Vision Coaching Institute",
-    images: [{ url: `${SITE_URL}/og-image.png`, width: 1200, height: 630 }],
+    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630, alt: "Blog — Vision Coaching Institute Tulsipur" }],
     locale: "en_IN",
     type: "website",
+  },
+  twitter: {
+    card:        "summary_large_image",
+    title:        "Vlogs & Blog | Vision Coaching Institute Tulsipur",
+    description:  "Expert tips, topper stories and exam strategies from Vision Coaching Institute, Tulsipur.",
+    images:      [`${SITE_URL}/opengraph-image`],
   },
 };
 
@@ -37,12 +43,40 @@ const POSTS = [
 ];
 
 export default function BlogIndex() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home",  "item": SITE_URL },
+          { "@type": "ListItem", "position": 2, "name": "Blog",  "item": `${SITE_URL}/blog` },
+        ],
+      },
+      {
+        "@type": "ItemList",
+        "name": "Vision Coaching Institute Blog",
+        "description": "Study tips, topper stories and coaching news from Vision Coaching Institute, Tulsipur.",
+        "url": `${SITE_URL}/blog`,
+        "numberOfItems": POSTS.length,
+        "itemListElement": POSTS.map((post, i) => ({
+          "@type": "ListItem",
+          "position": i + 1,
+          "url": `${SITE_URL}/blog/${post.slug}`,
+          "name": post.title,
+        })),
+      },
+    ],
+  };
+
   return (
-    <ContentPageShell
-      title="Vlogs & Blog"
-      subtitle="Study tips, topper stories and coaching news from our faculty."
-      crumbs={[{ label: "Home", href: "/" }, { label: "Blog", href: "/blog" }]}
-    >
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <ContentPageShell
+        title="Vlogs & Blog"
+        subtitle="Study tips, topper stories and coaching news from our faculty."
+        crumbs={[{ label: "Home", href: "/" }, { label: "Blog", href: "/blog" }]}
+      >
       <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", marginTop: "2rem" }}>
         {POSTS.map((post) => (
           <Link
@@ -76,5 +110,6 @@ export default function BlogIndex() {
         ))}
       </div>
     </ContentPageShell>
+    </>
   );
 }

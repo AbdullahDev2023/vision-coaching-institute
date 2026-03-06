@@ -1,7 +1,6 @@
 "use client";
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import en from "@/lib/i18n/en.json";
-import hi from "@/lib/i18n/hi.json";
 
 type Lang = "en" | "hi";
 type Translations = typeof en;
@@ -20,23 +19,36 @@ const LanguageContext = createContext<LanguageContextType>({
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>("en");
+  // Translations state — starts as English, lazily replaced with Hindi when needed.
+  // hi.json is NOT in the initial JS bundle; it's fetched only on demand.
+  const [t, setT] = useState<Translations>(en);
 
   useEffect(() => {
     const saved = localStorage.getItem("vci-lang") as Lang;
-    if (saved === "hi" || saved === "en") setLang(saved);
+    if (saved === "hi") {
+      // User previously chose Hindi — load chunk asynchronously
+      import("@/lib/i18n/hi.json").then((m) => {
+        setT(m.default as unknown as Translations);
+        setLang("hi");
+      });
+    }
   }, []);
 
-  const toggleLang = () => {
+  const toggleLang = async () => {
     const next: Lang = lang === "en" ? "hi" : "en";
+    if (next === "hi") {
+      const hiModule = await import("@/lib/i18n/hi.json");
+      setT(hiModule.default as unknown as Translations);
+    } else {
+      setT(en);
+    }
     setLang(next);
     localStorage.setItem("vci-lang", next);
   };
 
-  const t: Translations = lang === "hi" ? (hi as unknown as Translations) : en;
-
   return (
     <LanguageContext.Provider value={{ lang, t, toggleLang }}>
-      {/* suppressHydrationWarning: className changes post-hydration when
+      {/* suppressHydrationWarning: className may change post-hydration when
           localStorage restores "hi" — intentional, not a bug */}
       <div suppressHydrationWarning className={lang === "hi" ? "font-hindi" : "font-body"}>
         {children}

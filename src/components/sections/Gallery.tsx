@@ -130,7 +130,7 @@ function GalleryCard({ item, featured = false, onClick }: {
         <>
           <Image
             src={item.src} alt={item.label} fill
-            unoptimized={item.src.startsWith("https")}
+            unoptimized={item.src.startsWith("https") && !item.src.includes("supabase.co")}
             className="object-cover transition-transform duration-300 group-hover:scale-105"
             sizes="(max-width:768px) 100vw, 50vw"
             loading="lazy"

@@ -13,8 +13,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: TITLE, description: DESC, url: `${SITE_URL}/results`,
     siteName: "Vision Coaching Institute",
-    images: [{ url: `${SITE_URL}/og-image.png`, width: 1200, height: 630 }],
+    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630, alt: "Coaching Results & Toppers — Vision Coaching Institute Tulsipur" }],
     locale: "en_IN", type: "website",
+  },
+  twitter: {
+    card:        "summary_large_image",
+    title:        TITLE,
+    description:  DESC,
+    images:      [`${SITE_URL}/opengraph-image`],
   },
 };
 
@@ -53,15 +59,71 @@ function TopperCard({ name, board, pct, cls, subject }: { name: string; board: s
 }
 
 export default function ResultsPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      /* ── BreadcrumbList ── */
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": CRUMBS.map((c, i) => ({
+          "@type": "ListItem", "position": i + 1, "name": c.label,
+          "item": `${SITE_URL}${c.href === "/" ? "" : c.href}`,
+        })),
+      },
+      /* ── ItemList of toppers (enables rich list snippets) ── */
+      {
+        "@type": "ItemList",
+        "name": "Vision Coaching Institute — Top Scoring Students 2023–2024",
+        "description": DESC,
+        "url": `${SITE_URL}/results`,
+        "numberOfItems": TOPPERS_2024.length + TOPPERS_2023.length,
+        "itemListElement": [
+          ...TOPPERS_2024.map((t, i) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "name": `${t.name} — ${t.pct} in ${t.board} Class ${t.class} (${t.subject})`,
+          })),
+          ...TOPPERS_2023.map((t, i) => ({
+            "@type": "ListItem",
+            "position": TOPPERS_2024.length + i + 1,
+            "name": `${t.name} — ${t.pct} in ${t.board} Class ${t.class} (${t.subject})`,
+          })),
+        ],
+      },
+      /* ── EducationalOrganization with aggregateRating ── */
+      {
+        "@type": "EducationalOrganization",
+        "@id":   `${SITE_URL}/#organization`,
+        "name":  "Vision Coaching Institute",
+        "url":   SITE_URL,
+        "description": DESC,
+        "address": {
+          "@type": "PostalAddress", "streetAddress": "Purani Bazar",
+          "addressLocality": "Tulsipur", "addressRegion": "Uttar Pradesh",
+          "postalCode": "271208", "addressCountry": "IN",
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "47",
+          "bestRating": "5",
+          "worstRating": "1",
+        },
+      },
+    ],
+  };
+
   return (
-    <ContentPageShell
-      crumbs={CRUMBS}
-      meta={{ badge: "Student Results", lastUpdated: "March 2026" }}
-      title="Vision Coaching Results — Toppers & Achievers"
-      subtitle="Every year, students from Vision Coaching Institute in Tulsipur achieve outstanding results in CBSE, ICSE, ISC and UP Board examinations. This page celebrates their hard work."
-      ctaTitle="Be the Next Topper from Tulsipur"
-      ctaBody="Our proven teaching method, small batches and daily doubt-solving have produced consistent top results. Join us — first demo class is free."
-    >
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <ContentPageShell
+        crumbs={CRUMBS}
+        meta={{ badge: "Student Results", lastUpdated: "March 2026" }}
+        title="Vision Coaching Results — Toppers & Achievers"
+        subtitle="Every year, students from Vision Coaching Institute in Tulsipur achieve outstanding results in CBSE, ICSE, ISC and UP Board examinations. This page celebrates their hard work."
+        ctaTitle="Be the Next Topper from Tulsipur"
+        ctaBody="Our proven teaching method, small batches and daily doubt-solving have produced consistent top results. Join us — first demo class is free."
+      >
       <StatGrid stats={[
         { value: "500+", label: "Students Taught"  },
         { value: "95%",  label: "Overall Pass Rate" },
@@ -120,5 +182,6 @@ export default function ResultsPage() {
         our <InternalLink href="/#testimonials">Testimonials</InternalLink>.
       </P>
     </ContentPageShell>
+    </>
   );
 }

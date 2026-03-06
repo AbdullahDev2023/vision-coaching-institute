@@ -31,7 +31,9 @@ const notoDevanagari = Noto_Sans_Devanagari({
 });
 
 const SITE_URL  = "https://www.visioncoachinginstitute.online";
-const OG_IMAGE  = `${SITE_URL}/og-image.png`;
+// /opengraph-image is the Next.js App Router route served by opengraph-image.tsx.
+// We reference it here so the manual metadata and the auto-generated image use the same URL.
+const OG_IMAGE  = `${SITE_URL}/opengraph-image`;
 const OG_TITLE  = "Best Coaching in Tulsipur | CBSE ICSE UP Board | Vision Institute";
 const OG_DESC   =
   "Top coaching institute in Tulsipur for CBSE, ICSE, ISC & UP Board Classes 6–12. " +
@@ -310,6 +312,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
         {/* Supabase CDN — gallery + faculty images load from here */}
         <link rel="preconnect" href="https://ncvcdhcdpiylvyvbjrot.supabase.co" />
+
+        {/* Draco decoder CDN — used by Three.js GLTFLoader in HeroScene */}
+        <link rel="preconnect" href="https://www.gstatic.com" />
+        <link rel="dns-prefetch" href="https://www.gstatic.com" />
 
         {/* GA4 — dns-prefetch only (not critical path) */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />

@@ -1,10 +1,10 @@
 "use client";
 import Image from "next/image";
 import { useLanguage } from "@/lib/LanguageContext";
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { gsap } from "gsap";
+import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import LanguageToggle from "@/components/ui/LanguageToggle";
+// GSAP removed — navbar entrance now uses CSS animation (saves ~50 KB gzip)
 
 const NAV_LINKS = ["courses", "results", "faculty", "contact"] as const;
 
@@ -22,22 +22,6 @@ export default function Navbar() {
   const [scrolled, setScrolled]     = useState(false);
   const [menuOpen, setMenuOpen]     = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-  const navRef   = useRef<HTMLElement>(null);
-  const logoRef  = useRef<HTMLAnchorElement>(null);
-  const linksRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const tl = gsap.timeline({ delay: 0.1 });
-    tl.fromTo(navRef.current,
-      { y: -80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" });
-    tl.fromTo(logoRef.current,
-      { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, "-=0.3");
-    if (linksRef.current) {
-      tl.fromTo(linksRef.current.children,
-        { opacity: 0, y: -10 },
-        { opacity: 1, y: 0, duration: 0.3, stagger: 0.06, ease: "power2.out" }, "-=0.2");
-    }
-  }, []);
 
   useEffect(() => {
     const onScroll = () => {
@@ -59,11 +43,9 @@ export default function Navbar() {
   };
 
   return (
-    <motion.nav
-      ref={navRef}
+    <nav
       aria-label="Main navigation"
-      style={{ opacity: 0 }}
-      className={`navbar-fixed fixed top-0 z-50 transition-all duration-500 ${
+      className={`navbar-fixed navbar-entrance fixed top-0 z-50 transition-all duration-500 ${
         scrolled
           ? "bg-[#050D1F]/95 backdrop-blur-xl shadow-2xl shadow-black/40 border-b border-white/5"
           : "bg-transparent"
@@ -73,8 +55,8 @@ export default function Navbar() {
         <div className="grid grid-cols-[auto_1fr_auto] items-center h-14 sm:h-16 lg:h-20 gap-3 lg:gap-4">
 
           {/* ── Logo ── */}
-          <a ref={logoRef} href="#home" onClick={(e) => handleNavClick(e, "home")}
-            className="flex items-center gap-2.5 group flex-shrink-0 whitespace-nowrap">
+          <a href="#home" onClick={(e) => handleNavClick(e, "home")}
+            className="navbar-logo flex items-center gap-2.5 group flex-shrink-0 whitespace-nowrap">
             <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-full overflow-hidden flex-shrink-0 shadow-md shadow-gold/20 group-hover:scale-105 transition-transform border border-gold/25">
               <Image src="/logo.webp" alt="Vision Coaching Institute" width={96} height={96}
                 className="w-full h-full object-cover scale-[1.15]" priority sizes="96px" />
@@ -91,7 +73,7 @@ export default function Navbar() {
 
           {/* ── Desktop nav ── */}
           <div className="hidden lg:flex items-center justify-center">
-            <div ref={linksRef} className="flex items-center"
+            <div className="navbar-links flex items-center"
               style={{
                 gap: "0.125rem", padding: "0.25rem", borderRadius: "9999px",
                 background: scrolled ? "rgba(255,255,255,0.04)" : "transparent",
@@ -140,15 +122,28 @@ export default function Navbar() {
               className="lg:hidden relative flex items-center justify-center w-9 h-9 rounded-xl transition-colors duration-200"
               style={{ background: menuOpen ? "rgba(212,160,23,0.12)" : "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)" }}>
               <div className="flex flex-col gap-[4.5px]">
-                <motion.span animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 8 : 0, width: menuOpen ? "18px" : "18px" }}
-                  className="block h-[1.5px] rounded-full origin-center"
-                  style={{ width: 18, background: menuOpen ? "#D4A017" : "rgba(255,255,255,0.85)" }} />
-                <motion.span animate={{ opacity: menuOpen ? 0 : 1, scaleX: menuOpen ? 0 : 1 }}
-                  className="block h-[1.5px] rounded-full"
-                  style={{ width: 12, background: "rgba(255,255,255,0.85)" }} />
-                <motion.span animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -8 : 0 }}
-                  className="block h-[1.5px] rounded-full origin-center"
-                  style={{ width: 18, background: menuOpen ? "#D4A017" : "rgba(255,255,255,0.85)" }} />
+                <span className="block h-[1.5px] rounded-full origin-center"
+                  style={{
+                    width: 18,
+                    background: menuOpen ? "#D4A017" : "rgba(255,255,255,0.85)",
+                    transform: menuOpen ? "rotate(45deg) translateY(5.5px)" : "none",
+                    transition: "transform 0.2s ease, background 0.2s ease",
+                  }} />
+                <span className="block h-[1.5px] rounded-full"
+                  style={{
+                    width: 12,
+                    background: "rgba(255,255,255,0.85)",
+                    opacity: menuOpen ? 0 : 1,
+                    transform: menuOpen ? "scaleX(0)" : "scaleX(1)",
+                    transition: "opacity 0.2s ease, transform 0.2s ease",
+                  }} />
+                <span className="block h-[1.5px] rounded-full origin-center"
+                  style={{
+                    width: 18,
+                    background: menuOpen ? "#D4A017" : "rgba(255,255,255,0.85)",
+                    transform: menuOpen ? "rotate(-45deg) translateY(-5.5px)" : "none",
+                    transition: "transform 0.2s ease, background 0.2s ease",
+                  }} />
               </div>
             </button>
           </div>
@@ -232,6 +227,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 }

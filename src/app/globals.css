@@ -664,3 +664,70 @@ input, select, textarea {
   .animate-pulse     { animation: none !important; }
   .animate-bounce    { animation: none !important; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   PERFORMANCE ANIMATIONS — CSS replacements for GSAP / framer-motion
+══════════════════════════════════════════════════════════════ */
+
+/* Navbar entrance — replaces GSAP fromTo(navRef, {y:-80,opacity:0}, ...) */
+@keyframes navbarSlideDown {
+  from { transform: translateY(-80px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+.navbar-entrance {
+  animation: navbarSlideDown 0.6s cubic-bezier(0.075, 0.82, 0.165, 1) both;
+}
+/* Navbar logo entrance — replaces GSAP fromTo(logoRef, {opacity:0,x:-20}) */
+@keyframes navLogoFadeIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.navbar-logo {
+  animation: navLogoFadeIn 0.4s ease-out 0.3s both;
+}
+/* Navbar links stagger — replaces GSAP stagger on linksRef.children */
+@keyframes navLinkFadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.navbar-links > * { animation: navLinkFadeIn 0.3s ease-out both; }
+.navbar-links > *:nth-child(1) { animation-delay: 0.40s; }
+.navbar-links > *:nth-child(2) { animation-delay: 0.46s; }
+.navbar-links > *:nth-child(3) { animation-delay: 0.52s; }
+.navbar-links > *:nth-child(4) { animation-delay: 0.58s; }
+
+/* ContentLinks stagger — replaces framer-motion motion.div initial/animate */
+@keyframes contentLinkFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.content-link-item {
+  animation: contentLinkFadeIn 0.22s ease-out both;
+}
+.content-link-pill:hover {
+  border-color: rgba(212,160,23,0.55) !important;
+  color: #F0C842 !important;
+  background: rgba(212,160,23,0.10) !important;
+}
+
+/* AccordionSection height animation — CSS grid trick replaces framer-motion
+   motion.div height:"auto"→0. Requires inner div with min-height:0.         */
+.acc-content-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.38s cubic-bezier(0.25, 0.1, 0.25, 1),
+    opacity 0.18s ease;
+}
+.acc-content-grid--open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition:
+    grid-template-rows 0.38s cubic-bezier(0.25, 0.1, 0.25, 1),
+    opacity 0.32s ease;
+}
+.acc-content-inner {
+  overflow: hidden;
+  min-height: 0; /* required for grid-template-rows:0fr to fully collapse */
+}
