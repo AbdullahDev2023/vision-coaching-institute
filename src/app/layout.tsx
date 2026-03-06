@@ -25,7 +25,7 @@ const inter = Inter({
 });
 const notoDevanagari = Noto_Sans_Devanagari({
   subsets: ["devanagari"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "600"],   // was 5 weights (300/400/500/600/700) — Hindi users only need regular+semibold
   variable: "--font-noto-devanagari",
   display: "swap",
 });
@@ -335,7 +335,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>
+      <body style={{ background: "#050D1F" }}>
         {/* ── Google Analytics 4 ── */}
         {GA_ID && (
           <>

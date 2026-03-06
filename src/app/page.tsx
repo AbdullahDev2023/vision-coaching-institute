@@ -1,9 +1,6 @@
 import dynamic from "next/dynamic";
 import Navbar           from "@/components/layout/Navbar";
 import Footer           from "@/components/layout/Footer";
-import WhatsAppFloat    from "@/components/ui/WhatsAppFloat";
-import BackToTop        from "@/components/ui/BackToTop";
-import BottomTabNav      from "@/components/ui/BottomTabNav";
 import GalleryLoader    from "@/components/sections/GalleryLoader";
 import SchemaScripts    from "@/components/ui/SchemaScripts";
 import AccordionSection from "@/components/ui/AccordionSection";
@@ -14,6 +11,8 @@ import ContentLinks  from "@/components/ui/ContentLinks";
 
 // ── LoadingScreen: client-only overlay, must NEVER block SSR/LCP ──────────
 import LoadingScreenWrapper from "@/components/ui/LoadingScreenWrapper";
+
+import FloatingUIWrapper from "@/components/ui/FloatingUIWrapper";
 
 // ── CtaBanner: lightweight mid-page strip — NOT wrapped in accordion ───────
 const CtaBanner = dynamic(() => import("@/components/sections/CtaBanner"));
@@ -293,9 +292,7 @@ export default function Home() {
       </main>
 
       <Footer />
-      <WhatsAppFloat />
-      <BackToTop />
-      <BottomTabNav />
+      <FloatingUIWrapper />
     </>
   );
 }

@@ -666,7 +666,86 @@ input, select, textarea {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   PERFORMANCE ANIMATIONS — CSS replacements for GSAP / framer-motion
+   LOADING SCREEN — CSS-only, replaces GSAP (saves ~50KB parse)
+   Total overlay: 300ms animate + 200ms fade = 500ms (was 900ms+)
+══════════════════════════════════════════════════════════════ */
+
+@keyframes loadLogoIn {
+  from { transform: scale(0) rotate(-180deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0deg);   opacity: 1; }
+}
+@keyframes loadTextIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+@keyframes loadBarFill {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+.loading-screen-root {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at center, #0A1F5C 0%, #050D1F 70%);
+  transition: opacity 0.2s ease;
+}
+.loading-screen-out { opacity: 0; pointer-events: none; }
+
+.loading-logo-ring {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 2px solid #D4A017;
+  box-shadow: 0 0 30px rgba(212,160,23,0.4);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  animation: loadLogoIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.loading-logo-inner {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.loading-text {
+  color: #ffffff;
+  font-family: var(--font-playfair);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+  animation: loadTextIn 0.15s ease-out 0.15s both;
+}
+.loading-tagline {
+  color: #D4A017;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  animation: loadTextIn 0.12s ease-out 0.2s both;
+}
+.loading-bar-track {
+  width: 160px;
+  height: 2px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.loading-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #D4A017, #F0C842, #D4A017);
+  animation: loadBarFill 0.28s ease-in-out 0.05s both;
+}
+
+/* ══════════════════════════════════════════════════════════════
 ══════════════════════════════════════════════════════════════ */
 
 /* Navbar entrance — replaces GSAP fromTo(navRef, {y:-80,opacity:0}, ...) */
