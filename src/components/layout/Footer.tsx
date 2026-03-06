@@ -65,10 +65,12 @@ export default function Footer() {
                 <div className="text-gold text-xs font-medium tracking-widest uppercase">Institute · Tulsipur</div>
               </div>
             </div>
-            <p className="text-white/55 text-sm leading-relaxed font-normal" style={{ marginBottom: "var(--igap-sm)" }}>{tf.footer.tagline}</p>
+            <p className="text-white/65 text-sm leading-relaxed font-normal" style={{ marginBottom: "var(--igap-sm)" }}>{tf.footer.tagline}</p>
             <div className="flex gap-3">
               {SOCIAL_LINKS.map((s) => (
                 <a key={s.name} href={s.href}
+                  aria-label={`${s.name} — Vision Coaching Institute`}
+                  rel="noopener noreferrer" target="_blank"
                   className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-primary hover:bg-gold hover:border-gold transition-all duration-200">
                   {s.icon}
                 </a>
@@ -78,7 +80,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <motion.div variants={fadeUp} className="md:col-span-3">
-            <h4 className="text-gold font-bold text-[11px] uppercase tracking-widest" style={{ marginBottom: "var(--igap-sm)" }}>{tf.footer.quickLinks}</h4>
+            <h3 className="text-gold font-bold text-[11px] uppercase tracking-widest" style={{ marginBottom: "var(--igap-sm)" }}>{tf.footer.quickLinks}</h3>
             <ul className="item-gap">
               {navLinks.map((k) => (
                 <li key={k}>
@@ -94,20 +96,20 @@ export default function Footer() {
 
           {/* Contact */}
           <motion.div variants={fadeUp} className="md:col-span-5">
-            <h4 className="text-gold font-bold text-[11px] uppercase tracking-widest" style={{ marginBottom: "var(--igap-sm)" }}>{tf.footer.contactUs}</h4>
+            <h3 className="text-gold font-bold text-[11px] uppercase tracking-widest" style={{ marginBottom: "var(--igap-sm)" }}>{tf.footer.contactUs}</h3>
             <div className="item-gap">
               {tf.contact.phones.map((p: string) => (
                 <a key={p} href={`tel:${p.replace(/\s/g, "")}`}
-                  className="flex items-center gap-3 text-white/55 hover:text-gold text-sm transition-colors group">
+                  className="flex items-center gap-3 text-white/65 hover:text-gold text-sm transition-colors group">
                   <span className="w-7 h-7 rounded-full border border-white/10 group-hover:border-gold/50 group-hover:bg-gold/10 flex items-center justify-center text-xs transition-all flex-shrink-0">📞</span>
                   {p}
                 </a>
               ))}
-              <div className="flex items-start gap-3 text-white/50 text-sm">
+              <div className="flex items-start gap-3 text-white/65 text-sm">
                 <span className="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">📍</span>
                 <span className="leading-relaxed">{tf.contact.address}</span>
               </div>
-              <div className="flex items-center gap-3 text-white/50 text-sm">
+              <div className="flex items-center gap-3 text-white/65 text-sm">
                 <span className="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center text-xs flex-shrink-0">🕐</span>
                 <span>{tf.contact.hours}</span>
               </div>
@@ -117,12 +119,12 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-white/8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-white/25 text-xs text-center sm:text-left">
+          <p className="text-white/50 text-xs text-center sm:text-left">
             © {new Date().getFullYear()} Vision Coaching Institute, Tulsipur. All rights reserved.
           </p>
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-white/25 text-xs">{tf.footer.status}</span>
+            <span className="text-white/50 text-xs">{tf.footer.status}</span>
           </div>
         </div>
       </div>

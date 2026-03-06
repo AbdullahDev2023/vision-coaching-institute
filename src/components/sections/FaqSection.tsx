@@ -52,7 +52,7 @@ function FaqRow({ item, index, isOpen, onToggle }: {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}>
-            <p className="pl-12 text-white/58 text-sm leading-loose font-normal pr-8"
+            <p className="pl-12 text-white/70 text-sm leading-loose font-normal pr-8"
               style={{ paddingBottom: "var(--igap-sm)" }}>
               {item.a}
             </p>
@@ -101,7 +101,7 @@ export default function FaqSection() {
               <h3 className="font-heading font-bold text-white text-xl leading-snug" style={{ marginBottom: "var(--igap-sm)" }}>
                 Still have questions?
               </h3>
-              <p className="text-white/50 text-sm leading-relaxed font-normal" style={{ marginBottom: "var(--igap)" }}>
+              <p className="text-white/65 text-sm leading-relaxed font-normal" style={{ marginBottom: "var(--igap)" }}>
                 Our team is available Mon–Sat, 7 AM to 8 PM. Drop a WhatsApp or call us directly.
               </p>
               <a
@@ -135,7 +135,7 @@ export default function FaqSection() {
             className="lg:hidden mt-8 text-center gsap-reveal"
             initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }} viewport={{ once: true }}>
-            <p className="text-white/40 text-sm mb-4 font-normal">Still have questions?</p>
+            <p className="text-white/65 text-sm mb-4 font-normal">Still have questions?</p>
             <a
               href="https://wa.me/917210433685?text=Hi%2C%20I%20have%20a%20question%20about%20admissions"
               target="_blank" rel="noopener noreferrer"

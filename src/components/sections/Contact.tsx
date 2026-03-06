@@ -144,7 +144,7 @@ function EnquiryForm({ tf, whatsapp }: EnquiryFormProps) {
           {sending ? "Opening WhatsApp…" : tf.submitBtn}
         </button>
 
-        <p className="text-center text-white/25 text-xs font-normal leading-snug">{tf.privacyNote}</p>
+        <p className="text-center text-white/60 text-xs font-normal leading-snug">{tf.privacyNote}</p>
       </form>
     </div>
   );

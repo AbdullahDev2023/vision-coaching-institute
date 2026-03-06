@@ -24,7 +24,7 @@ function StatCard({
           className="block text-xl sm:text-3xl lg:text-4xl font-heading font-bold text-gold mb-1 sm:mb-2">
           {target}{suffix}
         </span>
-        <span className="text-white/60 text-[10px] sm:text-xs uppercase tracking-wide leading-snug block">{label}</span>
+        <span className="text-white/70 text-[10px] sm:text-xs uppercase tracking-wide leading-snug block">{label}</span>
       </div>
     </div>
   );
@@ -100,7 +100,7 @@ export default function About() {
               style={{ background: "linear-gradient(135deg, #0A1F5C 0%, #1A3A8F 100%)" }}>
               <div className="absolute right-5 top-5 text-5xl opacity-20">🎓</div>
               <div className="text-gold font-heading text-lg font-bold mb-5">{t.about.visionTitle}</div>
-              <p className="text-white/60 text-xs leading-relaxed font-normal">
+              <p className="text-white/70 text-xs leading-relaxed font-normal">
               {t.about.visionBody}
               </p>
             </div>

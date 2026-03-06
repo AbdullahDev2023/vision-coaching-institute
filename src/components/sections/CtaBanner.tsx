@@ -35,7 +35,7 @@ export default function CtaBanner() {
           <span className="text-gold">book yours today</span>
         </h2>
 
-        <p className="text-white/50 text-sm leading-relaxed max-w-xs font-normal">
+        <p className="text-white/65 text-sm leading-relaxed max-w-xs font-normal">
           Small batches fill fast. Secure your child&apos;s seat with a free demo class.
         </p>
 
@@ -51,7 +51,7 @@ export default function CtaBanner() {
         </div>
 
         {/* Share nudge */}
-        <p className="text-white/30 text-[11px] mt-1">
+        <p className="text-white/65 text-[11px] mt-1">
           Apne dost / neighbour ko bhi batao — unke bache bhi benefit kar sakte hain 🙌
         </p>
       </div>

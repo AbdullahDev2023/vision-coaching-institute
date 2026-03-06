@@ -117,7 +117,7 @@ export default function Testimonials() {
 
         <CarouselNav total={n} index={index} onPrev={prev} onNext={next} onGoTo={goTo} />
 
-        <p className="text-center text-white/30 text-xs font-normal">
+        <p className="text-center text-white/65 text-xs font-normal">
           ⭐ Rated 5.0 by {n}+ students &amp; parents from Tulsipur
         </p>
       </div>

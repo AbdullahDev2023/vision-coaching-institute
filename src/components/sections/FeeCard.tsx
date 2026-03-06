@@ -254,7 +254,7 @@ function LeadForm({ selectedTier, whatsapp, fc }: {
           )}
         </motion.button>
 
-        <p className="text-center text-white/25 text-xs font-normal leading-snug">{fc.privacyNote}</p>
+        <p className="text-center text-white/60 text-xs font-normal leading-snug">{fc.privacyNote}</p>
       </form>
 
       {/* Trust strip */}
@@ -267,7 +267,7 @@ function LeadForm({ selectedTier, whatsapp, fc }: {
           <div key={label} className="rounded-xl py-3 px-2 text-center border border-white/8"
             style={{ background: "rgba(255,255,255,0.03)" }}>
             <div className="text-xl mb-1">{icon}</div>
-            <div className="text-white/40 text-xs font-medium leading-tight">{label}</div>
+            <div className="text-white/65 text-xs font-medium leading-tight">{label}</div>
           </div>
         ))}
       </div>

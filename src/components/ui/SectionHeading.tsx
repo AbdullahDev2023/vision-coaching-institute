@@ -27,7 +27,7 @@ export default function SectionHeading({ title, subtitle, light = true, centered
 
       {subtitle && (
         <p className={`text-sm sm:text-base lg:text-lg leading-relaxed font-normal break-words max-w-xs sm:max-w-2xl ${centered ? "mx-auto" : ""} ${
-          light ? "text-white/65" : "text-primary/60"}`}
+          light ? "text-white/75" : "text-primary/70"}`}
           style={{ textWrap: "pretty" }}>
           {subtitle}
         </p>
