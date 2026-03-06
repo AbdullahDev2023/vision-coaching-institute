@@ -306,7 +306,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* GA4 — dns-prefetch only (not critical path) */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-        {/* Hard favicon links — belt-and-suspenders for Vercel edge caching */}
+        {/* Hard favicon links — belt-and-suspenders for CDN edge caching */}
         <link rel="icon"             href="/favicon.ico"    sizes="any" />
         <link rel="icon"             href="/favicon_32.png" type="image/png" sizes="32x32" />
         <link rel="icon"             href="/favicon_48.png" type="image/png" sizes="48x48" />

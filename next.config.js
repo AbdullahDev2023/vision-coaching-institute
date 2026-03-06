@@ -17,6 +17,20 @@ const nextConfig = {
     ],
   },
 
+  // Canonical redirect: non-www → www
+  // Ensures Google always indexes the www version and never splits authority
+  // between two origins.
+  async redirects() {
+    return [
+      {
+        source:      "/:path*",
+        has:         [{ type: "host", value: "visioncoachinginstitute.online" }],
+        destination: "https://www.visioncoachinginstitute.online/:path*",
+        permanent:   true, // 301
+      },
+    ];
+  },
+
   // HTTP response headers — applied to every route
   async headers() {
     return [

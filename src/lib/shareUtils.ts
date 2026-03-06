@@ -3,7 +3,7 @@
  * All messages use WhatsApp markdown: *bold*, newlines encoded as %0A
  */
 
-const SITE_URL = "https://vision-coaching-institute.vercel.app";
+const SITE_URL = "https://www.visioncoachinginstitute.online";
 const PHONE    = "+91 72104 33685";
 const ADDRESS  = "GCM8+GJW, Purani Bazar, Tulsipur, Balrampur, UP 271208";
 const MAPS_URL = "https://maps.google.com/?q=GCM8%2BGJW+Tulsipur+Uttar+Pradesh";

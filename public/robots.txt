@@ -1,5 +1,25 @@
+# robots.txt — Vision Coaching Institute
+# https://www.visioncoachinginstitute.online
+
 User-agent: *
 Allow: /
 
-# Sitemap
+# Private / admin routes — must never be indexed
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api/
+Disallow: /search-preview
+Disallow: /search-preview/
+Disallow: /_next/
+
+# Static assets — allow for image indexing
+Allow: /images/
+Allow: /favicon*
+Allow: /logo*
+Allow: /og-image*
+
+# Crawl-delay — be gentle on the server
+Crawl-delay: 5
+
+# Sitemaps
 Sitemap: https://www.visioncoachinginstitute.online/sitemap.xml

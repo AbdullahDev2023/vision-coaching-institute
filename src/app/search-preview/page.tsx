@@ -2,6 +2,7 @@ import SearchResultCard from "@/components/ui/SearchResultCard";
 
 export const metadata = {
   title: "Google Search Preview — Vision Coaching Institute",
+  robots: { index: false, follow: false },
 };
 
 export default function SearchPreviewPage() {

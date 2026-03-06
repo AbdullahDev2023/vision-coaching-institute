@@ -1,18 +1,24 @@
 import type { Metadata } from "next";
-import ContentPageShell, { H2, H3, P, UL, InfoBox, InternalLink } from "@/components/ui/ContentPageShell";
+import ContentPageShell, {
+  H2, H3, P, UL, InfoBox, InternalLink,
+} from "@/components/ui/ContentPageShell";
 
-const SITE_URL    = "https://www.visioncoachinginstitute.online";
-const SLUG        = "/blog/how-to-prepare-cbse-board-exam";
-const TITLE       = "How to Prepare for CBSE Board Exams — Tips from Tulsipur's Expert Coaches";
-const DESC        = "Expert tips on how to prepare for CBSE board exams from the faculty at Vision Coaching Institute, Tulsipur. Subject-wise strategy, study schedule, mock tests and exam-day advice for Class 10 and Class 12 students.";
-const DATE_PUB    = "2026-02-10";
-const DATE_MOD    = "2026-03-05";
+const SITE_URL = "https://www.visioncoachinginstitute.online";
+const SLUG     = "/blog/how-to-prepare-cbse-board-exam";
+const TITLE    = "How to Prepare for CBSE Board Exams | Vision Coaching Tulsipur";
+const DESC     =
+  "Expert tips on subject-wise strategy, study schedule, mock tests and exam-day advice " +
+  "for CBSE Class 10 & 12 students. From the faculty at Vision Coaching Institute, Tulsipur, UP.";
 
 export const metadata: Metadata = {
   title:       TITLE,
   description: DESC,
-  keywords:    ["how to prepare CBSE board exam","CBSE board exam preparation tips","CBSE class 10 preparation","CBSE class 12 preparation","board exam study tips UP","coaching Tulsipur CBSE tips","CBSE revision strategy"],
-  alternates:  { canonical: `${SITE_URL}${SLUG}` },
+  keywords: [
+    "CBSE board exam preparation","how to prepare CBSE board","CBSE Class 10 tips",
+    "CBSE Class 12 tips","board exam study schedule","CBSE mock test strategy",
+    "coaching Tulsipur CBSE","Vision Coaching study tips",
+  ],
+  alternates: { canonical: `${SITE_URL}${SLUG}` },
   openGraph: {
     title: TITLE, description: DESC, url: `${SITE_URL}${SLUG}`,
     siteName: "Vision Coaching Institute",
@@ -22,23 +28,38 @@ export const metadata: Metadata = {
 };
 
 const CRUMBS = [
-  { label: "Home",          href: "/"      },
-  { label: "Blog",          href: "/blog"  },
-  { label: "CBSE Board Prep", href: SLUG   },
+  { label: "Home", href: "/" },
+  { label: "Blog", href: "/blog" },
+  { label: "How to Prepare for CBSE Board Exams", href: SLUG },
 ];
 
-export default function CBSEBoardPrepBlog() {
+export default function CBSEBoardPrepPost() {
   const jsonLd = {
-    "@context": "https://schema.org", "@type": "Article",
-    "headline":      TITLE,
-    "description":   DESC,
-    "datePublished": DATE_PUB,
-    "dateModified":  DATE_MOD,
-    "author": { "@type": "Organization", "name": "Vision Coaching Institute", "url": SITE_URL },
-    "publisher": { "@type": "Organization", "name": "Vision Coaching Institute", "logo": { "@type": "ImageObject", "url": `${SITE_URL}/logo.png` } },
-    "image":     `${SITE_URL}/og-image.png`,
-    "mainEntityOfPage": { "@type": "WebPage", "@id": `${SITE_URL}${SLUG}` },
-    "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": CRUMBS.map((c, i) => ({ "@type": "ListItem", "position": i + 1, "name": c.label, "item": `${SITE_URL}${c.href === "/" ? "" : c.href}` })) },
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Prepare for CBSE Board Exams",
+    "description": DESC,
+    "url": `${SITE_URL}${SLUG}`,
+    "datePublished": "2026-02-10",
+    "dateModified": "2026-02-10",
+    "author": {
+      "@type": "Organization",
+      "name": "Vision Coaching Institute",
+      "@id": `${SITE_URL}/#organization`,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Vision Coaching Institute",
+      "@id": `${SITE_URL}/#organization`,
+      "logo": { "@type": "ImageObject", "url": `${SITE_URL}/logo.png` },
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": CRUMBS.map((c, i) => ({
+        "@type": "ListItem", "position": i + 1, "name": c.label,
+        "item": `${SITE_URL}${c.href === "/" ? "" : c.href}`,
+      })),
+    },
   };
 
   return (
@@ -46,146 +67,109 @@ export default function CBSEBoardPrepBlog() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ContentPageShell
         crumbs={CRUMBS}
-        meta={{ badge: "Study Guide", readTime: "7 min read", lastUpdated: "March 2026", isArticle: true }}
+        meta={{ badge: "Study Tips", lastUpdated: "10 Feb 2026" }}
         title="How to Prepare for CBSE Board Exams"
-        subtitle="A practical, subject-wise preparation guide from the faculty at Vision Coaching Institute, Tulsipur — covering study schedules, revision strategies, mock tests and exam-day tips for Class 10 and 12."
-        ctaTitle="Get Personalised CBSE Coaching in Tulsipur"
-        ctaBody="Our teachers implement every strategy in this guide daily with our students. Join the batch and get expert guidance from Day 1 — free demo class every Saturday."
+        subtitle="A subject-wise strategy guide from the faculty at Vision Coaching Institute, Tulsipur — covering study schedules, mock tests and exam-day habits that consistently produce 90%+ scores."
+        ctaTitle="Need Guided CBSE Coaching in Tulsipur?"
+        ctaBody="Join our small-batch CBSE coaching at Vision Coaching Institute, Purani Bazar, Tulsipur. Free demo class every Saturday — no commitment required."
       >
+        <H2>Start with the NCERT — Always</H2>
         <P>
-          CBSE board exams are high-stakes — especially Class 10 and Class 12. But the truth is
-          that with the right strategy, consistent effort and quality guidance, scoring 90%+ in
-          CBSE is absolutely achievable for most students. The faculty at Vision Coaching Institute
-          in Tulsipur have put together this practical guide based on years of coaching students
-          through board exam seasons.
+          The single most important advice for any CBSE student is this: the NCERT textbook
+          is the board exam. Every question in the CBSE Class 10 and Class 12 paper — including
+          the application-based and case-study questions — traces back to an NCERT concept.
+          Students who complete NCERT thoroughly before touching any guide book consistently
+          outperform those who jump straight to reference books.
+        </P>
+        <P>
+          At Vision Coaching Institute in Tulsipur, every lecture begins with the NCERT
+          paragraph. Only after the concept is clear do we move to additional questions.
         </P>
 
-        <H2>1. Start with the CBSE Syllabus and Weightage</H2>
-        <P>
-          Before opening a single textbook, download the official CBSE syllabus for your class
-          and subject. Every chapter in the CBSE syllabus carries a specific marks weightage.
-          High-weightage chapters must be studied with greater depth and more practice time. Your
-          preparation time is a finite resource — allocate it where the marks are.
-        </P>
+        <H2>Build a Realistic Study Schedule</H2>
+        <H3>6 Months Before Boards</H3>
         <UL items={[
-          "Mathematics: Algebra and Geometry carry the highest combined weightage in Class 10",
-          "Physics: Electricity, Magnetic Effects and Light are top-scoring chapters in Class 10",
-          "Chemistry: Chemical Reactions, Acids-Bases-Salts and Metals-Nonmetals are high frequency",
-          "Biology: Life Processes, Reproduction and Heredity are the highest-yielding chapters",
+          "Complete the full syllabus — one chapter per subject every week",
+          "Maintain a doubt notebook — write every unresolved question immediately",
+          "Attend every coaching class; do not skip for revisions (revise at home instead)",
+          "Solve 2–3 NCERT exercises per chapter on the same day they are taught",
         ]} />
 
-        <H2>2. Build a Realistic Study Schedule</H2>
-        <P>
-          A study schedule works only if it accounts for your actual daily commitments — school
-          hours, commute, meals and rest. Trying to study 12 hours a day for 3 months is a plan
-          that fails by week 2. Here is a realistic framework:
-        </P>
+        <H3>3 Months Before Boards</H3>
         <UL items={[
-          "Minimum 4 effective hours of self-study daily (in addition to coaching classes)",
-          "Rotate subjects daily — avoid spending all day on one subject",
-          "Keep Sunday as a light revision day — not a holiday, not a marathon",
-          "Dedicate the last 45 minutes before sleep to light revision (diagrams, formulas)",
-          "Review weekly test performance every Monday to adjust next week's focus areas",
+          "Begin the first full revision — chapter summaries and formula sheets",
+          "Start solving previous 5 years' question papers under timed conditions",
+          "Identify your weak chapters via test scores and give them extra time",
+          "Increase sleep to at least 7 hours — this is when memory consolidates",
         ]} />
-        <InfoBox icon="⏰" title="The 10-Week Board Sprint"
-          body="From February onwards, the final 10 weeks before CBSE boards should shift to: 3 weeks of chapter-wise revision, 3 weeks of mock exams + error correction, and 4 weeks of past-paper practice and final consolidation. This is exactly the structure we follow at Vision Coaching, Tulsipur." />
 
-        <H2>3. Master NCERT — Do Not Skip It</H2>
-        <P>
-          CBSE board exams are designed around NCERT textbooks. Every fact, every diagram, every
-          example in the NCERT book is potential exam material. Students who use reference books
-          before mastering NCERT almost always make the mistake of learning content that will not
-          appear on the board paper.
-        </P>
-        <P>
-          At Vision Coaching Institute in Tulsipur, our CBSE teaching always starts with NCERT —
-          every definition, every example, every exercise. Reference books and supplementary
-          material come after NCERT is completely covered.
-        </P>
+        <H3>1 Month Before Boards</H3>
+        <UL items={[
+          "Do NOT start new topics — revise what you already know",
+          "Complete at least 2 full mock exams per subject in board-exam format",
+          "Practise answer writing: diagrams, headings, numbered steps, word limits",
+          "Solve the last 3 years' CBSE board question papers — focus on marking patterns",
+        ]} />
 
-        <H2>4. Subject-Wise Preparation Strategy</H2>
+        <H2>Subject-Wise Strategy</H2>
 
         <H3>Mathematics</H3>
         <P>
-          Maths is the subject where students either gain or lose the most marks. Practice is
-          everything. Solve every NCERT exercise. Then solve at least 3 past CBSE board papers
-          under timed conditions. For Class 12, be completely comfortable with Calculus, Vectors
-          and Probability — these three units together account for nearly 40% of the paper.
+          Maths is entirely about practice. Solve every NCERT example and exercise — not just
+          read them. For Class 12, Chapter-wise Probability, Integration and Matrices are
+          high-weightage and predictable. Use the marking scheme from previous years to understand
+          step-wise marks — even a wrong final answer earns partial credit if steps are shown.
         </P>
 
         <H3>Physics</H3>
         <P>
-          Never memorise Physics formulas without understanding the derivation. CBSE often asks
-          for short derivations in 2-mark and 3-mark questions. Numericals should be practised
-          every day — aim for at least 20 chapter-specific numericals per topic before moving on.
+          Physics requires both conceptual understanding and numerical fluency. Write all formulae
+          in a single sheet and revise daily. For Class 12, Electrostatics, Current Electricity and
+          Optics together carry over 30 marks. Derivations must be memorised — they appear verbatim
+          in the board paper.
         </P>
 
         <H3>Chemistry</H3>
         <P>
-          Organic Chemistry requires a different approach: learn reaction mechanisms and name
-          reactions as a set, not individually. Create a condensed "reactions sheet" that you
-          review every 3 days. For Physical Chemistry, formula-based problems respond well to
-          spaced repetition practice.
+          Divide Chemistry into three parts: Physical (numerical-heavy), Organic (mechanism-based)
+          and Inorganic (memory-based). Inorganic Chemistry — particularly p-block and d-block
+          elements — is easiest to score in with regular revision. NCERT reactions in Organic
+          Chemistry are directly quoted in board questions.
         </P>
 
         <H3>Biology</H3>
         <P>
-          Biology is a diagram-heavy subject. Every diagram — cell structure, human anatomy,
-          reproduction stages, DNA replication — must be practised by hand at least 7 times.
-          CBSE Biology examiners award full marks only for labelled diagrams. One unlabelled
-          diagram can cost you 2 marks — across many questions, that adds up.
+          Biology is a high-scoring subject for students who read NCERT carefully and draw
+          clean, labelled diagrams. Every diagram in NCERT is a potential 2–3 mark question.
+          Genetics, Reproduction and Ecology together account for nearly 50 marks in Class 12.
+          Make flowcharts for cycles (nitrogen, carbon, water) — they simplify revision.
         </P>
 
-        <H2>5. Mock Tests Are Not Optional</H2>
-        <P>
-          Knowing content and performing under exam conditions are two different skills. Students
-          who write full-length mock exams consistently perform better in actual boards than students
-          who only revise. At Vision Coaching Institute in Tulsipur, we schedule at least 3 full
-          mock exams per subject in the 60 days before boards. Each mock is evaluated and returned
-          with chapter-wise error analysis.
-        </P>
+        <InfoBox icon="⏱️" title="The 1-Hour Mock Rule"
+          body="Sit at your study table at 10:30 AM (the same time as the board exam) and solve one past paper under strict time conditions once a week from November onwards. This trains your brain to perform at peak during the actual exam time." />
+
+        <H2>Exam-Day Habits That Cost Marks</H2>
         <UL items={[
-          "Sit the mock exam in real exam conditions — timed, no notes, no phone",
-          "Evaluate your paper against the CBSE marking scheme immediately after",
-          "Identify which question types you are consistently losing marks on",
-          "Make a correction register — revisit every wrong answer within 24 hours",
+          "Not reading the question paper for the first 15 minutes (use this time — it is free)",
+          "Writing long answers for 1-mark questions — answer in one line and move on",
+          "Skipping diagrams in Biology and Physics (each diagram is worth 1–2 marks)",
+          "Attempting questions in the wrong order — attempt your strongest section first",
+          "Leaving blank spaces — attempt everything; partial marks are real marks",
         ]} />
 
-        <H2>6. Solve Previous Years' Papers</H2>
+        <H2>One Final Point — Consistent Coaching Beats Last-Minute Cramming</H2>
         <P>
-          CBSE board papers follow predictable patterns. Questions repeat, not exactly, but in
-          structure. Solving 5–7 years of past papers per subject reveals which chapters are
-          tested every year (high priority) and which appear rarely (lower priority). Our teachers
-          at Vision Coaching Institute, Tulsipur, use past-paper analysis in every lesson
-          to focus on what actually matters.
-        </P>
-
-        <H2>7. Exam Day Strategy</H2>
-        <UL items={[
-          "Read the entire question paper in the first 15 minutes — do not start writing yet",
-          "Begin with your strongest section — confidence at the start improves overall performance",
-          "Attempt all questions — CBSE gives marks even for partially correct answers",
-          "For Science, write answers in points with proper headings — examiners reward structure",
-          "For Maths, show all steps — step-marks are awarded even if the final answer is wrong",
-          "Manage time by section: do not spend more than 25% of time on any single section",
-        ]} />
-
-        <InfoBox icon="🎯" title="Ask Your Teacher Before the Exam"
-          body="At Vision Coaching Institute in Tulsipur, we hold pre-exam sessions specifically to walk students through likely question patterns, how to handle tricky questions and time management for each paper. If your coaching centre does not do this, ask them to." />
-
-        <H2>The Advantage of Quality Coaching in Tulsipur</H2>
-        <P>
-          Every strategy in this guide is most effective when implemented with expert guidance.
-          A good coach can identify your weak areas in week 1 and structure your preparation around
-          them — something that is very difficult to do alone. Our <InternalLink href="/#faculty">faculty
-          at Vision Coaching Institute</InternalLink> in Tulsipur bring years of board exam
-          teaching experience and have helped students implement exactly these strategies to achieve
-          top results year after year.
+          Students who attend regular coaching throughout the year — solving doubts as they arise,
+          taking weekly tests and getting faculty feedback — consistently score higher than students
+          who study alone for long hours only in the final weeks. This is the core reason why our
+          students at Vision Coaching in Tulsipur have maintained a 95%+ pass rate across CBSE,
+          ISC, ICSE and UP Board every year.
         </P>
         <P>
-          Check our <InternalLink href="/results">Results page</InternalLink> to see what our
-          CBSE students have achieved, or visit our <InternalLink href="/#courses">Courses section</InternalLink> for
-          details on what we teach.
+          If you are looking for structured CBSE coaching in Tulsipur, visit our{" "}
+          <InternalLink href="/cbse-coaching-tulsipur">CBSE Coaching page</InternalLink> or
+          check our <InternalLink href="/#fees">fee structure</InternalLink> and book a free
+          demo class — call or WhatsApp +91 72104 33685.
         </P>
       </ContentPageShell>
     </>
