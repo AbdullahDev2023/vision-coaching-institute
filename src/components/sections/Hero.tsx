@@ -101,9 +101,9 @@ function HeroTextContent({ t, primaryPhone }: {
       </div>
 
       {/* CTA */}
-      <div className="flex flex-col gap-2 mt-1 items-center lg:items-start">
+      <div className="flex flex-col gap-2 mt-1">
         <a href={`https://wa.me/${t.contact.whatsapp}`} target="_blank" rel="noopener noreferrer"
-          className="btn-primary" style={{ fontSize: "1rem" }}>
+          className="btn-primary self-start" style={{ fontSize: "1rem" }}>
           {t.hero.cta}
         </a>
         <p className="text-white/40 text-xs">{t.hero.ctaSub}</p>
@@ -112,7 +112,7 @@ function HeroTextContent({ t, primaryPhone }: {
 
       {/* Phone */}
       <a href={`tel:${primaryPhone.replace(/\s/g, "")}`}
-        className="inline-flex items-center gap-2 text-white/55 hover:text-gold text-sm font-medium transition-colors group">
+        className="inline-flex items-center gap-2 text-white/55 hover:text-gold text-sm font-medium transition-colors group self-start">
         <span className="w-7 h-7 rounded-full border border-white/15 group-hover:border-gold/50 group-hover:bg-gold/10 flex items-center justify-center text-xs transition-all">📞</span>
         {primaryPhone}
       </a>
@@ -155,8 +155,8 @@ export default function Hero() {
         style={{ scrollbarWidth: "none", gap: "1.5rem", paddingLeft: "1.75rem", paddingRight: "1.75rem" }}>
         <style>{`.hero-scroll::-webkit-scrollbar{display:none}`}</style>
 
-        <div className="hero-scroll flex-none snap-start w-[88vw] max-w-[520px] hero-col-animate flex flex-col items-center text-center"
-          style={{ gap: "var(--igap-sm)", paddingRight: "0.5rem" }}>
+        <div className="hero-scroll flex-none snap-start w-[88vw] max-w-[520px] hero-col-animate flex flex-col"
+          style={{ gap: "var(--igap-sm)", paddingRight: "0.5rem", paddingLeft: "1.25rem" }}>
           <HeroTextContent t={t} primaryPhone={primaryPhone} />
         </div>
 
